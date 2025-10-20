@@ -6,7 +6,7 @@ typedef struct {
     MDR_PORT_TypeDef* port;
     uint32_t pin;
     uint8_t state;
-    uint32_t start_time;  // Время включения светодиода
+    uint32_t start_time;  // A?aiy aee??aiey naaoiaeiaa
 } LED_ConfigTypeDef;
 
 /* LED configuration array */
@@ -17,7 +17,7 @@ static LED_ConfigTypeDef LED_Config[LED_COUNT] = {
     {LED4_PORT, LED4_PIN, 0, 0}
 };
 
-// Статические переменные для управления последовательностью
+// Noaoe?aneea ia?aiaiiua aey oi?aaeaiey iineaaiaaoaeuiinou?
 static uint8_t sequence_active = 0;
 static uint8_t current_led = 0;
 static uint32_t sequence_start_time = 0;
@@ -28,20 +28,19 @@ void LED_Init(void)
     PORT_InitTypeDef Port_InitStructure;
     
     /* Enable clocks for PORTA and PORTC */
-    RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTA, ENABLE);
-    RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTC, ENABLE);
+    RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTA,ENABLE);
+	Port_InitStructure.PORT_Pin = PORT_Pin_1|PORT_Pin_3|PORT_Pin_5;
+	Port_InitStructure.PORT_OE = PORT_OE_OUT;
+	Port_InitStructure.PORT_MODE = PORT_MODE_DIGITAL;
+	Port_InitStructure.PORT_SPEED = PORT_SPEED_FAST;
+	PORT_Init(MDR_PORTA, &Port_InitStructure);
 	
-    /* Configure PORTA pins */
-    Port_InitStructure.PORT_Pin = LED1_PIN | LED2_PIN | LED3_PIN;
-    Port_InitStructure.PORT_OE = PORT_OE_OUT;
-    Port_InitStructure.PORT_FUNC = PORT_FUNC_PORT;
-    Port_InitStructure.PORT_MODE = PORT_MODE_DIGITAL;
-    Port_InitStructure.PORT_SPEED = PORT_SPEED_FAST;
-    PORT_Init(MDR_PORTA, &Port_InitStructure);
-    
-    /* Configure PORTC pin */
-    Port_InitStructure.PORT_Pin = LED4_PIN;
-    PORT_Init(MDR_PORTC, &Port_InitStructure);
+	RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTC,ENABLE);
+	Port_InitStructure.PORT_Pin = PORT_Pin_2;
+	Port_InitStructure.PORT_OE = PORT_OE_OUT;
+	Port_InitStructure.PORT_MODE = PORT_MODE_DIGITAL;
+  Port_InitStructure.PORT_SPEED = PORT_SPEED_FAST;
+	PORT_Init(MDR_PORTC, &Port_InitStructure);
 
     /* Turn off all LEDs initially */
     LED_AllOff();
@@ -57,7 +56,7 @@ void LED_On(LED_TypeDef led)
     if (led < LED_COUNT) {
         PORT_SetBits(LED_Config[led].port, LED_Config[led].pin);
         LED_Config[led].state = 1;
-        LED_Config[led].start_time = HD_GetTick(); // Запоминаем время включения
+        LED_Config[led].start_time = HD_GetTick(); // Caiiieiaai a?aiy aee??aiey
     }
 }
 
@@ -69,7 +68,7 @@ void LED_On(LED_TypeDef led)
   */
 void LED_On_ms(LED_TypeDef led, uint32_t ms) {
     LED_On(led);
-    // Время выключения будет обработано в LED_Process функции
+    // A?aiy auee??aiey aoaao ia?aaioaii a LED_Process ooieoee
 }
 
 /**
@@ -84,27 +83,27 @@ void LED_Process(void)
 		LED_Toggle(i);
 	}
 //    
-//    // Обрабатываем последовательность светодиодов
+//    // Ia?aaaouaaai iineaaiaaoaeuiinou naaoiaeiaia
 //    if (sequence_active) {
 //        uint32_t elapsed_time = current_time - sequence_start_time;
 //        uint32_t step_duration = led_on_time;
 //        
-//        // Определяем, какой светодиод должен гореть в данный момент
+//        // Ii?aaaeyai, eaeie naaoiaeia aie?ai ai?aou a aaiiue iiiaio
 //        uint8_t target_led = (elapsed_time / step_duration) % LED_COUNT;
 //        
-//        // Если переключились на новый светодиод
+//        // Anee ia?aee??eeenu ia iiaue naaoiaeia
 //        if (target_led != current_led) {
-//            // Выключаем предыдущий светодиод
+//            // Auee??aai i?aauaouee naaoiaeia
 //            if (current_led < LED_COUNT) {
 //                LED_Off((LED_TypeDef)current_led);
 //            }
 //            
-//            // Включаем новый светодиод
+//            // Aee??aai iiaue naaoiaeia
 //            LED_On((LED_TypeDef)target_led);
 //            current_led = target_led;
 //        }
 //        
-//        // Автоматически выключаем текущий светодиод, если его время истекло
+//        // Aaoiiaoe?anee auee??aai oaeouee naaoiaeia, anee aai a?aiy enoaeei
 //        if (current_led < LED_COUNT && LED_Config[current_led].state) {
 //            uint32_t led_elapsed_time = current_time - LED_Config[current_led].start_time;
 //            if (led_elapsed_time >= step_duration) {
@@ -124,7 +123,7 @@ void LED_Off(LED_TypeDef led)
     if (led < LED_COUNT) {
         PORT_ResetBits(LED_Config[led].port, LED_Config[led].pin);
         LED_Config[led].state = 0;
-        LED_Config[led].start_time = 0; // Сбрасываем время включения
+        LED_Config[led].start_time = 0; // Na?anuaaai a?aiy aee??aiey
     }
 }
 
@@ -184,7 +183,7 @@ void LED_Sequence(uint32_t delay_time)
     sequence_start_time = HD_GetTick();
     led_on_time = delay_time;
     
-    // Включаем первый светодиод
+    // Aee??aai ia?aue naaoiaeia
     LED_On((LED_TypeDef)current_led);
 }
 

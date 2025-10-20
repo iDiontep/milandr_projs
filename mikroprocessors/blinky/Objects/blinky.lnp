@@ -1,6 +1,6 @@
 --cpu Cortex-M3
-".\objects\hardware_drivers.o"
 ".\objects\leds.o"
+".\objects\hardware_drivers.o"
 ".\objects\app.o"
 ".\objects\main.o"
 ".\objects\startup_mdr32f9q2i.o"

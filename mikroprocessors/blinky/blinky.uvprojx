@@ -454,11 +454,6 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>hardware_drivers.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\hardware_drivers\Src\hardware_drivers.c</FilePath>
-            </File>
-            <File>
               <FileName>leds.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\hardware_drivers\Src\leds.c</FilePath>
@@ -472,6 +467,11 @@
               <FileName>hardware_drivers.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\hardware_drivers\Inc\hardware_drivers.h</FilePath>
+            </File>
+            <File>
+              <FileName>hardware_drivers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware_drivers\Src\hardware_drivers.c</FilePath>
             </File>
           </Files>
         </Group>
