@@ -42,8 +42,9 @@ typedef enum {
 #define LED_REG_TOGGLE(port)    BIT_TGL((port)->RXTX, mask)
 
 /* PWM Wave parameters */
-#define DEFAULT_PWM_PERIOD  200
-#define DEFAULT_WAVE_SPEED  3
+#define DEFAULT_PWM_PERIOD  1500
+#define DEFAULT_WAVE_SPEED  1
+
 
 /* Function prototypes - Basic LED control */
 void LED_Init(void);
@@ -69,5 +70,7 @@ void LED_SetWaveSpeed(uint32_t speed);
 void LED_SetPWMPeriod(uint32_t period);
 uint8_t LED_PWMWaveIsActive(void);
 void LED_ProcessPWM(void);
+
+
 
 #endif /* LEDS_H */

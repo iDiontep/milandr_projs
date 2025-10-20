@@ -27,32 +27,18 @@ Project File Date:  10/20/2025
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'MDR32F9Q2I'
-hardware_drivers/Src/leds.c(31): error: use of undeclared identifier 'RST_CLK_PCLK_CMD_REG'
-    __IO uint32_t* pclk_cmd = (__IO uint32_t*)RST_CLK_PCLK_CMD_REG;
-                                              ^
-hardware_drivers/Src/leds.c(35): error: no member named 'CFG' in 'MDR_PORT_TypeDef'
-    __IO uint32_t* porta_cfg = (__IO uint32_t*)&MDR_PORTA->CFG;
-                                                ~~~~~~~~~  ^
-hardware_drivers/Src/leds.c(40): error: use of undeclared identifier 'PORT_CFG_POS'
-    *porta_cfg |= (PORT_OE_OUT | PORT_MODE_DIGITAL | PORT_SPEED_FAST) & (porta_pins << PORT_CFG_POS);
-                                                                                       ^
-hardware_drivers/Src/leds.c(43): error: no member named 'CFG' in 'MDR_PORT_TypeDef'
-    __IO uint32_t* portc_cfg = (__IO uint32_t*)&MDR_PORTC->CFG;  
-                                                ~~~~~~~~~  ^
-hardware_drivers/Src/leds.c(48): error: use of undeclared identifier 'PORT_CFG_POS'
-    *portc_cfg |= (PORT_OE_OUT | PORT_MODE_DIGITAL | PORT_SPEED_FAST) & (portc_pins << PORT_CFG_POS);
-                                                                                       ^
-5 errors generated.
-compiling leds.c...
 compiling App.c...
-assembling startup_MDR32F9Q2I.S...
-compiling system_MDR32F9Q2I.c...
-compiling main.c...
+compiling leds.c...
 compiling MDR32FxQI_port.c...
+compiling main.c...
+compiling system_MDR32F9Q2I.c...
 compiling hardware_drivers.c...
 compiling MDR32FxQI_rst_clk.c...
+assembling startup_MDR32F9Q2I.S...
 compiling MDR32FxQI_timer.c...
-".\Objects\blinky.axf" - 5 Error(s), 0 Warning(s).
+linking...
+Program Size: Code=4528 RO-data=256 RW-data=76 ZI-data=1668  
+".\Objects\blinky.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -104,7 +90,6 @@ Package Vendor: Milandr
    * Component: Milandr::Drivers:TIMER:2.1.0i
       Source file:   Libraries/SPL/MDR32FxQI/src/MDR32FxQI_timer.c
       Include file:  Libraries/SPL/MDR32FxQI/inc/MDR32FxQI_timer.h
-Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

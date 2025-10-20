@@ -152,7 +152,7 @@ void HD_Delay_ms_blocking(uint32_t ms)
     uint32_t start_tick = HD_GetTick();
     
     while ((HD_GetTick() - start_tick) < ms) {
-        /* Wait */
+        __NOP();
     }
 }
 

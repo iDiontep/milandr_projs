@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\blinky.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\blinky.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Oct 20 19:58:09 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Oct 20 20:23:01 2025
 <BR><P>
-<H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        128 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; LED_Process_PWM &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
+Timer1_IRQHandler &rArr; LED_Process &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 <P>
 <H3>
 Functions with no stack information
@@ -203,7 +203,7 @@ Global Symbols
 
 <P><STRONG><a name="[29]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; LED_Process_PWM &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; LED_Process &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -443,7 +443,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[31]"></a>__aeabi_errno_addr</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text))
@@ -493,10 +493,8 @@ Global Symbols
 <P><STRONG><a name="[8d]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
 <P><STRONG><a name="[3b]"></a>HD_GetTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, hardware_drivers.o(.text.HD_GetTick))
-<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
-<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
-<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_On
+<BR><BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_StartPWMWave
 </UL>
 
 <P><STRONG><a name="[36]"></a>HD_System_Init</STRONG> (Thumb, 260 bytes, Stack size 32 bytes, hardware_drivers.o(.text.HD_System_Init))
@@ -516,38 +514,31 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3e]"></a>LED_Off</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, leds.o(.text.LED_Off))
-<BR><BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<P><STRONG><a name="[3a]"></a>LED_Process</STRONG> (Thumb, 424 bytes, Stack size 40 bytes, leds.o(.text.LED_Process))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = LED_Process &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
-
-<P><STRONG><a name="[3a]"></a>LED_On</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, leds.o(.text.LED_On))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LED_On
-</UL>
-<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_GetTick
-</UL>
-<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
-</UL>
-
-<P><STRONG><a name="[3c]"></a>LED_Process</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, leds.o(.text.LED_Process))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = LED_Process
-</UL>
-<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_GetTick
-</UL>
-<BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_IRQHandler
-</UL>
-
-<P><STRONG><a name="[3d]"></a>LED_Process_PWM</STRONG> (Thumb, 240 bytes, Stack size 40 bytes, main.o(.text.LED_Process_PWM))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = LED_Process_PWM &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
-</UL>
-<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
-<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz
-<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
-<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Off
+<BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2uiz
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_GetTick
-<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_On
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[46]"></a>LED_SetPWMPeriod</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, leds.o(.text.LED_SetPWMPeriod))
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[45]"></a>LED_SetWaveSpeed</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, leds.o(.text.LED_SetWaveSpeed))
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[42]"></a>LED_StartPWMWave</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, leds.o(.text.LED_StartPWMWave))
+<BR><BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -569,73 +560,75 @@ Global Symbols
 <P><STRONG><a name="[1f]"></a>SystemInit</STRONG> (Thumb, 158 bytes, Stack size 0 bytes, system_mdr32f9q2i.o(.text.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mdr32f9q2i.o(.text)
 </UL>
-<P><STRONG><a name="[46]"></a>TIMER_ClearFlag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mdr32fxqi_timer.o(.text.TIMER_ClearFlag))
+<P><STRONG><a name="[44]"></a>TIMER_ClearFlag</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mdr32fxqi_timer.o(.text.TIMER_ClearFlag))
 <BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_IRQHandler
 </UL>
 
-<P><STRONG><a name="[45]"></a>TIMER_GetITStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, mdr32fxqi_timer.o(.text.TIMER_GetITStatus))
+<P><STRONG><a name="[43]"></a>TIMER_GetITStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, mdr32fxqi_timer.o(.text.TIMER_GetITStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1_IRQHandler
 </UL>
 
 <P><STRONG><a name="[14]"></a>Timer1_IRQHandler</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, hardware_drivers.o(.text.Timer1_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Timer1_IRQHandler &rArr; LED_Process
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Timer1_IRQHandler &rArr; LED_Process &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_ClearFlag
-<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_GetITStatus
-<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
+<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_ClearFlag
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_GetITStatus
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_mdr32f9q2i.o(RESET)
 </UL>
-<P><STRONG><a name="[2a]"></a>main</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = main &rArr; LED_Process_PWM &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
+<P><STRONG><a name="[2a]"></a>main</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = main &rArr; LED_Process &rArr; sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
-<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_System_Init
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_GetTick
+<BR>[Calls]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HD_System_Init
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_SetPWMPeriod
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_SetWaveSpeed
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_StartPWMWave
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
 <P><STRONG><a name="[51]"></a>__ARM_fpclassifyf</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, fpclassifyf.o(i.__ARM_fpclassifyf))
-<BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR><BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[47]"></a>__mathlib_flt_infnan</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_infnan))
 <BR><BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbnf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[49]"></a>__mathlib_flt_invalid</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_invalid))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __mathlib_flt_invalid &rArr; __aeabi_fdiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[4a]"></a>__mathlib_flt_underflow</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_underflow))
 <BR><BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbnf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[4b]"></a>__mathlib_rredf2</STRONG> (Thumb, 344 bytes, Stack size 32 bytes, rredf.o(i.__mathlib_rredf2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbnf
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
-<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
-<P><STRONG><a name="[42]"></a>sinf</STRONG> (Thumb, 338 bytes, Stack size 32 bytes, sinf.o(i.sinf))
+<P><STRONG><a name="[3f]"></a>sinf</STRONG> (Thumb, 338 bytes, Stack size 32 bytes, sinf.o(i.sinf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = sinf &rArr; __mathlib_rredf2 &rArr; __aeabi_fmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
@@ -646,20 +639,20 @@ Global Symbols
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_frnd
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
-<P><STRONG><a name="[43]"></a>__aeabi_fadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, faddsub_clz.o(x$fpl$fadd))
+<P><STRONG><a name="[40]"></a>__aeabi_fadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, faddsub_clz.o(x$fpl$fadd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fadd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
 <P><STRONG><a name="[52]"></a>_fadd</STRONG> (Thumb, 196 bytes, Stack size 16 bytes, faddsub_clz.o(x$fpl$fadd), UNUSED)
@@ -674,11 +667,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_scalbnf
 </UL>
 
-<P><STRONG><a name="[41]"></a>__aeabi_fdiv</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fdiv.o(x$fpl$fdiv))
+<P><STRONG><a name="[3e]"></a>__aeabi_fdiv</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fdiv.o(x$fpl$fdiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fdiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
 <P><STRONG><a name="[58]"></a>_fdiv</STRONG> (Thumb, 384 bytes, Stack size 16 bytes, fdiv.o(x$fpl$fdiv), UNUSED)
@@ -689,17 +682,17 @@ Global Symbols
 <P><STRONG><a name="[50]"></a>__aeabi_f2iz</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, ffix.o(x$fpl$ffix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[59]"></a>_ffix</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, ffix.o(x$fpl$ffix), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_fnaninf
 </UL>
 
-<P><STRONG><a name="[44]"></a>__aeabi_f2uiz</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, ffixu.o(x$fpl$ffixu))
+<P><STRONG><a name="[41]"></a>__aeabi_f2uiz</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, ffixu.o(x$fpl$ffixu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2uiz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
 <P><STRONG><a name="[5a]"></a>_ffixu</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, ffixu.o(x$fpl$ffixu), UNUSED)
@@ -712,19 +705,19 @@ Global Symbols
 
 <P><STRONG><a name="[8e]"></a>_fflt</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$fflt), UNUSED)
 
-<P><STRONG><a name="[3f]"></a>__aeabi_ui2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$ffltu))
+<P><STRONG><a name="[3c]"></a>__aeabi_ui2f</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$ffltu))
 <BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
 <P><STRONG><a name="[8f]"></a>_ffltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, fflt_clz.o(x$fpl$ffltu), UNUSED)
 
-<P><STRONG><a name="[40]"></a>__aeabi_fmul</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fmul.o(x$fpl$fmul))
+<P><STRONG><a name="[3d]"></a>__aeabi_fmul</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, fmul.o(x$fpl$fmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process_PWM
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Process
 </UL>
 
 <P><STRONG><a name="[5b]"></a>_fmul</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, fmul.o(x$fpl$fmul), UNUSED)
@@ -755,12 +748,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_fnaninf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[4e]"></a>__aeabi_frsub</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, faddsub_clz.o(x$fpl$frsb))
 <BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[5c]"></a>_frsb</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, faddsub_clz.o(x$fpl$frsb), UNUSED)
@@ -772,7 +765,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fsub
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sinf
 </UL>
 
 <P><STRONG><a name="[5e]"></a>_fsub</STRONG> (Thumb, 234 bytes, Stack size 16 bytes, faddsub_clz.o(x$fpl$fsub), UNUSED)
