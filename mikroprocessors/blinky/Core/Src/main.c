@@ -13,7 +13,7 @@
 // Переменные для управления ШИМ волной
 static uint32_t pwm_counter = 0;
 static uint32_t pwm_period = 500; // Период ШИМ (количество шагов)
-static uint32_t wave_speed = 1;   // Скорость волны (уменьшена)
+static uint32_t wave_speed = 3;   // Скорость волны 
 static uint8_t wave_active = 1;   // Флаг активности волны
 
 // Таймер для регулирования скорости обновления ШИМ
@@ -98,8 +98,8 @@ int main(void) {
     
     /* Start PWM wave */
     start_pwm_wave();
-    set_wave_speed(1);  // Медленная скорость
-    set_pwm_period(1000); // Период волны
+    set_wave_speed(2);  // Медленная скорость
+    set_pwm_period(3000); // Период волны
 
     /* Main loop */
     while(1) {
