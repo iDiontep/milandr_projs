@@ -56,6 +56,7 @@ void LED_SetState(LED_TypeDef led, uint8_t state);
 uint8_t LED_GetState(LED_TypeDef led);
 void LED_AllOn(void);
 void LED_AllOff(void);
+void LED_AllToggle(void);
 void LED_Process(void);
 
 /* Function prototypes - Sequence control */
@@ -71,6 +72,9 @@ void LED_SetPWMPeriod(uint32_t period);
 uint8_t LED_PWMWaveIsActive(void);
 void LED_ProcessPWM(void);
 
+/* Function prototypes - Process control */
+void LED_ProcessEnable(uint8_t enable);
+uint8_t LED_ProcessIsEnabled(void);
 
 
 #endif /* LEDS_H */

@@ -30,8 +30,10 @@ static uint32_t pwm_period = DEFAULT_PWM_PERIOD;
 static uint32_t wave_speed = DEFAULT_WAVE_SPEED;
 static uint8_t wave_active = 0;
 static uint32_t last_pwm_update = 0;
-static const uint32_t pwm_update_interval = 0; // 10ms update interval
+static const uint32_t pwm_update_interval = 0;
 
+// Process control
+static uint8_t led_process_enabled = 1; // Process enabled by default
 
 void LED_Init(void)
 {
@@ -228,7 +230,12 @@ uint8_t LED_PWMWaveIsActive(void) {
 /**
   * @brief  Main LED process function called from timer interrupt
   */
-void LED_Process(void){
+void LED_Process(void) {
+    // Check if processing is enabled
+//    if (!led_process_enabled) {
+//        return;
+//    }
+    
     uint32_t current_time = HD_GetTick();
     
     /* Process PWM Wave if active */
@@ -253,5 +260,38 @@ void LED_Process(void){
             LED_On((LED_TypeDef)current_led);
             sequence_start_time = current_time;
         }
+    }
+}
+
+/**
+  * @brief  Enable or disable LED processing
+  */
+void LED_ProcessEnable(uint8_t enable) {
+    led_process_enabled = enable;
+    
+    if (!enable) {
+        // Stop all LED activities when process is disabled
+        LED_StopPWMWave();
+        LED_SequenceStop();
+        LED_AllOff();
+    } else {
+        // Restart PWM wave when process is enabled
+        LED_StartPWMWave();
+    }
+}
+
+/**
+  * @brief  Check if LED processing is enabled
+  */
+uint8_t LED_ProcessIsEnabled(void) {
+    return led_process_enabled;
+}
+
+/**
+  * @brief  Toggle all LEDs
+  */
+void LED_AllToggle(void) {
+    for (int i = 0; i < LED_COUNT; i++) {
+        LED_Toggle((LED_TypeDef)i);
     }
 }

@@ -1,5 +1,6 @@
 #include "hardware_drivers.h"
 #include "main.h"
+#include "app.h"
 #include "leds.h"
 #include "MDR32FxQI_rst_clk.h"
 #include "MDR32FxQI_port.h"
@@ -8,6 +9,8 @@
 /* Private variables */
 static volatile uint32_t tick_counter = 0;
 static uint32_t system_clock = 8000000; /* Default 8 MHz */
+extern button_data user_button;
+
 
 /* SysTick interrupt handler */
 void SysTick_Handler(void)
@@ -15,14 +18,14 @@ void SysTick_Handler(void)
     HD_IncrementTick();
 }
 
-/* TIMER1 interrupt handler for LED processing */
+/* TIMER1 interrupt handler for application processing */
 void TIMER1_IRQHandler(void)
 {
     if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
         TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
         
-        /* Call LED process function */
-        LED_Process();
+        /* Call application process function */
+        app_process();
     }
 }
 
@@ -213,7 +216,7 @@ void HD_System_Init(void)
     HD_Delay_Init();
     
     /* Initialize TIMER1 for LED processing */
-    HD_Timer1_Init();
+		button_init(&user_button, MDR_PORTA, 0, 0);
     
     /* Additional hardware initialization can be added here */
 }

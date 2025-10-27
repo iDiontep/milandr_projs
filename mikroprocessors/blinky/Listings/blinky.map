@@ -71,15 +71,33 @@ Section Cross References
     leds.o(.text.LED_Process) refers to leds.o(.bss.led_on_time) for led_on_time
     leds.o(.text.LED_Process) refers to leds.o(.bss.current_led) for current_led
     leds.o(.ARM.exidx.text.LED_Process) refers to leds.o(.text.LED_Process) for [Anonymous Symbol]
+    leds.o(.text.LED_ProcessEnable) refers to leds.o(.data.led_process_enabled) for led_process_enabled
+    leds.o(.text.LED_ProcessEnable) refers to leds.o(.bss.wave_active) for wave_active
+    leds.o(.text.LED_ProcessEnable) refers to leds.o(.bss.pwm_counter) for pwm_counter
+    leds.o(.text.LED_ProcessEnable) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    leds.o(.text.LED_ProcessEnable) refers to leds.o(.data.LED_Config) for LED_Config
+    leds.o(.text.LED_ProcessEnable) refers to leds.o(.bss.sequence_active) for sequence_active
+    leds.o(.ARM.exidx.text.LED_ProcessEnable) refers to leds.o(.text.LED_ProcessEnable) for [Anonymous Symbol]
+    leds.o(.text.LED_ProcessIsEnabled) refers to leds.o(.data.led_process_enabled) for led_process_enabled
+    leds.o(.ARM.exidx.text.LED_ProcessIsEnabled) refers to leds.o(.text.LED_ProcessIsEnabled) for [Anonymous Symbol]
+    leds.o(.text.LED_AllToggle) refers to leds.o(.data.LED_Config) for LED_Config
+    leds.o(.text.LED_AllToggle) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    leds.o(.ARM.exidx.text.LED_AllToggle) refers to leds.o(.text.LED_AllToggle) for [Anonymous Symbol]
     hardware_drivers.o(.text.SysTick_Handler) refers to hardware_drivers.o(.bss.tick_counter) for tick_counter
     hardware_drivers.o(.ARM.exidx.text.SysTick_Handler) refers to hardware_drivers.o(.text.SysTick_Handler) for [Anonymous Symbol]
     hardware_drivers.o(.text.HD_IncrementTick) refers to hardware_drivers.o(.bss.tick_counter) for tick_counter
     hardware_drivers.o(.ARM.exidx.text.HD_IncrementTick) refers to hardware_drivers.o(.text.HD_IncrementTick) for [Anonymous Symbol]
     hardware_drivers.o(.text.TIMER1_IRQHandler) refers to mdr32fxqi_timer.o(.text.TIMER_GetITStatus) for TIMER_GetITStatus
     hardware_drivers.o(.text.TIMER1_IRQHandler) refers to mdr32fxqi_timer.o(.text.TIMER_ClearFlag) for TIMER_ClearFlag
-    hardware_drivers.o(.text.TIMER1_IRQHandler) refers to leds.o(.text.LED_Process) for LED_Process
+    hardware_drivers.o(.text.TIMER1_IRQHandler) refers to app.o(.text.app_process) for app_process
     hardware_drivers.o(.ARM.exidx.text.TIMER1_IRQHandler) refers to hardware_drivers.o(.text.TIMER1_IRQHandler) for [Anonymous Symbol]
     hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd) for RST_CLK_PCLKcmd
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_BRGInit) for TIMER_BRGInit
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_CntStructInit) for TIMER_CntStructInit
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_CntInit) for TIMER_CntInit
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_ITConfig) for TIMER_ITConfig
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_ClearFlag) for TIMER_ClearFlag
+    hardware_drivers.o(.text.HD_Timer1_Init) refers to mdr32fxqi_timer.o(.text.TIMER_Cmd) for TIMER_Cmd
     hardware_drivers.o(.ARM.exidx.text.HD_Timer1_Init) refers to hardware_drivers.o(.text.HD_Timer1_Init) for [Anonymous Symbol]
     hardware_drivers.o(.ARM.exidx.text.HD_Delay_Init) refers to hardware_drivers.o(.text.HD_Delay_Init) for [Anonymous Symbol]
     hardware_drivers.o(.text.HD_Delay_ms) refers to hardware_drivers.o(.bss.HD_Delay_ms.delay_running) for HD_Delay_ms.delay_running
@@ -95,16 +113,63 @@ Section Cross References
     hardware_drivers.o(.text.HD_Delay_ms_blocking) refers to hardware_drivers.o(.bss.tick_counter) for tick_counter
     hardware_drivers.o(.ARM.exidx.text.HD_Delay_ms_blocking) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for [Anonymous Symbol]
     hardware_drivers.o(.ARM.exidx.text.HD_Delay_us_blocking) refers to hardware_drivers.o(.text.HD_Delay_us_blocking) for [Anonymous Symbol]
-    hardware_drivers.o(.text.HD_System_Init) refers to mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd) for RST_CLK_PCLKcmd
+    hardware_drivers.o(.text.HD_System_Init) refers to main.o(.bss.user_button) for user_button
+    hardware_drivers.o(.text.HD_System_Init) refers to button.o(.text.button_init) for button_init
     hardware_drivers.o(.ARM.exidx.text.HD_System_Init) refers to hardware_drivers.o(.text.HD_System_Init) for [Anonymous Symbol]
     hardware_drivers.o(.ARM.exidx.text.HD_GetSystemClock) refers to hardware_drivers.o(.text.HD_GetSystemClock) for [Anonymous Symbol]
     hardware_drivers.o(.ARM.exidx.text.HD_AssertFailed) refers to hardware_drivers.o(.text.HD_AssertFailed) for [Anonymous Symbol]
-    main.o(.text.main) refers to hardware_drivers.o(.text.HD_System_Init) for HD_System_Init
-    main.o(.text.main) refers to leds.o(.text.LED_Init) for LED_Init
-    main.o(.text.main) refers to leds.o(.text.LED_StartPWMWave) for LED_StartPWMWave
-    main.o(.text.main) refers to leds.o(.text.LED_SetWaveSpeed) for LED_SetWaveSpeed
-    main.o(.text.main) refers to leds.o(.text.LED_SetPWMPeriod) for LED_SetPWMPeriod
-    main.o(.text.main) refers to leds.o(.text.LED_Process) for LED_Process
+    button.o(.ARM.exidx.text.button_read_gpio) refers to button.o(.text.button_read_gpio) for [Anonymous Symbol]
+    button.o(.text.button_init) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    button.o(.ARM.exidx.text.button_init) refers to button.o(.text.button_init) for [Anonymous Symbol]
+    button.o(.ARM.exidx.text.read_button) refers to button.o(.text.read_button) for [Anonymous Symbol]
+    button.o(.ARM.exidx.text.button_get_state) refers to button.o(.text.button_get_state) for [Anonymous Symbol]
+    button.o(.ARM.exidx.text.button_get_clicks) refers to button.o(.text.button_get_clicks) for [Anonymous Symbol]
+    button.o(.ARM.exidx.text.button_reset_clicks) refers to button.o(.text.button_reset_clicks) for [Anonymous Symbol]
+    app.o(.text.app_init) refers to hardware_drivers.o(.text.HD_System_Init) for HD_System_Init
+    app.o(.text.app_init) refers to hardware_drivers.o(.text.HD_Timer1_Init) for HD_Timer1_Init
+    app.o(.text.app_init) refers to leds.o(.text.LED_Init) for LED_Init
+    app.o(.text.app_init) refers to main.o(.bss.user_button) for user_button
+    app.o(.text.app_init) refers to button.o(.text.button_init) for button_init
+    app.o(.text.app_init) refers to leds.o(.text.LED_AllOn) for LED_AllOn
+    app.o(.text.app_init) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    app.o(.text.app_init) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    app.o(.text.app_init) refers to app.o(.bss.app_state) for app_state
+    app.o(.ARM.exidx.text.app_init) refers to app.o(.text.app_init) for [Anonymous Symbol]
+    app.o(.ARM.exidx.text.app_start) refers to app.o(.text.app_start) for [Anonymous Symbol]
+    app.o(.text.app_process) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    app.o(.text.app_process) refers to app.o(.bss.app_process.last_button_process) for app_process.last_button_process
+    app.o(.text.app_process) refers to main.o(.bss.user_button) for user_button
+    app.o(.text.app_process) refers to button.o(.text.read_button) for read_button
+    app.o(.text.app_process) refers to app.o(.bss.app_handle_button_events.button_processed) for app_handle_button_events.button_processed
+    app.o(.text.app_process) refers to leds.o(.text.LED_AllOn) for LED_AllOn
+    app.o(.text.app_process) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    app.o(.text.app_process) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    app.o(.text.app_process) refers to button.o(.text.button_reset_clicks) for button_reset_clicks
+    app.o(.text.app_process) refers to app.o(.bss.app_process.last_sequence_update) for app_process.last_sequence_update
+    app.o(.text.app_process) refers to app.o(.bss.app_process.current_led) for app_process.current_led
+    app.o(.text.app_process) refers to leds.o(.text.LED_On) for LED_On
+    app.o(.ARM.exidx.text.app_process) refers to app.o(.text.app_process) for [Anonymous Symbol]
+    app.o(.text.app_set_mode) refers to app.o(.bss.app_mode) for app_mode
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_StopPWMWave) for LED_StopPWMWave
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_SequenceStop) for LED_SequenceStop
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_StartPWMWave) for LED_StartPWMWave
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_SetWaveSpeed) for LED_SetWaveSpeed
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_SetPWMPeriod) for LED_SetPWMPeriod
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_Sequence) for LED_Sequence
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_On) for LED_On
+    app.o(.text.app_set_mode) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    app.o(.text.app_set_mode) refers to leds.o(.text.LED_Off) for LED_Off
+    app.o(.ARM.exidx.text.app_set_mode) refers to app.o(.text.app_set_mode) for [Anonymous Symbol]
+    app.o(.text.app_get_mode) refers to app.o(.bss.app_mode) for app_mode
+    app.o(.ARM.exidx.text.app_get_mode) refers to app.o(.text.app_get_mode) for [Anonymous Symbol]
+    app.o(.text.app_get_state) refers to app.o(.bss.app_state) for app_state
+    app.o(.ARM.exidx.text.app_get_state) refers to app.o(.text.app_get_state) for [Anonymous Symbol]
+    app.o(.text.app_toggle_process) refers to leds.o(.text.LED_ProcessIsEnabled) for LED_ProcessIsEnabled
+    app.o(.text.app_toggle_process) refers to leds.o(.text.LED_ProcessEnable) for LED_ProcessEnable
+    app.o(.ARM.exidx.text.app_toggle_process) refers to app.o(.text.app_toggle_process) for [Anonymous Symbol]
+    main.o(.text.main) refers to app.o(.text.app_init) for app_init
+    main.o(.text.main) refers to app.o(.text.app_start) for app_start
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     startup_mdr32f9q2i.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mdr32f9q2i.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -415,7 +480,6 @@ Removing Unused input sections from the image.
 
     Removing leds.o(.text), (0 bytes).
     Removing leds.o(.ARM.exidx.text.LED_Init), (8 bytes).
-    Removing leds.o(.text.LED_AllOff), (46 bytes).
     Removing leds.o(.ARM.exidx.text.LED_AllOff), (8 bytes).
     Removing leds.o(.text.LED_On), (42 bytes).
     Removing leds.o(.ARM.exidx.text.LED_On), (8 bytes).
@@ -435,23 +499,41 @@ Removing Unused input sections from the image.
     Removing leds.o(.ARM.exidx.text.LED_SequenceStop), (8 bytes).
     Removing leds.o(.text.LED_SequenceIsActive), (12 bytes).
     Removing leds.o(.ARM.exidx.text.LED_SequenceIsActive), (8 bytes).
-    Removing leds.o(.text.LED_AllOn), (44 bytes).
     Removing leds.o(.ARM.exidx.text.LED_AllOn), (8 bytes).
+    Removing leds.o(.text.LED_StartPWMWave), (28 bytes).
     Removing leds.o(.ARM.exidx.text.LED_StartPWMWave), (8 bytes).
     Removing leds.o(.text.LED_StopPWMWave), (58 bytes).
     Removing leds.o(.ARM.exidx.text.LED_StopPWMWave), (8 bytes).
+    Removing leds.o(.text.LED_SetWaveSpeed), (12 bytes).
     Removing leds.o(.ARM.exidx.text.LED_SetWaveSpeed), (8 bytes).
+    Removing leds.o(.text.LED_SetPWMPeriod), (12 bytes).
     Removing leds.o(.ARM.exidx.text.LED_SetPWMPeriod), (8 bytes).
     Removing leds.o(.text.LED_PWMWaveIsActive), (12 bytes).
     Removing leds.o(.ARM.exidx.text.LED_PWMWaveIsActive), (8 bytes).
+    Removing leds.o(.text.LED_Process), (424 bytes).
     Removing leds.o(.ARM.exidx.text.LED_Process), (8 bytes).
+    Removing leds.o(.text.LED_ProcessEnable), (176 bytes).
+    Removing leds.o(.ARM.exidx.text.LED_ProcessEnable), (8 bytes).
+    Removing leds.o(.text.LED_ProcessIsEnabled), (12 bytes).
+    Removing leds.o(.ARM.exidx.text.LED_ProcessIsEnabled), (8 bytes).
+    Removing leds.o(.text.LED_AllToggle), (56 bytes).
+    Removing leds.o(.ARM.exidx.text.LED_AllToggle), (8 bytes).
+    Removing leds.o(.bss.sequence_active), (1 bytes).
+    Removing leds.o(.bss.current_led), (1 bytes).
+    Removing leds.o(.bss.sequence_start_time), (4 bytes).
+    Removing leds.o(.bss.led_on_time), (4 bytes).
+    Removing leds.o(.bss.wave_active), (1 bytes).
+    Removing leds.o(.bss.pwm_counter), (4 bytes).
+    Removing leds.o(.data.wave_speed), (4 bytes).
+    Removing leds.o(.data.pwm_period), (4 bytes).
+    Removing leds.o(.data.led_process_enabled), (1 bytes).
+    Removing leds.o(.bss.set_led_pwm.pwm_step), (4 bytes).
     Removing hardware_drivers.o(.text), (0 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
     Removing hardware_drivers.o(.text.HD_IncrementTick), (16 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_IncrementTick), (8 bytes).
     Removing hardware_drivers.o(.text.TIMER1_IRQHandler), (38 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.TIMER1_IRQHandler), (8 bytes).
-    Removing hardware_drivers.o(.text.HD_Timer1_Init), (122 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Timer1_Init), (8 bytes).
     Removing hardware_drivers.o(.text.HD_Delay_Init), (38 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_Init), (8 bytes).
@@ -460,7 +542,6 @@ Removing Unused input sections from the image.
     Removing hardware_drivers.o(.ARM.exidx.text.HD_GetTick), (8 bytes).
     Removing hardware_drivers.o(.text.HD_Delay_us), (96 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_us), (8 bytes).
-    Removing hardware_drivers.o(.text.HD_Delay_ms_blocking), (32 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_ms_blocking), (8 bytes).
     Removing hardware_drivers.o(.text.HD_Delay_us_blocking), (50 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_us_blocking), (8 bytes).
@@ -473,7 +554,36 @@ Removing Unused input sections from the image.
     Removing hardware_drivers.o(.bss.HD_Delay_ms.delay_running), (1 bytes).
     Removing hardware_drivers.o(.bss.HD_Delay_us.start_tick), (4 bytes).
     Removing hardware_drivers.o(.bss.HD_Delay_us.delay_running), (1 bytes).
+    Removing button.o(.text), (0 bytes).
+    Removing button.o(.text.button_read_gpio), (10 bytes).
+    Removing button.o(.ARM.exidx.text.button_read_gpio), (8 bytes).
+    Removing button.o(.ARM.exidx.text.button_init), (8 bytes).
+    Removing button.o(.text.read_button), (140 bytes).
+    Removing button.o(.ARM.exidx.text.read_button), (8 bytes).
+    Removing button.o(.text.button_get_state), (4 bytes).
+    Removing button.o(.ARM.exidx.text.button_get_state), (8 bytes).
+    Removing button.o(.text.button_get_clicks), (4 bytes).
+    Removing button.o(.ARM.exidx.text.button_get_clicks), (8 bytes).
+    Removing button.o(.text.button_reset_clicks), (6 bytes).
+    Removing button.o(.ARM.exidx.text.button_reset_clicks), (8 bytes).
     Removing app.o(.text), (0 bytes).
+    Removing app.o(.ARM.exidx.text.app_init), (8 bytes).
+    Removing app.o(.ARM.exidx.text.app_start), (8 bytes).
+    Removing app.o(.text.app_process), (168 bytes).
+    Removing app.o(.ARM.exidx.text.app_process), (8 bytes).
+    Removing app.o(.text.app_set_mode), (114 bytes).
+    Removing app.o(.ARM.exidx.text.app_set_mode), (8 bytes).
+    Removing app.o(.text.app_get_mode), (12 bytes).
+    Removing app.o(.ARM.exidx.text.app_get_mode), (8 bytes).
+    Removing app.o(.text.app_get_state), (12 bytes).
+    Removing app.o(.ARM.exidx.text.app_get_state), (8 bytes).
+    Removing app.o(.text.app_toggle_process), (20 bytes).
+    Removing app.o(.ARM.exidx.text.app_toggle_process), (8 bytes).
+    Removing app.o(.bss.app_process.last_button_process), (4 bytes).
+    Removing app.o(.bss.app_process.last_sequence_update), (4 bytes).
+    Removing app.o(.bss.app_process.current_led), (1 bytes).
+    Removing app.o(.bss.app_mode), (1 bytes).
+    Removing app.o(.bss.app_handle_button_events.button_processed), (1 bytes).
     Removing main.o(.text), (0 bytes).
     Removing main.o(.ARM.exidx.text.main), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
@@ -572,11 +682,8 @@ Removing Unused input sections from the image.
     Removing mdr32fxqi_timer.o(.text), (0 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_DeInit), (68 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_DeInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_CntInit), (60 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_CntInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_CntStructInit), (16 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_CntStructInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_Cmd), (16 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_Cmd), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_SetCounter), (4 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_SetCounter), (8 bytes).
@@ -680,18 +787,15 @@ Removing Unused input sections from the image.
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetStatus), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_GetFlagStatus), (10 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetFlagStatus), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_ClearFlag), (6 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_ClearFlag), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_DMACmd), (20 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_DMACmd), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_ITConfig), (20 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_ITConfig), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_GetITStatus), (14 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetITStatus), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_BRGInit), (106 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_BRGInit), (8 bytes).
 
-277 unused section(s) (total 4864 bytes) removed from the image.
+316 unused section(s) (total 5773 bytes) removed from the image.
 
 ==============================================================================
 
@@ -779,6 +883,7 @@ Image Symbol Table
     MDR32FxQI_rst_clk.c                      0x00000000   Number         0  mdr32fxqi_rst_clk.o ABSOLUTE
     MDR32FxQI_timer.c                        0x00000000   Number         0  mdr32fxqi_timer.o ABSOLUTE
     RTE\Device\MDR32F9Q2I\startup_MDR32F9Q2I.S 0x00000000   Number         0  startup_mdr32f9q2i.o ABSOLUTE
+    button.c                                 0x00000000   Number         0  button.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     hardware_drivers.c                       0x00000000   Number         0  hardware_drivers.o ABSOLUTE
     leds.c                                   0x00000000   Number         0  leds.o ABSOLUTE
@@ -833,77 +938,40 @@ Image Symbol Table
     .ARM.Collect$$rtexit$$00000004           0x08000154   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
     .text                                    0x0800015c   Section      104  startup_mdr32f9q2i.o(.text)
     .text                                    0x080001c4   Section        0  heapauxi.o(.text)
-    .text                                    0x080001ca   Section        0  _rserrno.o(.text)
-    .text                                    0x080001e0   Section        8  rt_errno_addr_intlibspace.o(.text)
-    .text                                    0x080001e8   Section        8  libspace.o(.text)
-    .text                                    0x080001f0   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x0800023a   Section        0  exit.o(.text)
-    .text                                    0x0800024c   Section        0  sys_exit.o(.text)
-    .text                                    0x08000258   Section        2  use_no_semi.o(.text)
-    .text                                    0x0800025a   Section        0  indicate_semi.o(.text)
-    [Anonymous Symbol]                       0x0800025c   Section        0  hardware_drivers.o(.text.HD_GetTick)
-    [Anonymous Symbol]                       0x08000268   Section        0  hardware_drivers.o(.text.HD_System_Init)
-    [Anonymous Symbol]                       0x08000374   Section        0  leds.o(.text.LED_Init)
-    [Anonymous Symbol]                       0x080003f4   Section        0  leds.o(.text.LED_Process)
-    [Anonymous Symbol]                       0x0800059c   Section        0  leds.o(.text.LED_SetPWMPeriod)
-    [Anonymous Symbol]                       0x080005a8   Section        0  leds.o(.text.LED_SetWaveSpeed)
-    [Anonymous Symbol]                       0x080005b4   Section        0  leds.o(.text.LED_StartPWMWave)
-    [Anonymous Symbol]                       0x080005d0   Section        0  mdr32fxqi_port.o(.text.PORT_Init)
-    [Anonymous Symbol]                       0x08000724   Section        0  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
-    [Anonymous Symbol]                       0x0800073c   Section        0  hardware_drivers.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x0800074c   Section        0  system_mdr32f9q2i.o(.text.SystemInit)
-    [Anonymous Symbol]                       0x080007ec   Section        0  main.o(.text.main)
-    i.__ARM_fpclassifyf                      0x08000810   Section        0  fpclassifyf.o(i.__ARM_fpclassifyf)
-    i.__mathlib_flt_infnan                   0x08000836   Section        0  funder.o(i.__mathlib_flt_infnan)
-    i.__mathlib_flt_invalid                  0x0800083c   Section        0  funder.o(i.__mathlib_flt_invalid)
-    i.__mathlib_flt_underflow                0x08000844   Section        0  funder.o(i.__mathlib_flt_underflow)
-    i.__mathlib_rredf2                       0x08000850   Section        0  rredf.o(i.__mathlib_rredf2)
-    i.sinf                                   0x080009b8   Section        0  sinf.o(i.sinf)
-    x$fpl$fadd                               0x08000b40   Section      196  faddsub_clz.o(x$fpl$fadd)
-    _fadd1                                   0x08000b4f   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    x$fpl$fcheck1                            0x08000c04   Section       12  fcheck1.o(x$fpl$fcheck1)
-    _fdiv1                                   0x08000c11   Thumb Code     0  fdiv.o(x$fpl$fdiv)
-    x$fpl$fdiv                               0x08000c10   Section      388  fdiv.o(x$fpl$fdiv)
-    x$fpl$ffix                               0x08000d94   Section       54  ffix.o(x$fpl$ffix)
-    x$fpl$ffixu                              0x08000dcc   Section       62  ffixu.o(x$fpl$ffixu)
-    x$fpl$fflt                               0x08000e0c   Section       48  fflt_clz.o(x$fpl$fflt)
-    x$fpl$ffltu                              0x08000e3c   Section       38  fflt_clz.o(x$fpl$ffltu)
-    x$fpl$fmul                               0x08000e64   Section      258  fmul.o(x$fpl$fmul)
-    x$fpl$fnaninf                            0x08000f66   Section      140  fnaninf.o(x$fpl$fnaninf)
-    x$fpl$fretinf                            0x08000ff2   Section       10  fretinf.o(x$fpl$fretinf)
-    x$fpl$frnd                               0x08000ffc   Section       96  frnd.o(x$fpl$frnd)
-    x$fpl$frsb                               0x0800105c   Section       20  faddsub_clz.o(x$fpl$frsb)
-    x$fpl$fsub                               0x08001070   Section      234  faddsub_clz.o(x$fpl$fsub)
-    _fsub1                                   0x0800107f   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    x$fpl$retnan                             0x0800115a   Section      100  retnan.o(x$fpl$retnan)
-    x$fpl$scalbnf                            0x080011be   Section       76  scalbnf.o(x$fpl$scalbnf)
-    x$fpl$trapveneer                         0x0800120a   Section       48  trapv.o(x$fpl$trapveneer)
-    x$fpl$usenofp                            0x0800123a   Section        0  usenofp.o(x$fpl$usenofp)
-    twooverpi                                0x0800123c   Data          32  rredf.o(.constdata)
-    .constdata                               0x0800123c   Section       32  rredf.o(.constdata)
+    .text                                    0x080001cc   Section        8  libspace.o(.text)
+    .text                                    0x080001d4   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x0800021e   Section        0  exit.o(.text)
+    .text                                    0x08000230   Section        0  sys_exit.o(.text)
+    .text                                    0x0800023c   Section        2  use_no_semi.o(.text)
+    .text                                    0x0800023e   Section        0  indicate_semi.o(.text)
+    [Anonymous Symbol]                       0x08000240   Section        0  hardware_drivers.o(.text.HD_Delay_ms_blocking)
+    [Anonymous Symbol]                       0x08000260   Section        0  hardware_drivers.o(.text.HD_GetTick)
+    [Anonymous Symbol]                       0x0800026c   Section        0  hardware_drivers.o(.text.HD_System_Init)
+    [Anonymous Symbol]                       0x0800032c   Section        0  hardware_drivers.o(.text.HD_Timer1_Init)
+    [Anonymous Symbol]                       0x080003b8   Section        0  leds.o(.text.LED_AllOff)
+    [Anonymous Symbol]                       0x080003e8   Section        0  leds.o(.text.LED_AllOn)
+    [Anonymous Symbol]                       0x08000414   Section        0  leds.o(.text.LED_Init)
+    [Anonymous Symbol]                       0x08000494   Section        0  mdr32fxqi_port.o(.text.PORT_Init)
+    [Anonymous Symbol]                       0x080005e8   Section        0  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
+    [Anonymous Symbol]                       0x08000600   Section        0  hardware_drivers.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x08000610   Section        0  system_mdr32f9q2i.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x080006b0   Section        0  mdr32fxqi_timer.o(.text.TIMER_BRGInit)
+    [Anonymous Symbol]                       0x0800071c   Section        0  mdr32fxqi_timer.o(.text.TIMER_ClearFlag)
+    [Anonymous Symbol]                       0x08000724   Section        0  mdr32fxqi_timer.o(.text.TIMER_Cmd)
+    [Anonymous Symbol]                       0x08000734   Section        0  mdr32fxqi_timer.o(.text.TIMER_CntInit)
+    [Anonymous Symbol]                       0x08000770   Section        0  mdr32fxqi_timer.o(.text.TIMER_CntStructInit)
+    [Anonymous Symbol]                       0x08000780   Section        0  mdr32fxqi_timer.o(.text.TIMER_ITConfig)
+    [Anonymous Symbol]                       0x08000794   Section        0  app.o(.text.app_init)
+    [Anonymous Symbol]                       0x080007ec   Section        0  app.o(.text.app_start)
+    [Anonymous Symbol]                       0x080007f0   Section        0  button.o(.text.button_init)
+    [Anonymous Symbol]                       0x08000820   Section        0  main.o(.text.main)
     LED_Config                               0x20000000   Data          64  leds.o(.data.LED_Config)
     [Anonymous Symbol]                       0x20000000   Section        0  leds.o(.data.LED_Config)
-    pwm_period                               0x20000044   Data           4  leds.o(.data.pwm_period)
-    [Anonymous Symbol]                       0x20000044   Section        0  leds.o(.data.pwm_period)
-    wave_speed                               0x20000048   Data           4  leds.o(.data.wave_speed)
-    [Anonymous Symbol]                       0x20000048   Section        0  leds.o(.data.wave_speed)
-    .bss                                     0x20000050   Section       96  libspace.o(.bss)
-    current_led                              0x200000b0   Data           1  leds.o(.bss.current_led)
-    [Anonymous Symbol]                       0x200000b0   Section        0  leds.o(.bss.current_led)
-    led_on_time                              0x200000b4   Data           4  leds.o(.bss.led_on_time)
-    [Anonymous Symbol]                       0x200000b4   Section        0  leds.o(.bss.led_on_time)
-    pwm_counter                              0x200000b8   Data           4  leds.o(.bss.pwm_counter)
-    [Anonymous Symbol]                       0x200000b8   Section        0  leds.o(.bss.pwm_counter)
-    sequence_active                          0x200000bc   Data           1  leds.o(.bss.sequence_active)
-    [Anonymous Symbol]                       0x200000bc   Section        0  leds.o(.bss.sequence_active)
-    sequence_start_time                      0x200000c0   Data           4  leds.o(.bss.sequence_start_time)
-    [Anonymous Symbol]                       0x200000c0   Section        0  leds.o(.bss.sequence_start_time)
-    set_led_pwm.pwm_step                     0x200000c4   Data           4  leds.o(.bss.set_led_pwm.pwm_step)
-    [Anonymous Symbol]                       0x200000c4   Section        0  leds.o(.bss.set_led_pwm.pwm_step)
-    tick_counter                             0x200000c8   Data           4  hardware_drivers.o(.bss.tick_counter)
-    [Anonymous Symbol]                       0x200000c8   Section        0  hardware_drivers.o(.bss.tick_counter)
-    wave_active                              0x200000cc   Data           1  leds.o(.bss.wave_active)
-    [Anonymous Symbol]                       0x200000cc   Section        0  leds.o(.bss.wave_active)
+    .bss                                     0x20000048   Section       96  libspace.o(.bss)
+    app_state                                0x200000a8   Data           1  app.o(.bss.app_state)
+    [Anonymous Symbol]                       0x200000a8   Section        0  app.o(.bss.app_state)
+    tick_counter                             0x200000ac   Data           4  hardware_drivers.o(.bss.tick_counter)
+    [Anonymous Symbol]                       0x200000ac   Section        0  hardware_drivers.o(.bss.tick_counter)
     Heap_Mem                                 0x200000d0   Data         512  startup_mdr32f9q2i.o(HEAP)
     HEAP                                     0x200000d0   Section      512  startup_mdr32f9q2i.o(HEAP)
     Stack_Mem                                0x200002d0   Data        1024  startup_mdr32f9q2i.o(STACK)
@@ -1031,69 +1099,42 @@ Image Symbol Table
     __use_two_region_memory                  0x080001c5   Thumb Code     2  heapauxi.o(.text)
     __rt_heap_escrow$2region                 0x080001c7   Thumb Code     2  heapauxi.o(.text)
     __rt_heap_expand$2region                 0x080001c9   Thumb Code     2  heapauxi.o(.text)
-    __read_errno                             0x080001cb   Thumb Code    10  _rserrno.o(.text)
-    __set_errno                              0x080001d5   Thumb Code    12  _rserrno.o(.text)
-    __aeabi_errno_addr                       0x080001e1   Thumb Code     8  rt_errno_addr_intlibspace.o(.text)
-    __errno$intlibspace                      0x080001e1   Thumb Code     0  rt_errno_addr_intlibspace.o(.text)
-    __rt_errno_addr$intlibspace              0x080001e1   Thumb Code     0  rt_errno_addr_intlibspace.o(.text)
-    __user_libspace                          0x080001e9   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x080001e9   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x080001e9   Thumb Code     0  libspace.o(.text)
-    __user_setup_stackheap                   0x080001f1   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x0800023b   Thumb Code    18  exit.o(.text)
-    _sys_exit                                0x0800024d   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x08000259   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x08000259   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x0800025b   Thumb Code     0  indicate_semi.o(.text)
-    HD_GetTick                               0x0800025d   Thumb Code    12  hardware_drivers.o(.text.HD_GetTick)
-    HD_System_Init                           0x08000269   Thumb Code   266  hardware_drivers.o(.text.HD_System_Init)
-    LED_Init                                 0x08000375   Thumb Code   126  leds.o(.text.LED_Init)
-    LED_Process                              0x080003f5   Thumb Code   424  leds.o(.text.LED_Process)
-    LED_SetPWMPeriod                         0x0800059d   Thumb Code    12  leds.o(.text.LED_SetPWMPeriod)
-    LED_SetWaveSpeed                         0x080005a9   Thumb Code    12  leds.o(.text.LED_SetWaveSpeed)
-    LED_StartPWMWave                         0x080005b5   Thumb Code    28  leds.o(.text.LED_StartPWMWave)
-    PORT_Init                                0x080005d1   Thumb Code   340  mdr32fxqi_port.o(.text.PORT_Init)
-    RST_CLK_PCLKcmd                          0x08000725   Thumb Code    24  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
-    SysTick_Handler                          0x0800073d   Thumb Code    16  hardware_drivers.o(.text.SysTick_Handler)
-    SystemInit                               0x0800074d   Thumb Code   158  system_mdr32f9q2i.o(.text.SystemInit)
-    main                                     0x080007ed   Thumb Code    36  main.o(.text.main)
-    __ARM_fpclassifyf                        0x08000811   Thumb Code    38  fpclassifyf.o(i.__ARM_fpclassifyf)
-    __mathlib_flt_infnan                     0x08000837   Thumb Code     6  funder.o(i.__mathlib_flt_infnan)
-    __mathlib_flt_invalid                    0x0800083d   Thumb Code     8  funder.o(i.__mathlib_flt_invalid)
-    __mathlib_flt_underflow                  0x08000845   Thumb Code    10  funder.o(i.__mathlib_flt_underflow)
-    __mathlib_rredf2                         0x08000851   Thumb Code   344  rredf.o(i.__mathlib_rredf2)
-    sinf                                     0x080009b9   Thumb Code   338  sinf.o(i.sinf)
-    __aeabi_fadd                             0x08000b41   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    _fadd                                    0x08000b41   Thumb Code   196  faddsub_clz.o(x$fpl$fadd)
-    __fpl_fcheck_NaN1                        0x08000c05   Thumb Code     6  fcheck1.o(x$fpl$fcheck1)
-    __aeabi_fdiv                             0x08000c11   Thumb Code     0  fdiv.o(x$fpl$fdiv)
-    _fdiv                                    0x08000c11   Thumb Code   384  fdiv.o(x$fpl$fdiv)
-    __aeabi_f2iz                             0x08000d95   Thumb Code     0  ffix.o(x$fpl$ffix)
-    _ffix                                    0x08000d95   Thumb Code    54  ffix.o(x$fpl$ffix)
-    __aeabi_f2uiz                            0x08000dcd   Thumb Code     0  ffixu.o(x$fpl$ffixu)
-    _ffixu                                   0x08000dcd   Thumb Code    62  ffixu.o(x$fpl$ffixu)
-    __aeabi_i2f                              0x08000e0d   Thumb Code     0  fflt_clz.o(x$fpl$fflt)
-    _fflt                                    0x08000e0d   Thumb Code    48  fflt_clz.o(x$fpl$fflt)
-    __aeabi_ui2f                             0x08000e3d   Thumb Code     0  fflt_clz.o(x$fpl$ffltu)
-    _ffltu                                   0x08000e3d   Thumb Code    38  fflt_clz.o(x$fpl$ffltu)
-    __aeabi_fmul                             0x08000e65   Thumb Code     0  fmul.o(x$fpl$fmul)
-    _fmul                                    0x08000e65   Thumb Code   258  fmul.o(x$fpl$fmul)
-    __fpl_fnaninf                            0x08000f67   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
-    __fpl_fretinf                            0x08000ff3   Thumb Code    10  fretinf.o(x$fpl$fretinf)
-    _frnd                                    0x08000ffd   Thumb Code    96  frnd.o(x$fpl$frnd)
-    __aeabi_frsub                            0x0800105d   Thumb Code     0  faddsub_clz.o(x$fpl$frsb)
-    _frsb                                    0x0800105d   Thumb Code    20  faddsub_clz.o(x$fpl$frsb)
-    __aeabi_fsub                             0x08001071   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    _fsub                                    0x08001071   Thumb Code   234  faddsub_clz.o(x$fpl$fsub)
-    __fpl_return_NaN                         0x0800115b   Thumb Code   100  retnan.o(x$fpl$retnan)
-    __ARM_scalbnf                            0x080011bf   Thumb Code    76  scalbnf.o(x$fpl$scalbnf)
-    __fpl_cmpreturn                          0x0800120b   Thumb Code    48  trapv.o(x$fpl$trapveneer)
-    __I$use$fp                               0x0800123a   Number         0  usenofp.o(x$fpl$usenofp)
-    Region$$Table$$Base                      0x0800125c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800127c   Number         0  anon$$obj.o(Region$$Table)
+    __user_libspace                          0x080001cd   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x080001cd   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x080001cd   Thumb Code     0  libspace.o(.text)
+    __user_setup_stackheap                   0x080001d5   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x0800021f   Thumb Code    18  exit.o(.text)
+    _sys_exit                                0x08000231   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x0800023d   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x0800023d   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x0800023f   Thumb Code     0  indicate_semi.o(.text)
+    HD_Delay_ms_blocking                     0x08000241   Thumb Code    32  hardware_drivers.o(.text.HD_Delay_ms_blocking)
+    HD_GetTick                               0x08000261   Thumb Code    12  hardware_drivers.o(.text.HD_GetTick)
+    HD_System_Init                           0x0800026d   Thumb Code   192  hardware_drivers.o(.text.HD_System_Init)
+    HD_Timer1_Init                           0x0800032d   Thumb Code   138  hardware_drivers.o(.text.HD_Timer1_Init)
+    LED_AllOff                               0x080003b9   Thumb Code    46  leds.o(.text.LED_AllOff)
+    LED_AllOn                                0x080003e9   Thumb Code    44  leds.o(.text.LED_AllOn)
+    LED_Init                                 0x08000415   Thumb Code   126  leds.o(.text.LED_Init)
+    PORT_Init                                0x08000495   Thumb Code   340  mdr32fxqi_port.o(.text.PORT_Init)
+    RST_CLK_PCLKcmd                          0x080005e9   Thumb Code    24  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
+    SysTick_Handler                          0x08000601   Thumb Code    16  hardware_drivers.o(.text.SysTick_Handler)
+    SystemInit                               0x08000611   Thumb Code   158  system_mdr32f9q2i.o(.text.SystemInit)
+    TIMER_BRGInit                            0x080006b1   Thumb Code   106  mdr32fxqi_timer.o(.text.TIMER_BRGInit)
+    TIMER_ClearFlag                          0x0800071d   Thumb Code     6  mdr32fxqi_timer.o(.text.TIMER_ClearFlag)
+    TIMER_Cmd                                0x08000725   Thumb Code    16  mdr32fxqi_timer.o(.text.TIMER_Cmd)
+    TIMER_CntInit                            0x08000735   Thumb Code    60  mdr32fxqi_timer.o(.text.TIMER_CntInit)
+    TIMER_CntStructInit                      0x08000771   Thumb Code    16  mdr32fxqi_timer.o(.text.TIMER_CntStructInit)
+    TIMER_ITConfig                           0x08000781   Thumb Code    20  mdr32fxqi_timer.o(.text.TIMER_ITConfig)
+    app_init                                 0x08000795   Thumb Code    86  app.o(.text.app_init)
+    app_start                                0x080007ed   Thumb Code     2  app.o(.text.app_start)
+    button_init                              0x080007f1   Thumb Code    48  button.o(.text.button_init)
+    main                                     0x08000821   Thumb Code    12  main.o(.text.main)
+    Region$$Table$$Base                      0x0800082c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800084c   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000040   Data           4  system_mdr32f9q2i.o(.data.SystemCoreClock)
-    __libspace_start                         0x20000050   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x200000b0   Data           0  libspace.o(.bss)
+    __libspace_start                         0x20000048   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x200000a8   Data           0  libspace.o(.bss)
+    user_button                              0x200000b0   Data          28  main.o(.bss.user_button)
 
 
 
@@ -1103,142 +1144,118 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000012d0, Max: 0x00020000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000898, Max: 0x00020000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000127c, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000084c, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000c0   Data   RO          106    RESET               startup_mdr32f9q2i.o
-    0x080000c0   0x080000c0   0x00000008   Code   RO          362  * !!!main             c_w.l(__main.o)
-    0x080000c8   0x080000c8   0x00000034   Code   RO          598    !!!scatter          c_w.l(__scatter.o)
-    0x080000fc   0x080000fc   0x0000001a   Code   RO          600    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x08000000   0x08000000   0x000000c0   Data   RO          161    RESET               startup_mdr32f9q2i.o
+    0x080000c0   0x080000c0   0x00000008   Code   RO          417  * !!!main             c_w.l(__main.o)
+    0x080000c8   0x080000c8   0x00000034   Code   RO          653    !!!scatter          c_w.l(__scatter.o)
+    0x080000fc   0x080000fc   0x0000001a   Code   RO          655    !!handler_copy      c_w.l(__scatter_copy.o)
     0x08000116   0x08000116   0x00000002   PAD
-    0x08000118   0x08000118   0x0000001c   Code   RO          602    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x08000134   0x08000134   0x00000002   Code   RO          457    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          463    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          465    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          467    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          470    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          472    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          474    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          477    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          479    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          481    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          483    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          485    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          487    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          489    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          491    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          493    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          495    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          497    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          501    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          503    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          505    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          507    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000002   Code   RO          508    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
-    0x08000138   0x08000138   0x00000002   Code   RO          534    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          549    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          551    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          554    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          557    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          559    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          562    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000002   Code   RO          563    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x0800013c   0x0800013c   0x00000000   Code   RO          390    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x0800013c   0x0800013c   0x00000000   Code   RO          424    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x0800013c   0x0800013c   0x00000006   Code   RO          436    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x08000142   0x08000142   0x00000000   Code   RO          426    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x08000142   0x08000142   0x00000004   Code   RO          427    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x08000146   0x08000146   0x00000000   Code   RO          429    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x08000146   0x08000146   0x00000008   Code   RO          430    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x0800014e   0x0800014e   0x00000002   Code   RO          460    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x08000150   0x08000150   0x00000000   Code   RO          512    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x08000150   0x08000150   0x00000004   Code   RO          513    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x08000154   0x08000154   0x00000006   Code   RO          514    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x08000118   0x08000118   0x0000001c   Code   RO          657    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x08000134   0x08000134   0x00000002   Code   RO          512    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          518    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          520    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          522    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          525    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          527    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          529    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          532    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          534    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          536    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          538    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          540    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          542    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          544    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          546    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          548    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          550    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          552    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          556    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          558    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          560    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          562    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000002   Code   RO          563    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x08000138   0x08000138   0x00000002   Code   RO          589    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          604    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          606    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          609    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          612    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          614    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          617    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000002   Code   RO          618    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x0800013c   0x0800013c   0x00000000   Code   RO          445    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x0800013c   0x0800013c   0x00000000   Code   RO          479    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x0800013c   0x0800013c   0x00000006   Code   RO          491    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          481    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x08000142   0x08000142   0x00000004   Code   RO          482    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x08000146   0x08000146   0x00000000   Code   RO          484    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x08000146   0x08000146   0x00000008   Code   RO          485    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0800014e   0x0800014e   0x00000002   Code   RO          515    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x08000150   0x08000150   0x00000000   Code   RO          567    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x08000150   0x08000150   0x00000004   Code   RO          568    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x08000154   0x08000154   0x00000006   Code   RO          569    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0800015a   0x0800015a   0x00000002   PAD
-    0x0800015c   0x0800015c   0x00000068   Code   RO          107    .text               startup_mdr32f9q2i.o
-    0x080001c4   0x080001c4   0x00000006   Code   RO          360    .text               c_w.l(heapauxi.o)
-    0x080001ca   0x080001ca   0x00000016   Code   RO          391    .text               c_w.l(_rserrno.o)
-    0x080001e0   0x080001e0   0x00000008   Code   RO          441    .text               c_w.l(rt_errno_addr_intlibspace.o)
-    0x080001e8   0x080001e8   0x00000008   Code   RO          445    .text               c_w.l(libspace.o)
-    0x080001f0   0x080001f0   0x0000004a   Code   RO          448    .text               c_w.l(sys_stackheap_outer.o)
-    0x0800023a   0x0800023a   0x00000012   Code   RO          450    .text               c_w.l(exit.o)
-    0x0800024c   0x0800024c   0x0000000c   Code   RO          524    .text               c_w.l(sys_exit.o)
-    0x08000258   0x08000258   0x00000002   Code   RO          539    .text               c_w.l(use_no_semi.o)
-    0x0800025a   0x0800025a   0x00000000   Code   RO          541    .text               c_w.l(indicate_semi.o)
-    0x0800025a   0x0800025a   0x00000002   PAD
-    0x0800025c   0x0800025c   0x0000000c   Code   RO           68    .text.HD_GetTick    hardware_drivers.o
-    0x08000268   0x08000268   0x0000010a   Code   RO           76    .text.HD_System_Init  hardware_drivers.o
-    0x08000372   0x08000372   0x00000002   PAD
-    0x08000374   0x08000374   0x0000007e   Code   RO            2    .text.LED_Init      leds.o
-    0x080003f2   0x080003f2   0x00000002   PAD
-    0x080003f4   0x080003f4   0x000001a8   Code   RO           36    .text.LED_Process   leds.o
-    0x0800059c   0x0800059c   0x0000000c   Code   RO           32    .text.LED_SetPWMPeriod  leds.o
-    0x080005a8   0x080005a8   0x0000000c   Code   RO           30    .text.LED_SetWaveSpeed  leds.o
-    0x080005b4   0x080005b4   0x0000001c   Code   RO           26    .text.LED_StartPWMWave  leds.o
-    0x080005d0   0x080005d0   0x00000154   Code   RO          129    .text.PORT_Init     mdr32fxqi_port.o
-    0x08000724   0x08000724   0x00000018   Code   RO          219    .text.RST_CLK_PCLKcmd  mdr32fxqi_rst_clk.o
-    0x0800073c   0x0800073c   0x00000010   Code   RO           56    .text.SysTick_Handler  hardware_drivers.o
-    0x0800074c   0x0800074c   0x0000009e   Code   RO          116    .text.SystemInit    system_mdr32f9q2i.o
+    0x0800015c   0x0800015c   0x00000068   Code   RO          162    .text               startup_mdr32f9q2i.o
+    0x080001c4   0x080001c4   0x00000006   Code   RO          415    .text               c_w.l(heapauxi.o)
+    0x080001ca   0x080001ca   0x00000002   PAD
+    0x080001cc   0x080001cc   0x00000008   Code   RO          500    .text               c_w.l(libspace.o)
+    0x080001d4   0x080001d4   0x0000004a   Code   RO          503    .text               c_w.l(sys_stackheap_outer.o)
+    0x0800021e   0x0800021e   0x00000012   Code   RO          505    .text               c_w.l(exit.o)
+    0x08000230   0x08000230   0x0000000c   Code   RO          579    .text               c_w.l(sys_exit.o)
+    0x0800023c   0x0800023c   0x00000002   Code   RO          594    .text               c_w.l(use_no_semi.o)
+    0x0800023e   0x0800023e   0x00000000   Code   RO          596    .text               c_w.l(indicate_semi.o)
+    0x0800023e   0x0800023e   0x00000002   PAD
+    0x08000240   0x08000240   0x00000020   Code   RO           79    .text.HD_Delay_ms_blocking  hardware_drivers.o
+    0x08000260   0x08000260   0x0000000c   Code   RO           75    .text.HD_GetTick    hardware_drivers.o
+    0x0800026c   0x0800026c   0x000000c0   Code   RO           83    .text.HD_System_Init  hardware_drivers.o
+    0x0800032c   0x0800032c   0x0000008a   Code   RO           69    .text.HD_Timer1_Init  hardware_drivers.o
+    0x080003b6   0x080003b6   0x00000002   PAD
+    0x080003b8   0x080003b8   0x0000002e   Code   RO            4    .text.LED_AllOff    leds.o
+    0x080003e6   0x080003e6   0x00000002   PAD
+    0x080003e8   0x080003e8   0x0000002c   Code   RO           24    .text.LED_AllOn     leds.o
+    0x08000414   0x08000414   0x0000007e   Code   RO            2    .text.LED_Init      leds.o
+    0x08000492   0x08000492   0x00000002   PAD
+    0x08000494   0x08000494   0x00000154   Code   RO          184    .text.PORT_Init     mdr32fxqi_port.o
+    0x080005e8   0x080005e8   0x00000018   Code   RO          274    .text.RST_CLK_PCLKcmd  mdr32fxqi_rst_clk.o
+    0x08000600   0x08000600   0x00000010   Code   RO           63    .text.SysTick_Handler  hardware_drivers.o
+    0x08000610   0x08000610   0x0000009e   Code   RO          171    .text.SystemInit    system_mdr32f9q2i.o
+    0x080006ae   0x080006ae   0x00000002   PAD
+    0x080006b0   0x080006b0   0x0000006a   Code   RO          404    .text.TIMER_BRGInit  mdr32fxqi_timer.o
+    0x0800071a   0x0800071a   0x00000002   PAD
+    0x0800071c   0x0800071c   0x00000006   Code   RO          396    .text.TIMER_ClearFlag  mdr32fxqi_timer.o
+    0x08000722   0x08000722   0x00000002   PAD
+    0x08000724   0x08000724   0x00000010   Code   RO          292    .text.TIMER_Cmd     mdr32fxqi_timer.o
+    0x08000734   0x08000734   0x0000003c   Code   RO          288    .text.TIMER_CntInit  mdr32fxqi_timer.o
+    0x08000770   0x08000770   0x00000010   Code   RO          290    .text.TIMER_CntStructInit  mdr32fxqi_timer.o
+    0x08000780   0x08000780   0x00000014   Code   RO          400    .text.TIMER_ITConfig  mdr32fxqi_timer.o
+    0x08000794   0x08000794   0x00000056   Code   RO          122    .text.app_init      app.o
     0x080007ea   0x080007ea   0x00000002   PAD
-    0x080007ec   0x080007ec   0x00000024   Code   RO           96    .text.main          main.o
-    0x08000810   0x08000810   0x00000026   Code   RO          404    i.__ARM_fpclassifyf  m_ws.l(fpclassifyf.o)
-    0x08000836   0x08000836   0x00000006   Code   RO          407    i.__mathlib_flt_infnan  m_ws.l(funder.o)
-    0x0800083c   0x0800083c   0x00000008   Code   RO          409    i.__mathlib_flt_invalid  m_ws.l(funder.o)
-    0x08000844   0x08000844   0x0000000a   Code   RO          412    i.__mathlib_flt_underflow  m_ws.l(funder.o)
-    0x0800084e   0x0800084e   0x00000002   PAD
-    0x08000850   0x08000850   0x00000168   Code   RO          420    i.__mathlib_rredf2  m_ws.l(rredf.o)
-    0x080009b8   0x080009b8   0x00000188   Code   RO          387    i.sinf              m_ws.l(sinf.o)
-    0x08000b40   0x08000b40   0x000000c4   Code   RO          364    x$fpl$fadd          fz_ws.l(faddsub_clz.o)
-    0x08000c04   0x08000c04   0x0000000c   Code   RO          458    x$fpl$fcheck1       fz_ws.l(fcheck1.o)
-    0x08000c10   0x08000c10   0x00000184   Code   RO          371    x$fpl$fdiv          fz_ws.l(fdiv.o)
-    0x08000d94   0x08000d94   0x00000036   Code   RO          393    x$fpl$ffix          fz_ws.l(ffix.o)
-    0x08000dca   0x08000dca   0x00000002   PAD
-    0x08000dcc   0x08000dcc   0x0000003e   Code   RO          374    x$fpl$ffixu         fz_ws.l(ffixu.o)
-    0x08000e0a   0x08000e0a   0x00000002   PAD
-    0x08000e0c   0x08000e0c   0x00000030   Code   RO          379    x$fpl$fflt          fz_ws.l(fflt_clz.o)
-    0x08000e3c   0x08000e3c   0x00000026   Code   RO          378    x$fpl$ffltu         fz_ws.l(fflt_clz.o)
-    0x08000e62   0x08000e62   0x00000002   PAD
-    0x08000e64   0x08000e64   0x00000102   Code   RO          384    x$fpl$fmul          fz_ws.l(fmul.o)
-    0x08000f66   0x08000f66   0x0000008c   Code   RO          397    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
-    0x08000ff2   0x08000ff2   0x0000000a   Code   RO          399    x$fpl$fretinf       fz_ws.l(fretinf.o)
-    0x08000ffc   0x08000ffc   0x00000060   Code   RO          401    x$fpl$frnd          fz_ws.l(frnd.o)
-    0x0800105c   0x0800105c   0x00000014   Code   RO          365    x$fpl$frsb          fz_ws.l(faddsub_clz.o)
-    0x08001070   0x08001070   0x000000ea   Code   RO          366    x$fpl$fsub          fz_ws.l(faddsub_clz.o)
-    0x0800115a   0x0800115a   0x00000064   Code   RO          509    x$fpl$retnan        fz_ws.l(retnan.o)
-    0x080011be   0x080011be   0x0000004c   Code   RO          443    x$fpl$scalbnf       fz_ws.l(scalbnf.o)
-    0x0800120a   0x0800120a   0x00000030   Code   RO          522    x$fpl$trapveneer    fz_ws.l(trapv.o)
-    0x0800123a   0x0800123a   0x00000000   Code   RO          403    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x0800123a   0x0800123a   0x00000002   PAD
-    0x0800123c   0x0800123c   0x00000020   Data   RO          421    .constdata          m_ws.l(rredf.o)
-    0x0800125c   0x0800125c   0x00000020   Data   RO          597    Region$$Table       anon$$obj.o
+    0x080007ec   0x080007ec   0x00000002   Code   RO          124    .text.app_start     app.o
+    0x080007ee   0x080007ee   0x00000002   PAD
+    0x080007f0   0x080007f0   0x00000030   Code   RO          104    .text.button_init   button.o
+    0x08000820   0x08000820   0x0000000c   Code   RO          150    .text.main          main.o
+    0x0800082c   0x0800082c   0x00000020   Data   RO          652    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001280, Size: 0x000006d0, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000850, Size: 0x000006d0, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001280   0x00000040   Data   RW           38    .data.LED_Config    leds.o
-    0x20000040   0x080012c0   0x00000004   Data   RW          118    .data.SystemCoreClock  system_mdr32f9q2i.o
-    0x20000044   0x080012c4   0x00000004   Data   RW           46    .data.pwm_period    leds.o
-    0x20000048   0x080012c8   0x00000004   Data   RW           45    .data.wave_speed    leds.o
-    0x2000004c   0x080012cc   0x00000004   PAD
-    0x20000050        -       0x00000060   Zero   RW          446    .bss                c_w.l(libspace.o)
-    0x200000b0        -       0x00000001   Zero   RW           40    .bss.current_led    leds.o
-    0x200000b1   0x080012cc   0x00000003   PAD
-    0x200000b4        -       0x00000004   Zero   RW           42    .bss.led_on_time    leds.o
-    0x200000b8        -       0x00000004   Zero   RW           44    .bss.pwm_counter    leds.o
-    0x200000bc        -       0x00000001   Zero   RW           39    .bss.sequence_active  leds.o
-    0x200000bd   0x080012cc   0x00000003   PAD
-    0x200000c0        -       0x00000004   Zero   RW           41    .bss.sequence_start_time  leds.o
-    0x200000c4        -       0x00000004   Zero   RW           47    .bss.set_led_pwm.pwm_step  leds.o
-    0x200000c8        -       0x00000004   Zero   RW           86    .bss.tick_counter   hardware_drivers.o
-    0x200000cc        -       0x00000001   Zero   RW           43    .bss.wave_active    leds.o
-    0x200000cd   0x080012cc   0x00000003   PAD
-    0x200000d0        -       0x00000200   Zero   RW          105    HEAP                startup_mdr32f9q2i.o
-    0x200002d0        -       0x00000400   Zero   RW          104    STACK               startup_mdr32f9q2i.o
+    0x20000000   0x08000850   0x00000040   Data   RW           44    .data.LED_Config    leds.o
+    0x20000040   0x08000890   0x00000004   Data   RW          173    .data.SystemCoreClock  system_mdr32f9q2i.o
+    0x20000044   0x08000894   0x00000004   PAD
+    0x20000048        -       0x00000060   Zero   RW          501    .bss                c_w.l(libspace.o)
+    0x200000a8        -       0x00000001   Zero   RW          136    .bss.app_state      app.o
+    0x200000a9   0x08000894   0x00000003   PAD
+    0x200000ac        -       0x00000004   Zero   RW           93    .bss.tick_counter   hardware_drivers.o
+    0x200000b0        -       0x0000001c   Zero   RW          152    .bss.user_button    main.o
+    0x200000cc   0x08000894   0x00000004   PAD
+    0x200000d0        -       0x00000200   Zero   RW          160    HEAP                startup_mdr32f9q2i.o
+    0x200002d0        -       0x00000400   Zero   RW          159    STACK               startup_mdr32f9q2i.o
 
 
 ==============================================================================
@@ -1248,18 +1265,21 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       294          0          0          0          4       7907   hardware_drivers.o
-       602          0          0         72         19       8158   leds.o
-        36          0          0          0          0        390   main.o
+        88          0          0          0          1       2836   app.o
+        48          0          0          0          0       2827   button.o
+       390          0          0          0          4      10405   hardware_drivers.o
+       216          0          0         64          0       9339   leds.o
+        12          0          0          0         28       1279   main.o
        340          0          0          0          0       5547   mdr32fxqi_port.o
         24          0          0          0          0      14077   mdr32fxqi_rst_clk.o
+       224          0          0          0          0      23900   mdr32fxqi_timer.o
        104         26        192          0       1536       1712   startup_mdr32f9q2i.o
        158          0          0          4          0       2645   system_mdr32f9q2i.o
 
     ----------------------------------------------------------------------
-      1564         26        224         76       1572      40436   Object Totals
+      1620         26        224         68       1580      74567   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         6          0          0          0         13          0   (incl. Padding)
+        16          0          0          0         11          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1272,7 +1292,6 @@ Image component sizes
         52          8          0          0          0          0   __scatter.o
         26          0          0          0          0          0   __scatter_copy.o
         28          0          0          0          0          0   __scatter_zi.o
-        22          0          0          0          0        100   _rserrno.o
         18          0          0          0          0         80   exit.o
          6          0          0          0          0        152   heapauxi.o
          0          0          0          0          0          0   indicate_semi.o
@@ -1281,45 +1300,24 @@ Image component sizes
          2          0          0          0          0          0   libshutdown.o
          2          0          0          0          0          0   libshutdown2.o
          8          4          0          0         96         68   libspace.o
-         8          4          0          0          0         68   rt_errno_addr_intlibspace.o
          2          0          0          0          0          0   rtexit.o
         10          0          0          0          0          0   rtexit2.o
         12          4          0          0          0         68   sys_exit.o
         74          0          0          0          0         80   sys_stackheap_outer.o
          2          0          0          0          0         68   use_no_semi.o
-       450          8          0          0          0        236   faddsub_clz.o
-        12          4          0          0          0         68   fcheck1.o
-       388         76          0          0          0         96   fdiv.o
-        54          4          0          0          0         84   ffix.o
-        62          4          0          0          0         84   ffixu.o
-        86          0          0          0          0        136   fflt_clz.o
-       258          4          0          0          0         84   fmul.o
-       140          4          0          0          0         84   fnaninf.o
-        10          0          0          0          0         68   fretinf.o
-        96          4          0          0          0         76   frnd.o
-       100          0          0          0          0         68   retnan.o
-        76          0          0          0          0         68   scalbnf.o
-        48          0          0          0          0         68   trapv.o
-         0          0          0          0          0          0   usenofp.o
-        38          0          0          0          0         68   fpclassifyf.o
-        24          0          0          0          0        204   funder.o
-       360         16         32          0          0         88   rredf.o
-       392         54          0          0          0        124   sinf.o
 
     ----------------------------------------------------------------------
-      2912        198         32          0         96       2456   Library Totals
-        16          0          0          0          0          0   (incl. Padding)
+       280         16          0          0         96        584   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-       302         20          0          0         96        752   c_w.l
-      1780        108          0          0          0       1220   fz_ws.l
-       814         70         32          0          0        484   m_ws.l
+       272         16          0          0         96        584   c_w.l
 
     ----------------------------------------------------------------------
-      2912        198         32          0         96       2456   Library Totals
+       280         16          0          0         96        584   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1328,15 +1326,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4476        224        256         76       1668      41436   Grand Totals
-      4476        224        256         76       1668      41436   ELF Image Totals
-      4476        224        256         76          0          0   ROM Totals
+      1900         42        224         68       1676      74883   Grand Totals
+      1900         42        224         68       1676      74883   ELF Image Totals
+      1900         42        224         68          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 4732 (   4.62kB)
+    Total RO  Size (Code + RO Data)                 2124 (   2.07kB)
     Total RW  Size (RW Data + ZI Data)              1744 (   1.70kB)
-    Total ROM Size (Code + RO Data + RW Data)       4808 (   4.70kB)
+    Total ROM Size (Code + RO Data + RW Data)       2192 (   2.14kB)
 
 ==============================================================================
 
