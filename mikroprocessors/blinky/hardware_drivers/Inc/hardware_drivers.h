@@ -28,6 +28,7 @@ void HD_IncrementTick(void);
 
 /* Timer functions */
 void HD_Timer1_Init(void);
+void TIMER1_IRQHandler(void);
 
 /* System functions */
 void HD_System_Init(void);

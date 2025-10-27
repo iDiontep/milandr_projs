@@ -19,7 +19,9 @@ int main(void) {
     while(1) {
         // All LED processing is done in timer interrupts
         // You can add other non-time-critical tasks here
-			LED_Process();
-      //  __NOP();
+        __NOP();
+				//LED_Process();
+        // Or add small delay to reduce CPU usage
+        // HD_Delay_ms_blocking(1);
     }
 }

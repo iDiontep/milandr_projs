@@ -16,7 +16,7 @@ void SysTick_Handler(void)
 }
 
 /* TIMER1 interrupt handler for LED processing */
-void Timer1_IRQHandler(void)
+void TIMER1_IRQHandler(void)
 {
     if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
         TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
@@ -33,46 +33,45 @@ void Timer1_IRQHandler(void)
   */
 void HD_Timer1_Init(void)
 {
+    TIMER_CntInitTypeDef timer_init;
+    
     /* Enable clock for TIMER1 */
     RST_CLK_PCLKcmd(RST_CLK_PCLK_TIMER1, ENABLE);
     
-    /* Configure timer clock - аналогично первому коду */
-    MDR_RST_CLK->TIM_CLOCK &= ~RST_CLK_TIM_CLOCK_TIM1_BRG_Msk;
-    MDR_RST_CLK->TIM_CLOCK |= (0 << RST_CLK_TIM_CLOCK_TIM1_BRG_Pos) | RST_CLK_TIM_CLOCK_TIM1_CLK_EN;
-
-    /* Прямая работа с регистрами по образцу первого кода */
-    MDR_TIMER1->CNT = 0;
-    MDR_TIMER1->PSG = 0;
-    MDR_TIMER1->ARR = (system_clock / 1000) - 1; /* 1ms period */
+    /* Configure timer clock source */
+    TIMER_BRGInit(MDR_TIMER1, TIMER_HCLKdiv1);
     
-    /* Настройка основного контроллера таймера */
-    MDR_TIMER1->CNTRL = (0x0 << TIMER_CNTRL_FDTS_Pos) | TIMER_CNTRL_CNT_EN;
+    /* Initialize timer structure */
+    TIMER_CntStructInit(&timer_init);
     
-    /* Отключаем каналы, т.к. они не используются для обработки LED */
-    MDR_TIMER1->CH1_CNTRL = 0;
-    MDR_TIMER1->CH2_CNTRL = 0;
-    MDR_TIMER1->CH3_CNTRL = 0;
-    MDR_TIMER1->CH4_CNTRL = 0;
+    /* Configure timer for 1ms period */
+    timer_init.TIMER_Prescaler = 0;          /* No prescaler */
+    timer_init.TIMER_Period = (system_clock / 1000) - 1;  /* 1ms period */
+    timer_init.TIMER_CounterMode = TIMER_CntMode_ClkFixedDir;
+    timer_init.TIMER_CounterDirection = TIMER_CntDir_Up;
+    timer_init.TIMER_EventSource = TIMER_EvSrc_TIM_CLK;
+    timer_init.TIMER_FilterSampling = TIMER_FDTS_TIMER_CLK_div_1;
+    timer_init.TIMER_ARR_UpdateMode = TIMER_ARR_Update_Immediately;
+    timer_init.TIMER_ETR_FilterConf = TIMER_Filter_1FF_at_TIMER_CLK;
+    timer_init.TIMER_ETR_Prescaler = TIMER_ETR_Prescaler_None;
+    timer_init.TIMER_ETR_Polarity = TIMER_ETRPolarity_NonInverted;
+    timer_init.TIMER_BRK_Polarity = TIMER_BRKPolarity_NonInverted;
     
-    /* Дополнительные регистры управления каналами */
-    MDR_TIMER1->CH1_CNTRL1 = 0;
-    MDR_TIMER1->CH2_CNTRL1 = 0;
-    MDR_TIMER1->CH3_CNTRL1 = 0;
-    MDR_TIMER1->CH4_CNTRL1 = 0;
+    /* Apply timer configuration */
+    TIMER_CntInit(MDR_TIMER1, &timer_init);
     
-    /* Регистры управления внешними событиями и brake */
-    MDR_TIMER1->BRKETR_CNTRL = 0;
-    MDR_TIMER1->DMA_RE = 0;
-
-    /* Включаем прерывание по событию переполнения (ARR) */
-    MDR_TIMER1->IE = TIMER_IE_BRK_EVENT_IE;
-
-
-    /* Настройка прерывания */
+    /* Enable TIMER1 interrupts */
+    TIMER_ITConfig(MDR_TIMER1, TIMER_STATUS_CNT_ARR, ENABLE);
+    
+    /* Clear any pending interrupts */
+    TIMER_ClearFlag(MDR_TIMER1, TIMER_STATUS_Msk);
+    
+    /* Configure NVIC for TIMER1 */
     NVIC_SetPriority(Timer1_IRQn, 1);
     NVIC_EnableIRQ(Timer1_IRQn);
     
-    /* Таймер уже запущен через установку TIMER_CNTRL_CNT_EN выше */
+    /* Start timer */
+    TIMER_Cmd(MDR_TIMER1, ENABLE);
 }
 
 
