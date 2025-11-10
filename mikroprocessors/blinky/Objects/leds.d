@@ -15,6 +15,7 @@
   C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\m-profile\armv7m_mpu.h \
   RTE\Device\MDR32F9Q2I\system_MDR32F9Q2I.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_timer.h \
-  Core\Inc\main.h \
+  hardware_drivers\Inc\bit_utils.h Core\Inc\main.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_port.h \
+  hardware_drivers\Inc\seg7_display.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h

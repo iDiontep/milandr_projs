@@ -15,14 +15,17 @@ void SysTick_Handler(void)
     HD_IncrementTick();
 }
 
-/* TIMER1 interrupt handler for LED processing */
+/* TIMER1 interrupt handler for LED and display processing */
 void TIMER1_IRQHandler(void)
 {
     if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
         TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
         
         /* Call LED process function */
-        LED_Process();
+        //LED_Process();
+        
+        /* Call 7-segment display process function */
+        SEG7_Process();
     }
 }
 
@@ -211,9 +214,6 @@ void HD_System_Init(void)
 		MDR_PORTC-> GFEN  &= ~(0x01 << (2));
     /* Initialize delay system */
     HD_Delay_Init();
-    
-    /* Initialize TIMER1 for LED processing */
-    HD_Timer1_Init();
     
     /* Additional hardware initialization can be added here */
 }

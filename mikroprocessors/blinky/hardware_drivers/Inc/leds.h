@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "hardware_drivers.h"
+#include "bit_utils.h"
 
 /* LED definitions */
 typedef enum {
