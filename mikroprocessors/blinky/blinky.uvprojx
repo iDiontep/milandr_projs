@@ -488,6 +488,26 @@
               <FileType>5</FileType>
               <FilePath>.\hardware_drivers\Inc\bit_utils.h</FilePath>
             </File>
+            <File>
+              <FileName>stopwatch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware_drivers\Inc\stopwatch.h</FilePath>
+            </File>
+            <File>
+              <FileName>stopwatch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware_drivers\Src\stopwatch.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware_drivers\Src\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware_drivers\Inc\button.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
