@@ -1,6 +1,6 @@
 #include "hardware_drivers.h"
 #include "main.h"
-#include "leds.h"
+#include "seg7_display.h"
 #include "MDR32FxQI_rst_clk.h"
 #include "MDR32FxQI_port.h"
 #include "MDR32FxQI_timer.h"
@@ -18,12 +18,16 @@ void SysTick_Handler(void)
 /* TIMER1 interrupt handler for LED processing */
 void TIMER1_IRQHandler(void)
 {
+    /* Check and clear ALL possible timer interrupt flags */
     if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
         TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
         
         /* Call LED process function */
-        LED_Process();
+        SEG7_Process();
     }
+    
+    /* Clear any other pending timer interrupts to prevent infinite loops */
+    TIMER_ClearFlag(MDR_TIMER1, TIMER_STATUS_Msk);
 }
 
 /**
@@ -46,7 +50,7 @@ void HD_Timer1_Init(void)
     
     /* Configure timer for 1ms period */
     timer_init.TIMER_Prescaler = 0;          /* No prescaler */
-    timer_init.TIMER_Period = (system_clock / 1000) - 1;  /* 1ms period */
+    timer_init.TIMER_Period = (system_clock / 8000 / 5) - 1;  /* 5ms period */
     timer_init.TIMER_CounterMode = TIMER_CntMode_ClkFixedDir;
     timer_init.TIMER_CounterDirection = TIMER_CntDir_Up;
     timer_init.TIMER_EventSource = TIMER_EvSrc_TIM_CLK;
@@ -211,9 +215,7 @@ void HD_System_Init(void)
 		MDR_PORTC-> GFEN  &= ~(0x01 << (2));
     /* Initialize delay system */
     HD_Delay_Init();
-    
-    /* Initialize TIMER1 for LED processing */
-    HD_Timer1_Init();
+
     
     /* Additional hardware initialization can be added here */
 }

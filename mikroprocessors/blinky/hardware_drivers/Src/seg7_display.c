@@ -6,8 +6,8 @@
 // Глобальные переменные таймера
 static volatile uint32_t timer_counter = 0;
 static volatile uint32_t timer_seconds = 0;
-static volatile bool timer_running = false;
-static volatile bool timer_updated = false;
+static volatile bool timer_running = 1;
+static volatile bool timer_updated = 1;
 
 // Переменные для динамической индикации
 static uint8_t current_digit = 0;
@@ -73,37 +73,62 @@ void select_digit(uint8_t n) {
 }
 
 void SEG7_Init(void) {
-    PORT_InitTypeDef port_init;
+     PORT_InitTypeDef port_init;
     
-    // Включаем тактирование портов
+    /* Enable clock for all used ports */
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTA, ENABLE);
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTB, ENABLE);
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTC, ENABLE);
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTE, ENABLE);
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTF, ENABLE);
-    
-    // Настройка сегментов (порты A и B)
+
+    /* Configure segment pins as outputs */
     PORT_StructInit(&port_init);
-    port_init.PORT_Pin = PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5;
+    port_init.PORT_Pin = SEG7_SEG_A_PIN | SEG7_SEG_B_PIN | SEG7_SEG_C_PIN;
     port_init.PORT_OE = PORT_OE_OUT;
     port_init.PORT_FUNC = PORT_FUNC_PORT;
     port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_PULL_UP = PORT_PULL_UP_OFF;
-    port_init.PORT_PULL_DOWN = PORT_PULL_DOWN_OFF;
-    PORT_Init(MDR_PORTA, &port_init);
-    
-    port_init.PORT_Pin = PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5;
-    PORT_Init(MDR_PORTB, &port_init);
-    
-    // Настройка разрядов (порты C, E, F)
-    port_init.PORT_Pin = PORT_Pin_0 | PORT_Pin_1;
-    PORT_Init(MDR_PORTC, &port_init);
-    
-    port_init.PORT_Pin = PORT_Pin_0;
-    PORT_Init(MDR_PORTE, &port_init);
-    
-    port_init.PORT_Pin = PORT_Pin_1;
-    PORT_Init(MDR_PORTF, &port_init);
+    port_init.PORT_SPEED = PORT_SPEED_FAST;
+    port_init.PORT_PD = PORT_PD_DRIVER;
+    PORT_Init(SEG7_SEG_A_PORT, &port_init);
+
+    PORT_StructInit(&port_init);
+    port_init.PORT_Pin = SEG7_SEG_D_PIN | SEG7_SEG_E_PIN | SEG7_SEG_F_PIN | 
+                         SEG7_SEG_G_PIN | SEG7_SEG_DP_PIN;
+    port_init.PORT_OE = PORT_OE_OUT;
+    port_init.PORT_FUNC = PORT_FUNC_PORT;
+    port_init.PORT_MODE = PORT_MODE_DIGITAL;
+    port_init.PORT_SPEED = PORT_SPEED_FAST;
+    port_init.PORT_PD = PORT_PD_DRIVER;
+    PORT_Init(SEG7_SEG_D_PORT, &port_init);
+
+    /* Configure digit selection pins as outputs */
+    PORT_StructInit(&port_init);
+    port_init.PORT_Pin = SEG7_DIGIT_1_PIN | SEG7_DIGIT_2_PIN;
+    port_init.PORT_OE = PORT_OE_OUT;
+    port_init.PORT_FUNC = PORT_FUNC_PORT;
+    port_init.PORT_MODE = PORT_MODE_DIGITAL;
+    port_init.PORT_SPEED = PORT_SPEED_FAST;
+    port_init.PORT_PD = PORT_PD_DRIVER;
+    PORT_Init(SEG7_DIGIT_1_PORT, &port_init);
+
+    PORT_StructInit(&port_init);
+    port_init.PORT_Pin = SEG7_DIGIT_3_PIN;
+    port_init.PORT_OE = PORT_OE_OUT;
+    port_init.PORT_FUNC = PORT_FUNC_PORT;
+    port_init.PORT_MODE = PORT_MODE_DIGITAL;
+    port_init.PORT_SPEED = PORT_SPEED_FAST;
+    port_init.PORT_PD = PORT_PD_DRIVER;
+    PORT_Init(SEG7_DIGIT_3_PORT, &port_init);
+
+    PORT_StructInit(&port_init);
+    port_init.PORT_Pin = SEG7_DIGIT_4_PIN;
+    port_init.PORT_OE = PORT_OE_OUT;
+    port_init.PORT_FUNC = PORT_FUNC_PORT;
+    port_init.PORT_MODE = PORT_MODE_DIGITAL;
+    port_init.PORT_SPEED = PORT_SPEED_FAST;
+    port_init.PORT_PD = PORT_PD_DRIVER;
+    PORT_Init(SEG7_DIGIT_4_PORT, &port_init);
     
     // Инициализация переменных дисплея
     memset(display_digits, 0, sizeof(display_digits));
@@ -111,8 +136,8 @@ void SEG7_Init(void) {
 }
 
 void SEG7_Process(void) {
-    // Гасим предыдущий разряд
-    select_digit(4); // Несуществующий разряд - гасим все
+	
+		timer_seconds++;
     
     // Устанавливаем сегменты для текущего разряда
     set_segments(display_digits[current_digit]);
@@ -124,41 +149,51 @@ void SEG7_Process(void) {
     current_digit = (current_digit + 1) % 4;
 }
 
-void Timer_Init(void) {
+void app_Init(void) {
     timer_counter = 0;
     timer_seconds = 0;
-    timer_running = false;
-    timer_updated = false;
+    timer_running = true;
+    timer_updated = true;
+	
+
 }
 
 void Timer_Process(void) {
     static uint32_t last_tick = 0;
     uint32_t current_tick = HD_GetTick();
     
-    if (timer_running && (current_tick - last_tick >= 100)) { // 100 мс
-        timer_counter++;
-        last_tick = current_tick;
-        
-        if (timer_counter >= 10) { // 1 секунда
-            timer_counter = 0;
-            timer_seconds++;
-            timer_updated = true;
+    if (timer_running) {
+        if ((current_tick - last_tick) >= 100) { // 100 мс
+            timer_counter++;
+            last_tick = current_tick;
             
-            // Ограничение 99:59
-            if (timer_seconds >= 6000) {
-                timer_seconds = 0;
+            if (timer_counter >= 10) { // 1 секунда (10 * 100мс = 1000мс)
+                timer_counter = 0;
+                timer_seconds++;
+                timer_updated = true;
+								Display_Update();
+                
+                // Ограничение 99:59
+                if (timer_seconds >= 6000) { // 100 минут * 60 секунд
+                    timer_seconds = 0;
+                }
             }
         }
+    } else {
+        // Если таймер не работает, обновляем last_tick для корректного запуска
+        last_tick = current_tick;
     }
 }
 
 void Timer_StartStop(void) {
     timer_running = !timer_running;
+    timer_updated = true; // Принудительное обновление дисплея при изменении состояния
 }
 
 void Timer_Reset(void) {
     timer_seconds = 0;
     timer_counter = 0;
+    timer_running = false;
     timer_updated = true;
 }
 
@@ -177,27 +212,26 @@ void Display_Update(void) {
     }
 }
 
-
 void SEG7_DisplayTest(void) {
     // Отображаем 1 на первом разряде
     select_digit(0);
-    set_segments(1);
-    HD_Delay_ms_blocking(5);
+    set_segments(display_digits[0]);
+    HD_Delay_ms_blocking(1);
     
     // Отображаем 2 на втором разряде
     select_digit(1);
-    set_segments(2);
-    HD_Delay_ms_blocking(5);
+    set_segments(display_digits[1]);
+    HD_Delay_ms_blocking(1);
     
     // Отображаем 3 на третьем разряде
     select_digit(2);
-    set_segments(3);
-    HD_Delay_ms_blocking(5);
+    set_segments(display_digits[2]);
+    HD_Delay_ms_blocking(1);
     
     // Отображаем 4 на четвертом разряде
     select_digit(3);
-    set_segments(4);
-    HD_Delay_ms_blocking(5);
+    set_segments(display_digits[3]);
+    HD_Delay_ms_blocking(1);
 }
 
 void SEG7_DisplayNumber(uint16_t number) {
@@ -211,9 +245,7 @@ void SEG7_DisplayNumber(uint16_t number) {
         digits[2] = (number % 100) / 10;
         digits[3] = number % 10;
     }
-    
-    // Гасим предыдущий разряд
-    select_digit(4); // Несуществующий разряд
+   
     
     // Устанавливаем сегменты для текущей цифры
     set_segments(digits[current_digit]);
@@ -223,4 +255,6 @@ void SEG7_DisplayNumber(uint16_t number) {
     
     // Переходим к следующему разряду
     current_digit = (current_digit + 1) % 4;
+		
+		HD_Delay_ms_blocking(1);
 }

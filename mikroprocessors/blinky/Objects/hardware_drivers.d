@@ -17,4 +17,4 @@
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_timer.h \
   Core\Inc\main.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_port.h \
-  hardware_drivers\Inc\leds.h
+  hardware_drivers\Inc\seg7_display.h

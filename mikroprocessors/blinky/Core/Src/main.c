@@ -1,33 +1,18 @@
 #include "button.h"
 #include "seg7_display.h"
 #include "hardware_drivers.h"
+#include "leds.h"
 
 int main(void) {
     // Инициализация системы
     HD_System_Init();
-    HD_Delay_Init();
-    SEG7_Init();
-    
-    // Простой тест - статическое отображение 1234
-    while(1) {
-        // Вариант 1: Статическое отображение (поочередно включаем разряды)
-        SEG7_DisplayTest();
-        
-        // Или вариант 2: Используем динамическую индикацию
-        // SEG7_DisplayNumber(1234);
-        // HD_Delay_ms_blocking(1);
-    }
-}
-	
-    /*
-	int main(void) {
-    // Инициализация системы
-    HD_System_Init();
     Buttons_Init();
-    Timer_Init();
+    app_Init();
     SEG7_Init();
-    HD_Timer1_Init(); // Для динамической индикации
-	
+    LED_Init();
+    
+    // Включаем глобальные прерывания
+    __enable_irq();
 	
     while(1) {
         Buttons_Process();
@@ -46,10 +31,8 @@ int main(void) {
         
         // Динамическая индикация обрабатывается в прерывании TIMER1
         // SEG7_Process() вызывается автоматически из TIMER1_IRQHandler
-        
+        SEG7_DisplayTest();
         // Небольшая задержка для стабильности
         HD_Delay_ms_blocking(10);
     }
-		}
-*/		
-
+}
