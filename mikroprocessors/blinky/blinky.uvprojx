@@ -473,6 +473,26 @@
               <FileType>1</FileType>
               <FilePath>.\hardware_drivers\Src\hardware_drivers.c</FilePath>
             </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware_drivers\Src\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware_drivers\Inc\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>seg7_display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware_drivers\Inc\seg7_display.h</FilePath>
+            </File>
+            <File>
+              <FileName>seg7_display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware_drivers\Src\seg7_display.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
