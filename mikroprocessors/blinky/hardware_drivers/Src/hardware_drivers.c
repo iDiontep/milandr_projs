@@ -16,16 +16,16 @@ void SysTick_Handler(void)
 }
 
 /* TIMER1 interrupt handler for LED processing */
-void TIMER1_IRQHandler(void)
+void Timer1_IRQHandler(void)
 {
     /* Check and clear ALL possible timer interrupt flags */
-    if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
-        TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
-        
-        /* Call LED process function */
-        SEG7_Process();
-    }
-    
+//    if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
+//        TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
+//        
+//        /* Call LED process function */
+//        SEG7_Process();
+//    }
+//    
     /* Clear any other pending timer interrupts to prevent infinite loops */
     TIMER_ClearFlag(MDR_TIMER1, TIMER_STATUS_Msk);
 }

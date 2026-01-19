@@ -141,7 +141,7 @@ void select_digit(uint8_t n) {
 }
 
 void SEG7_Init(void) {
-     PORT_InitTypeDef port_init;
+    PORT_InitTypeDef port;
     
     /* Enable clock for all used ports */
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTA, ENABLE);
@@ -150,55 +150,34 @@ void SEG7_Init(void) {
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTE, ENABLE);
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTF, ENABLE);
 
-    /* Configure segment pins as outputs */
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = SEG7_SEG_A_PIN | SEG7_SEG_B_PIN | SEG7_SEG_C_PIN;
-    port_init.PORT_OE = PORT_OE_OUT;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_SPEED = PORT_SPEED_FAST;
-    port_init.PORT_PD = PORT_PD_DRIVER;
-    PORT_Init(SEG7_SEG_A_PORT, &port_init);
+    /* Initialize structure directly (like in example) */
+    port.PORT_OE = PORT_OE_OUT;
+    port.PORT_FUNC = PORT_FUNC_PORT;
+    port.PORT_MODE = PORT_MODE_DIGITAL;
+    port.PORT_SPEED = PORT_SPEED_FAST;
+    port.PORT_PULL_UP = PORT_PULL_UP_OFF;
+    port.PORT_PULL_DOWN = PORT_PULL_DOWN_OFF;
+    port.PORT_PD = PORT_PD_DRIVER;
 
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = SEG7_SEG_D_PIN | SEG7_SEG_E_PIN | SEG7_SEG_F_PIN | 
-                         SEG7_SEG_G_PIN | SEG7_SEG_DP_PIN;
-    port_init.PORT_OE = PORT_OE_OUT;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_SPEED = PORT_SPEED_FAST;
-    port_init.PORT_PD = PORT_PD_DRIVER;
-    PORT_Init(SEG7_SEG_D_PORT, &port_init);
+    /* Configure segment pins as outputs */
+    port.PORT_Pin = SEG7_SEG_A_PIN | SEG7_SEG_B_PIN | SEG7_SEG_C_PIN;
+    PORT_Init(SEG7_SEG_A_PORT, &port);
+
+    port.PORT_Pin = SEG7_SEG_D_PIN | SEG7_SEG_E_PIN | SEG7_SEG_F_PIN | 
+                     SEG7_SEG_G_PIN | SEG7_SEG_DP_PIN;
+    PORT_Init(SEG7_SEG_D_PORT, &port);
 
     /* Configure digit selection pins as outputs */
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = SEG7_DIGIT_1_PIN | SEG7_DIGIT_2_PIN;
-    port_init.PORT_OE = PORT_OE_OUT;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_SPEED = PORT_SPEED_FAST;
-    port_init.PORT_PD = PORT_PD_DRIVER;
-    PORT_Init(SEG7_DIGIT_1_PORT, &port_init);
+    port.PORT_Pin = SEG7_DIGIT_1_PIN | SEG7_DIGIT_2_PIN;
+    PORT_Init(SEG7_DIGIT_1_PORT, &port);
 
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = SEG7_DIGIT_3_PIN;
-    port_init.PORT_OE = PORT_OE_OUT;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_SPEED = PORT_SPEED_FAST;
-    port_init.PORT_PD = PORT_PD_DRIVER;
-    PORT_Init(SEG7_DIGIT_3_PORT, &port_init);
+    port.PORT_Pin = SEG7_DIGIT_3_PIN;
+    PORT_Init(SEG7_DIGIT_3_PORT, &port);
 
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = SEG7_DIGIT_4_PIN;
-    port_init.PORT_OE = PORT_OE_OUT;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_SPEED = PORT_SPEED_FAST;
-    port_init.PORT_PD = PORT_PD_DRIVER;
-    PORT_Init(SEG7_DIGIT_4_PORT, &port_init);
+    port.PORT_Pin = SEG7_DIGIT_4_PIN;
+    PORT_Init(SEG7_DIGIT_4_PORT, &port);
     
-    // ������������� ���������� �������
+    // Инициализация переменных дисплея
     memset(display_digits, 0, sizeof(display_digits));
     current_digit = 0;
 }

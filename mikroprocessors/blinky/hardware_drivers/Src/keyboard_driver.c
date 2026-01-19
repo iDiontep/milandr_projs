@@ -33,8 +33,8 @@ void Keyboard_Init(void)
     );
 
     PORT_InitTypeDef port;
-    PORT_StructInit(&port);
     
+    /* Initialize structure directly (like in example) */
     port.PORT_OE = PORT_OE_OUT;
     port.PORT_FUNC = PORT_FUNC_PORT;
     port.PORT_MODE = PORT_MODE_DIGITAL;

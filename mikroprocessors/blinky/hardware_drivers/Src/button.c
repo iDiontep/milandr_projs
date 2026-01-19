@@ -20,20 +20,20 @@ static Button_TypeDef button_start_stop;
   */
 void Buttons_Init(void)
 {
-    PORT_InitTypeDef port_init;
+    PORT_InitTypeDef port;
     
     /* Enable clock for port */
     RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTA, ENABLE);
     
-    /* Configure button as input with pull-up */
-    PORT_StructInit(&port_init);
-    port_init.PORT_Pin = BUTTON_START_STOP_PIN;
-    port_init.PORT_OE = PORT_OE_IN;
-    port_init.PORT_FUNC = PORT_FUNC_PORT;
-    port_init.PORT_MODE = PORT_MODE_DIGITAL;
-    port_init.PORT_PULL_UP = PORT_PULL_UP_ON;
-    port_init.PORT_PULL_DOWN = PORT_PULL_DOWN_OFF;
-    PORT_Init(BUTTON_START_STOP_PORT, &port_init);
+    /* Initialize structure directly (like in example) */
+    port.PORT_OE = PORT_OE_IN;
+    port.PORT_FUNC = PORT_FUNC_PORT;
+    port.PORT_MODE = PORT_MODE_DIGITAL;
+    port.PORT_SPEED = PORT_SPEED_SLOW;
+    port.PORT_PULL_UP = PORT_PULL_UP_ON;
+    port.PORT_PULL_DOWN = PORT_PULL_DOWN_OFF;
+    port.PORT_Pin = BUTTON_START_STOP_PIN;
+    PORT_Init(BUTTON_START_STOP_PORT, &port);
     
     /* Initialize button structure */
     memset(&button_start_stop, 0, sizeof(button_start_stop));

@@ -27,7 +27,7 @@ typedef enum {
 } SystemState_t;
 
 /* Глобальные переменные */
-static char master_code[CODE_LENGTH + 1] = "123456";  // Код по умолчанию
+static char master_code[CODE_LENGTH + 1] = "112233";  // Код по умолчанию
 static char input_buffer[CODE_LENGTH + 1] = "";
 static char full_input_buffer[MAX_INPUT_BUFFER + 1] = "";
 static uint8_t input_index = 0;
@@ -61,6 +61,9 @@ char convert_key_to_display(char key) {
 
 /* Инициализация системы */
 void init_locker_system(void) {
+    // Отключение прерываний на время инициализации
+    __disable_irq();
+    
     // Инициализация периферии
     HD_System_Init();
     HD_Delay_Init();
@@ -71,6 +74,9 @@ void init_locker_system(void) {
     Buttons_Init();
     Keyboard_Init();
     SEG7_Init();
+    
+    // Включение прерываний после завершения инициализации
+    __enable_irq();
     
     // Начальное состояние
     current_state = STATE_LOCKED;
@@ -350,6 +356,9 @@ int main(void) {
         
         // Обновление светодиодов
         update_leds();
+        
+        // Обработка ШИМ для светодиодов (для плавного свечения)
+        LED_Process();
         
         // Проверка таймаутов блокировки
         if (is_keypad_locked) {
