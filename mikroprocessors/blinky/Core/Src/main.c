@@ -10,7 +10,8 @@
 #include <string.h>
 
 /* Максимальная длина кода */
-#define CODE_LENGTH 6
+#define CODE_LENGTH 20
+#define MASTER_CODE_LENGTH 6  // Длина мастер-кода для разблокировки
 #define MAX_INPUT_BUFFER 20
 #define MAX_WRONG_ATTEMPTS 3
 #define KEYPAD_LOCK_TIMEOUT_MS 60000  // 1 минута
@@ -27,8 +28,8 @@ typedef enum {
 } SystemState_t;
 
 /* Глобальные переменные */
-static char master_code[CODE_LENGTH + 1] = "112233";  // Код по умолчанию
-static char input_buffer[CODE_LENGTH + 1] = "";
+static char master_code[MASTER_CODE_LENGTH + 1] = "112233";  // Код по умолчанию (6 символов)
+static char input_buffer[CODE_LENGTH + 1] = "";  // Буфер ввода до 20 символов
 static char full_input_buffer[MAX_INPUT_BUFFER + 1] = "";
 static uint8_t input_index = 0;
 static uint8_t full_buffer_index = 0;
@@ -37,18 +38,22 @@ static uint32_t wrong_attempts = 0;
 static uint32_t lock_timer = 0;
 static uint8_t is_keypad_locked = 0;
 static uint32_t keypad_lock_start = 0;
+static uint8_t is_buffer_locked = 0;  // Флаг блокировки буфера
 
 /* Прототипы функций */
 void process_keypad(char key);
 void process_button(Button_EventTypeDef event);
 void update_leds(void);
 void check_code(void);
+int find_master_code_in_buffer(void);
 void clear_input_buffer(void);
+void shift_input_buffer_left(char new_key);
 void lock_keypad_temporary(void);
 void unlock_keypad(void);
 void reset_wrong_attempts(void);
 void init_locker_system(void);
 char convert_key_to_display(char key);
+void App_MainProcess(void);  // Основная логика приложения (вызывается из прерывания)
 
 /* Преобразование символов для отображения */
 char convert_key_to_display(char key) {
@@ -83,6 +88,7 @@ void init_locker_system(void) {
     clear_input_buffer();
     reset_wrong_attempts();
     is_keypad_locked = 0;
+    is_buffer_locked = 0;
     
     // Инициализация дисплея
     SEG7_ClearBuffer();
@@ -102,11 +108,17 @@ void process_keypad(char key) {
         }
     }
     
+    // Проверка блокировки буфера
+    if (is_buffer_locked) {
+        return; // Буфер заблокирован
+    }
+    
     // Блокировка по таймауту
     if (current_state == STATE_TIMEOUT_LOCKED) {
         if ((HD_GetTick() - lock_timer) >= KEYPAD_LOCK_TIMEOUT_MS) {
             current_state = STATE_LOCKED;
             reset_wrong_attempts();
+            is_buffer_locked = 0;  // Разблокируем буфер
             update_leds();
             SEG7_ClearBuffer();
         }
@@ -119,6 +131,7 @@ void process_keypad(char key) {
             // Ввод кода для разблокировки
             if ((key >= '0' && key <= '9') || (key >= 'A' && key <= 'F')) {
                 if (input_index < CODE_LENGTH) {
+                    // Обычное добавление символа
                     input_buffer[input_index++] = key;
                     input_buffer[input_index] = '\0';
                     
@@ -137,11 +150,33 @@ void process_keypad(char key) {
                     // Обновление дисплея
                     SEG7_PushSymbol(convert_key_to_display(key));
                     
-                    // Проверка кода при вводе 6 символов
-                    if (input_index == CODE_LENGTH) {
+                    // Проверка кода при каждом новом символе (если введено достаточно символов)
+                    if (input_index >= MASTER_CODE_LENGTH) {
                         check_code();
-                        clear_input_buffer();
+                        // Если код найден, буфер будет очищен в check_code
+                        // Если буфер заполнен и код не найден, буфер будет заблокирован
                     }
+                } else {
+                    // Переполнение - сдвигаем буфер на 1 символ влево
+                    shift_input_buffer_left(key);
+                    
+                    // Добавляем в полный буфер для проверки блокировки
+                    if (full_buffer_index < MAX_INPUT_BUFFER) {
+                        full_input_buffer[full_buffer_index++] = key;
+                        full_input_buffer[full_buffer_index] = '\0';
+                    }
+                    
+                    // Проверка на блокировку после 20 символов
+                    if (full_buffer_index >= MAX_INPUT_BUFFER) {
+                        lock_keypad_temporary();
+                        return;
+                    }
+                    
+                    // Обновление дисплея: удаляем самый правый символ и добавляем новый слева
+                    SEG7_PushSymbol(convert_key_to_display(key));
+                    
+                    // Проверка кода после сдвига
+                    check_code();
                 }
             }
             break;
@@ -154,16 +189,17 @@ void process_keypad(char key) {
             // Программирование нового кода
             if ((key >= '0' && key <= '9') || (key >= 'A' && key <= 'F')) {
                 if (input_index < CODE_LENGTH) {
+                    // Обычное добавление символа
                     input_buffer[input_index++] = key;
                     input_buffer[input_index] = '\0';
                     
                     // Обновление дисплея
                     SEG7_PushSymbol(convert_key_to_display(key));
                     
-                    // Сохранение кода при вводе 6 символов
-                    if (input_index == CODE_LENGTH) {
-                        memcpy(master_code, input_buffer, CODE_LENGTH);
-                        master_code[CODE_LENGTH] = '\0';
+                    // Сохранение кода при вводе 6 символов (MASTER_CODE_LENGTH)
+                    if (input_index == MASTER_CODE_LENGTH) {
+                        memcpy(master_code, input_buffer, MASTER_CODE_LENGTH);
+                        master_code[MASTER_CODE_LENGTH] = '\0';
                         
                         // Выход из режима программирования
                         current_state = STATE_LOCKED;
@@ -177,6 +213,18 @@ void process_keypad(char key) {
                         
                         // Очистка дисплея
                         SEG7_ClearBuffer();
+                    }
+                } else {
+                    // Переполнение - сдвигаем буфер на 1 символ влево
+                    shift_input_buffer_left(key);
+                    
+                    // Обновление дисплея: удаляем самый правый символ и добавляем новый слева
+                    SEG7_PushSymbol(convert_key_to_display(key));
+                    
+                    // Сохранение кода после сдвига (берем последние MASTER_CODE_LENGTH символов)
+                    if (input_index >= MASTER_CODE_LENGTH) {
+                        memcpy(master_code, &input_buffer[input_index - MASTER_CODE_LENGTH], MASTER_CODE_LENGTH);
+                        master_code[MASTER_CODE_LENGTH] = '\0';
                     }
                 }
             }
@@ -228,13 +276,34 @@ void process_button(Button_EventTypeDef event) {
     }
 }
 
+/* Поиск master_code в буфере ввода */
+int find_master_code_in_buffer(void) {
+    // Если буфер короче мастер-кода, совпадения быть не может
+    if (input_index < MASTER_CODE_LENGTH) {
+        return -1;
+    }
+    
+    // Ищем master_code в буфере, начиная с конца (последние символы)
+    for (int i = input_index - MASTER_CODE_LENGTH; i >= 0; i--) {
+        if (strncmp(&input_buffer[i], master_code, MASTER_CODE_LENGTH) == 0) {
+            return i;  // Возвращаем позицию начала совпадения
+        }
+    }
+    
+    return -1;  // Совпадение не найдено
+}
+
 /* Проверка введенного кода */
 void check_code(void) {
-    if (strncmp(input_buffer, master_code, CODE_LENGTH) == 0) {
-        // Код верный
+    int code_pos = find_master_code_in_buffer();
+    
+    if (code_pos >= 0) {
+        // Код найден в буфере
         current_state = STATE_UNLOCKED;
         reset_wrong_attempts();
         full_buffer_index = 0; // Сброс счетчика блокировки
+        is_buffer_locked = 0;  // Разблокируем буфер
+        clear_input_buffer();  // Очищаем буфер после успешной разблокировки
         
         // Все светодиоды
         LED_AllOn();
@@ -242,28 +311,20 @@ void check_code(void) {
         // Отображение "oPEn" на дисплее
         SEG7_SetBuffer("oPEn");
     } else {
-        // Неверный код
-        wrong_attempts++;
-        
-        if (wrong_attempts >= MAX_WRONG_ATTEMPTS) {
-            // Блокировка на 1 минуту
-            current_state = STATE_TIMEOUT_LOCKED;
-            lock_timer = HD_GetTick();
-            
-            // Мигание светодиодами ошибки
-            for (int i = 0; i < 5; i++) {
-                LED_AllOn();
-                HD_Delay_ms_blocking(200);
-                LED_AllOff();
-                HD_Delay_ms_blocking(200);
-            }
-        } else {
-            // Мигание ошибки
-            LED_AllOff();
-            HD_Delay_ms_blocking(200);
-            update_leds();
-            HD_Delay_ms_blocking(200);
+        // Код не найден в буфере
+        // Если буфер заполнен (20 символов) и нет совпадения - блокируем
+        if (input_index >= CODE_LENGTH) {
+            is_buffer_locked = 1;
+            lock_keypad_temporary();
+            return;
         }
+        
+        // Неверный код
+        // Мигание ошибки
+        LED_AllOff();
+        HD_Delay_ms_blocking(200);
+        update_leds();
+        HD_Delay_ms_blocking(200);
         
         // Отображение "Err" на дисплее
         SEG7_SetBuffer("Err ");
@@ -302,7 +363,21 @@ void update_leds(void) {
 /* Очистка буфера ввода */
 void clear_input_buffer(void) {
     input_index = 0;
+    is_buffer_locked = 0;  // Разблокируем буфер при очистке
     memset(input_buffer, 0, sizeof(input_buffer));
+}
+
+/* Сдвиг буфера ввода на 1 символ влево и добавление нового символа в конец */
+void shift_input_buffer_left(char new_key) {
+    // Сдвигаем все символы на 1 позицию влево
+    for (uint8_t i = 0; i < CODE_LENGTH - 1; i++) {
+        input_buffer[i] = input_buffer[i + 1];
+    }
+    // Добавляем новый символ в конец
+    input_buffer[CODE_LENGTH - 1] = new_key;
+    input_buffer[CODE_LENGTH] = '\0';
+    // input_index остается равным CODE_LENGTH
+    input_index = CODE_LENGTH;
 }
 
 /* Блокировка клавиатуры после 20 символов */
@@ -329,54 +404,62 @@ void reset_wrong_attempts(void) {
     wrong_attempts = 0;
 }
 
+/* Основная логика приложения (вызывается из прерывания каждые 10мс) */
+void App_MainProcess(void) {
+    static char last_key = 0;
+    
+    // Обработка клавиатуры с защитой от повторных нажатий
+    char key = keypadRead();
+    if (key) {
+        // Обрабатываем только если это новая клавиша (отличается от предыдущей)
+        if (key != last_key) {
+            process_keypad(key);
+            last_key = key;
+        }
+    } else {
+        // Когда клавиша отпущена, сбрасываем last_key для следующего нажатия
+        last_key = 0;
+    }
+    
+    // Обработка кнопки
+    Button_EventTypeDef btn_event = Buttons_GetStartStopEvent();
+    if (btn_event != BUTTON_EVENT_NONE) {
+        process_button(btn_event);
+    }
+    
+    // Обновление светодиодов
+    update_leds();
+    
+    // Обработка ШИМ для светодиодов (для плавного свечения)
+    LED_Process();
+    
+    // Проверка таймаутов блокировки
+    if (is_keypad_locked) {
+        if ((HD_GetTick() - keypad_lock_start) >= KEYPAD_LOCK_TIMEOUT_MS) {
+            unlock_keypad();
+        }
+    }
+   
+}
+
 /* Основной цикл */
 int main(void) {
     init_locker_system();
     
-    static char last_key = 0;
-    static uint32_t last_key_time = 0;
-    
     while (1) {
-        // Обработка клавиатуры с защитой от повторных нажатий
-        char key = keypadRead();
-        if (key && (key != last_key || (HD_GetTick() - last_key_time) > 200)) {
-            process_keypad(key);
-            last_key = key;
-            last_key_time = HD_GetTick();
-        } else if (!key) {
-            last_key = 0;
+        // Переход в режим энергосбережения или просто пустой цикл
+			    if (current_state == STATE_TIMEOUT_LOCKED) {
+        if ((HD_GetTick() - lock_timer) >= KEYPAD_LOCK_TIMEOUT_MS) {
+            current_state = STATE_LOCKED;
+            reset_wrong_attempts();
+            is_buffer_locked = 0;  // Разблокируем буфер
+            update_leds();
+            SEG7_ClearBuffer();
         }
-        
-        // Обработка кнопки
-        Buttons_Process();
-        Button_EventTypeDef btn_event = Buttons_GetStartStopEvent();
-        if (btn_event != BUTTON_EVENT_NONE) {
-            process_button(btn_event);
-        }
-        
-        // Обновление светодиодов
-        update_leds();
-        
-        // Обработка ШИМ для светодиодов (для плавного свечения)
-        LED_Process();
-        
-        // Проверка таймаутов блокировки
-        if (is_keypad_locked) {
-            if ((HD_GetTick() - keypad_lock_start) >= KEYPAD_LOCK_TIMEOUT_MS) {
-                unlock_keypad();
-            }
-        }
-        
-        if (current_state == STATE_TIMEOUT_LOCKED) {
-            if ((HD_GetTick() - lock_timer) >= KEYPAD_LOCK_TIMEOUT_MS) {
-                current_state = STATE_LOCKED;
-                reset_wrong_attempts();
-                update_leds();
-                SEG7_ClearBuffer();
-            }
-        }
-        
+				        
         // Небольшая задержка для стабильности
         HD_Delay_ms_blocking(10);
+
+    }
     }
 }

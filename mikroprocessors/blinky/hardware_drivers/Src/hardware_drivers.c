@@ -1,9 +1,15 @@
 #include "hardware_drivers.h"
 #include "main.h"
 #include "seg7_display.h"
+#include "keyboard_driver.h"
+#include "button.h"
+#include "leds.h"
 #include "MDR32FxQI_rst_clk.h"
 #include "MDR32FxQI_port.h"
 #include "MDR32FxQI_timer.h"
+
+/* Внешние функции из main.c */
+extern void App_MainProcess(void);
 
 /* Private variables */
 static volatile uint32_t tick_counter = 0;
@@ -18,14 +24,25 @@ void SysTick_Handler(void)
 /* TIMER1 interrupt handler for LED processing */
 void Timer1_IRQHandler(void)
 {
+    static uint8_t main_process_counter = 0;  // Счетчик для вызова основной логики каждые 10мс
+    
     /* Check and clear ALL possible timer interrupt flags */
-//    if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
-//        TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
-//        
-//        /* Call LED process function */
-//        SEG7_Process();
-//    }
-//    
+    if (TIMER_GetITStatus(MDR_TIMER1, TIMER_STATUS_CNT_ARR)) {
+        TIMER_ClearITPendingBit(MDR_TIMER1, TIMER_STATUS_CNT_ARR);
+        
+        /* Call process functions every 5ms */
+        Keyboard_Process();
+        Buttons_Process();
+        SEG7_Process();
+        
+        /* Call main application logic every 10ms (every 2nd interrupt) */
+        main_process_counter++;
+        if (main_process_counter >= 2) {
+            main_process_counter = 0;
+            App_MainProcess();
+        }
+    }
+    
     /* Clear any other pending timer interrupts to prevent infinite loops */
     TIMER_ClearFlag(MDR_TIMER1, TIMER_STATUS_Msk);
 }

@@ -5,7 +5,8 @@
 
 /* Function prototypes */
 void Keyboard_Init(void);
-char keypadRead(void);
+void Keyboard_Process(void);  // Обработка debounce - вызывать периодически
+char keypadRead(void);        // Получить стабильное значение клавиши
 
 #endif /* KEYBOARD_DRIVER_H */
 

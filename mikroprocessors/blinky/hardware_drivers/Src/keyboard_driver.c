@@ -3,12 +3,20 @@
 #include "MDR32FxQI_port.h"             // Milandr::Drivers:PORT
 #include "MDR32FxQI_timer.h"
 #include "keyboard_driver.h"
+#include "hardware_drivers.h"
 
+/* Debounce constants */
+#define KEYBOARD_DEBOUNCE_TIME_MS   20   // Время стабилизации контакта (мс)
 
 typedef struct {
     MDR_PORT_TypeDef* PORT;
     uint32_t PIN;
 } Pin;
+
+/* Keyboard debounce state */
+static char last_raw_key = 0;           // Последняя прочитанная клавиша
+static char debounced_key = 0;         // Стабильная клавиша после debounce
+static uint32_t debounce_start_time = 0; // Время начала изменения состояния
 
 static Pin row[4] = {
     {MDR_PORTA, PORT_Pin_6}, // R1 (phys 21) XP2
@@ -56,10 +64,19 @@ void Keyboard_Init(void)
         port.PORT_Pin = col[i].PIN;
         PORT_Init(col[i].PORT, &port);
     }
+    
+    // Инициализация переменных debounce
+    last_raw_key = 0;
+    debounced_key = 0;
+    debounce_start_time = HD_GetTick();
 }
 
 
-char keypadRead(void)
+/**
+  * @brief  Raw keypad read without debounce (internal function)
+  * @retval Pressed key character or 0 if no key pressed
+  */
+static char keypadReadRaw(void)
 {
     static const char keymap[4][4] =
     {
@@ -86,4 +103,43 @@ char keypadRead(void)
     }
 
     return 0;
+}
+
+/**
+  * @brief  Process keyboard debounce - call periodically
+  * @retval None
+  */
+void Keyboard_Process(void)
+{
+    uint32_t current_time = HD_GetTick();
+    char current_raw_key = keypadReadRaw();
+    
+    // Если состояние изменилось, начинаем отсчет времени debounce
+    if (current_raw_key != last_raw_key) {
+        debounce_start_time = current_time;
+        last_raw_key = current_raw_key;
+        return;
+    }
+    
+    // Проверяем, прошло ли достаточно времени для стабилизации
+    uint32_t time_diff = (current_time >= debounce_start_time) ? 
+                         (current_time - debounce_start_time) : 
+                         (0xFFFFFFFF - debounce_start_time + current_time + 1);
+    
+    if (time_diff >= KEYBOARD_DEBOUNCE_TIME_MS) {
+        // Состояние стабильно в течение времени debounce
+        // Обновляем debounced_key только если оно изменилось
+        if (debounced_key != current_raw_key) {
+            debounced_key = current_raw_key;
+        }
+    }
+}
+
+/**
+  * @brief  Get debounced keypad value
+  * @retval Pressed key character or 0 if no key pressed
+  */
+char keypadRead(void)
+{
+    return debounced_key;
 }
