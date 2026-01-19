@@ -15,6 +15,13 @@ void Display_Update(void);
 
 void SEG7_DisplayTest(void);
 void SEG7_DisplayNumber(uint16_t number);
+void SEG7_ShowSymbol(char sym);
+void SEG7_PushSymbol(char sym);
+void SEG7_SetBuffer(const char* str);
+void SEG7_ClearBuffer(void);
+
+// Внешний буфер для доступа из main.c
+extern char displayBuf[4];
 
 
 /* Segment pin definitions - Common Cathode configuration */

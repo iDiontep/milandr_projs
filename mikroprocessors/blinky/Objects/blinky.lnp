@@ -3,6 +3,7 @@
 ".\objects\hardware_drivers.o"
 ".\objects\button.o"
 ".\objects\seg7_display.o"
+".\objects\keyboard_driver.o"
 ".\objects\app.o"
 ".\objects\main.o"
 ".\objects\startup_mdr32f9q2i.o"

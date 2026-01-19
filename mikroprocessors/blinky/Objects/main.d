@@ -1,8 +1,7 @@
-./objects/main.o: Core\Src\main.c hardware_drivers\Inc\button.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+./objects/main.o: Core\Src\main.c \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h \
   RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
   RTE\_MDR32F9Q2I\RTE_Components.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h \
@@ -14,7 +13,10 @@
   RTE\Device\MDR32F9Q2I\system_MDR32F9Q2I.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_rst_clk.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_port.h \
-  hardware_drivers\Inc\seg7_display.h \
-  hardware_drivers\Inc\hardware_drivers.h \
   C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\SPL\MDR32FxQI\inc\MDR32FxQI_timer.h \
-  hardware_drivers\Inc\leds.h
+  hardware_drivers\Inc\hardware_drivers.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  hardware_drivers\Inc\leds.h hardware_drivers\Inc\button.h \
+  hardware_drivers\Inc\keyboard_driver.h \
+  hardware_drivers\Inc\seg7_display.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h

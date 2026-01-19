@@ -116,8 +116,17 @@ Section Cross References
     button.o(.ARM.exidx.text.Buttons_Process) refers to button.o(.text.Buttons_Process) for [Anonymous Symbol]
     button.o(.text.Buttons_GetStartStopEvent) refers to button.o(.bss.button_start_stop) for button_start_stop
     button.o(.ARM.exidx.text.Buttons_GetStartStopEvent) refers to button.o(.text.Buttons_GetStartStopEvent) for [Anonymous Symbol]
-    seg7_display.o(.text.set_segments) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
-    seg7_display.o(.text.set_segments) refers to mdr32fxqi_port.o(.text.PORT_SetBits) for PORT_SetBits
+    seg7_display.o(.text.SEG7_ShowSymbol) refers to seg7_display.o(.rodata.digitTable) for digitTable
+    seg7_display.o(.text.SEG7_ShowSymbol) refers to seg7_display.o(.rodata.alphaTable) for alphaTable
+    seg7_display.o(.text.SEG7_ShowSymbol) refers to seg7_display.o(.rodata.specialTable) for specialTable
+    seg7_display.o(.text.SEG7_ShowSymbol) refers to seg7_display.o(.text.set_segments_from_table) for set_segments_from_table
+    seg7_display.o(.text.SEG7_ShowSymbol) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
+    seg7_display.o(.ARM.exidx.text.SEG7_ShowSymbol) refers to seg7_display.o(.text.SEG7_ShowSymbol) for [Anonymous Symbol]
+    seg7_display.o(.text.set_segments_from_table) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
+    seg7_display.o(.text.set_segments_from_table) refers to mdr32fxqi_port.o(.text.PORT_SetBits) for PORT_SetBits
+    seg7_display.o(.ARM.exidx.text.set_segments_from_table) refers to seg7_display.o(.text.set_segments_from_table) for [Anonymous Symbol]
+    seg7_display.o(.text.set_segments) refers to seg7_display.o(.rodata.digitTable) for digitTable
+    seg7_display.o(.text.set_segments) refers to seg7_display.o(.text.set_segments_from_table) for set_segments_from_table
     seg7_display.o(.ARM.exidx.text.set_segments) refers to seg7_display.o(.text.set_segments) for [Anonymous Symbol]
     seg7_display.o(.text.select_digit) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
     seg7_display.o(.text.select_digit) refers to mdr32fxqi_port.o(.text.PORT_SetBits) for PORT_SetBits
@@ -128,10 +137,11 @@ Section Cross References
     seg7_display.o(.text.SEG7_Init) refers to seg7_display.o(.bss.display_digits) for display_digits
     seg7_display.o(.text.SEG7_Init) refers to seg7_display.o(.bss.current_digit) for current_digit
     seg7_display.o(.ARM.exidx.text.SEG7_Init) refers to seg7_display.o(.text.SEG7_Init) for [Anonymous Symbol]
-    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.bss.timer_seconds) for timer_seconds
+    seg7_display.o(.text.SEG7_Process) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.bss.SEG7_Process.last_update) for SEG7_Process.last_update
     seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.bss.current_digit) for current_digit
-    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.bss.display_digits) for display_digits
-    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.text.set_segments) for set_segments
+    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.data.displayBuf) for displayBuf
+    seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.text.SEG7_ShowSymbol) for SEG7_ShowSymbol
     seg7_display.o(.text.SEG7_Process) refers to seg7_display.o(.text.select_digit) for select_digit
     seg7_display.o(.ARM.exidx.text.SEG7_Process) refers to seg7_display.o(.text.SEG7_Process) for [Anonymous Symbol]
     seg7_display.o(.text.app_Init) refers to seg7_display.o(.bss.timer_counter) for timer_counter
@@ -162,28 +172,141 @@ Section Cross References
     seg7_display.o(.text.SEG7_DisplayTest) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
     seg7_display.o(.text.SEG7_DisplayTest) refers to mdr32fxqi_port.o(.text.PORT_SetBits) for PORT_SetBits
     seg7_display.o(.text.SEG7_DisplayTest) refers to seg7_display.o(.bss.display_digits) for display_digits
-    seg7_display.o(.text.SEG7_DisplayTest) refers to seg7_display.o(.text.set_segments) for set_segments
+    seg7_display.o(.text.SEG7_DisplayTest) refers to seg7_display.o(.rodata.digitTable) for digitTable
+    seg7_display.o(.text.SEG7_DisplayTest) refers to seg7_display.o(.text.set_segments_from_table) for set_segments_from_table
     seg7_display.o(.text.SEG7_DisplayTest) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
     seg7_display.o(.ARM.exidx.text.SEG7_DisplayTest) refers to seg7_display.o(.text.SEG7_DisplayTest) for [Anonymous Symbol]
     seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.data.SEG7_DisplayNumber.digits) for SEG7_DisplayNumber.digits
     seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.bss.SEG7_DisplayNumber.current_digit) for SEG7_DisplayNumber.current_digit
-    seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.text.set_segments) for set_segments
+    seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.rodata.digitTable) for digitTable
+    seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.text.set_segments_from_table) for set_segments_from_table
     seg7_display.o(.text.SEG7_DisplayNumber) refers to seg7_display.o(.text.select_digit) for select_digit
     seg7_display.o(.text.SEG7_DisplayNumber) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
     seg7_display.o(.ARM.exidx.text.SEG7_DisplayNumber) refers to seg7_display.o(.text.SEG7_DisplayNumber) for [Anonymous Symbol]
+    seg7_display.o(.text.SEG7_PushSymbol) refers to seg7_display.o(.data.displayBuf) for displayBuf
+    seg7_display.o(.ARM.exidx.text.SEG7_PushSymbol) refers to seg7_display.o(.text.SEG7_PushSymbol) for [Anonymous Symbol]
+    seg7_display.o(.text.SEG7_SetBuffer) refers to seg7_display.o(.data.displayBuf) for displayBuf
+    seg7_display.o(.ARM.exidx.text.SEG7_SetBuffer) refers to seg7_display.o(.text.SEG7_SetBuffer) for [Anonymous Symbol]
+    seg7_display.o(.text.SEG7_ClearBuffer) refers to seg7_display.o(.data.displayBuf) for displayBuf
+    seg7_display.o(.ARM.exidx.text.SEG7_ClearBuffer) refers to seg7_display.o(.text.SEG7_ClearBuffer) for [Anonymous Symbol]
+    keyboard_driver.o(.text.Keyboard_Init) refers to mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd) for RST_CLK_PCLKcmd
+    keyboard_driver.o(.text.Keyboard_Init) refers to mdr32fxqi_port.o(.text.PORT_StructInit) for PORT_StructInit
+    keyboard_driver.o(.text.Keyboard_Init) refers to keyboard_driver.o(.rodata.cst32) for row
+    keyboard_driver.o(.text.Keyboard_Init) refers to mdr32fxqi_port.o(.text.PORT_Init) for PORT_Init
+    keyboard_driver.o(.text.Keyboard_Init) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
+    keyboard_driver.o(.ARM.exidx.text.Keyboard_Init) refers to keyboard_driver.o(.text.Keyboard_Init) for [Anonymous Symbol]
+    keyboard_driver.o(.text.keypadRead) refers to keyboard_driver.o(.rodata.cst32) for row
+    keyboard_driver.o(.text.keypadRead) refers to mdr32fxqi_port.o(.text.PORT_SetBits) for PORT_SetBits
+    keyboard_driver.o(.text.keypadRead) refers to mdr32fxqi_port.o(.text.PORT_ReadInputDataBit) for PORT_ReadInputDataBit
+    keyboard_driver.o(.text.keypadRead) refers to mdr32fxqi_port.o(.text.PORT_ResetBits) for PORT_ResetBits
+    keyboard_driver.o(.ARM.exidx.text.keypadRead) refers to keyboard_driver.o(.text.keypadRead) for [Anonymous Symbol]
+    main.o(.ARM.exidx.text.convert_key_to_display) refers to main.o(.text.convert_key_to_display) for [Anonymous Symbol]
+    main.o(.text.init_locker_system) refers to hardware_drivers.o(.text.HD_System_Init) for HD_System_Init
+    main.o(.text.init_locker_system) refers to hardware_drivers.o(.text.HD_Delay_Init) for HD_Delay_Init
+    main.o(.text.init_locker_system) refers to hardware_drivers.o(.text.HD_Timer1_Init) for HD_Timer1_Init
+    main.o(.text.init_locker_system) refers to leds.o(.text.LED_Init) for LED_Init
+    main.o(.text.init_locker_system) refers to button.o(.text.Buttons_Init) for Buttons_Init
+    main.o(.text.init_locker_system) refers to keyboard_driver.o(.text.Keyboard_Init) for Keyboard_Init
+    main.o(.text.init_locker_system) refers to seg7_display.o(.text.SEG7_Init) for SEG7_Init
+    main.o(.text.init_locker_system) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.init_locker_system) refers to main.o(.bss.input_index) for input_index
+    main.o(.text.init_locker_system) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.text.init_locker_system) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.text.init_locker_system) refers to main.o(.bss.is_keypad_locked) for is_keypad_locked
+    main.o(.text.init_locker_system) refers to seg7_display.o(.text.SEG7_ClearBuffer) for SEG7_ClearBuffer
+    main.o(.text.init_locker_system) refers to main.o(.text.update_leds) for update_leds
+    main.o(.ARM.exidx.text.init_locker_system) refers to main.o(.text.init_locker_system) for [Anonymous Symbol]
+    main.o(.text.clear_input_buffer) refers to main.o(.bss.input_index) for input_index
+    main.o(.text.clear_input_buffer) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.ARM.exidx.text.clear_input_buffer) refers to main.o(.text.clear_input_buffer) for [Anonymous Symbol]
+    main.o(.text.reset_wrong_attempts) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.ARM.exidx.text.reset_wrong_attempts) refers to main.o(.text.reset_wrong_attempts) for [Anonymous Symbol]
+    main.o(.text.update_leds) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    main.o(.text.update_leds) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.update_leds) refers to leds.o(.text.LED_AllOn) for LED_AllOn
+    main.o(.text.update_leds) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    main.o(.text.update_leds) refers to leds.o(.text.LED_On) for LED_On
+    main.o(.ARM.exidx.text.update_leds) refers to main.o(.text.update_leds) for [Anonymous Symbol]
+    main.o(.text.process_keypad) refers to main.o(.bss.is_keypad_locked) for is_keypad_locked
+    main.o(.text.process_keypad) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    main.o(.text.process_keypad) refers to main.o(.bss.keypad_lock_start) for keypad_lock_start
+    main.o(.text.process_keypad) refers to main.o(.bss.full_buffer_index) for full_buffer_index
+    main.o(.text.process_keypad) refers to seg7_display.o(.text.SEG7_ClearBuffer) for SEG7_ClearBuffer
+    main.o(.text.process_keypad) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.process_keypad) refers to main.o(.bss.lock_timer) for lock_timer
+    main.o(.text.process_keypad) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.text.process_keypad) refers to main.o(.bss.input_index) for input_index
+    main.o(.text.process_keypad) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.text.process_keypad) refers to main.o(.rodata.str1.1) for .L.str.3
+    main.o(.text.process_keypad) refers to seg7_display.o(.text.SEG7_SetBuffer) for SEG7_SetBuffer
+    main.o(.text.process_keypad) refers to seg7_display.o(.text.SEG7_PushSymbol) for SEG7_PushSymbol
+    main.o(.text.process_keypad) refers to main.o(.data.master_code) for master_code
+    main.o(.text.process_keypad) refers to leds.o(.text.LED_AllOn) for LED_AllOn
+    main.o(.text.process_keypad) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    main.o(.text.process_keypad) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    main.o(.text.process_keypad) refers to main.o(.text.update_leds) for update_leds
+    main.o(.text.process_keypad) refers to main.o(.text.check_code) for check_code
+    main.o(.ARM.exidx.text.process_keypad) refers to main.o(.text.process_keypad) for [Anonymous Symbol]
+    main.o(.text.unlock_keypad) refers to main.o(.bss.is_keypad_locked) for is_keypad_locked
+    main.o(.text.unlock_keypad) refers to main.o(.bss.full_buffer_index) for full_buffer_index
+    main.o(.text.unlock_keypad) refers to seg7_display.o(.text.SEG7_ClearBuffer) for SEG7_ClearBuffer
+    main.o(.ARM.exidx.text.unlock_keypad) refers to main.o(.text.unlock_keypad) for [Anonymous Symbol]
+    main.o(.text.lock_keypad_temporary) refers to main.o(.bss.is_keypad_locked) for is_keypad_locked
+    main.o(.text.lock_keypad_temporary) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    main.o(.text.lock_keypad_temporary) refers to main.o(.bss.keypad_lock_start) for keypad_lock_start
+    main.o(.text.lock_keypad_temporary) refers to main.o(.bss.full_buffer_index) for full_buffer_index
+    main.o(.text.lock_keypad_temporary) refers to main.o(.rodata.str1.1) for .L.str.3
+    main.o(.text.lock_keypad_temporary) refers to seg7_display.o(.text.SEG7_SetBuffer) for SEG7_SetBuffer
+    main.o(.ARM.exidx.text.lock_keypad_temporary) refers to main.o(.text.lock_keypad_temporary) for [Anonymous Symbol]
+    main.o(.text.check_code) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.text.check_code) refers to main.o(.data.master_code) for master_code
+    main.o(.text.check_code) refers to strncmp.o(.text) for strncmp
+    main.o(.text.check_code) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.text.check_code) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.check_code) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    main.o(.text.check_code) refers to main.o(.bss.lock_timer) for lock_timer
+    main.o(.text.check_code) refers to main.o(.rodata.str1.1) for .L.str.2
+    main.o(.text.check_code) refers to leds.o(.text.LED_AllOn) for LED_AllOn
+    main.o(.text.check_code) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    main.o(.text.check_code) refers to leds.o(.text.LED_AllOff) for LED_AllOff
+    main.o(.text.check_code) refers to main.o(.bss.full_buffer_index) for full_buffer_index
+    main.o(.text.check_code) refers to main.o(.text.update_leds) for update_leds
+    main.o(.text.check_code) refers to seg7_display.o(.text.SEG7_SetBuffer) for SEG7_SetBuffer
+    main.o(.ARM.exidx.text.check_code) refers to main.o(.text.check_code) for [Anonymous Symbol]
+    main.o(.text.process_button) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.process_button) refers to main.o(.bss.input_index) for input_index
+    main.o(.text.process_button) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.text.process_button) refers to main.o(.text.update_leds) for update_leds
+    main.o(.text.process_button) refers to seg7_display.o(.text.SEG7_SetBuffer) for SEG7_SetBuffer
+    main.o(.text.process_button) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.text.process_button) refers to seg7_display.o(.text.SEG7_ClearBuffer) for SEG7_ClearBuffer
+    main.o(.ARM.exidx.text.process_button) refers to main.o(.text.process_button) for [Anonymous Symbol]
     main.o(.text.main) refers to hardware_drivers.o(.text.HD_System_Init) for HD_System_Init
-    main.o(.text.main) refers to button.o(.text.Buttons_Init) for Buttons_Init
-    main.o(.text.main) refers to seg7_display.o(.text.app_Init) for app_Init
-    main.o(.text.main) refers to seg7_display.o(.text.SEG7_Init) for SEG7_Init
+    main.o(.text.main) refers to hardware_drivers.o(.text.HD_Delay_Init) for HD_Delay_Init
+    main.o(.text.main) refers to hardware_drivers.o(.text.HD_Timer1_Init) for HD_Timer1_Init
     main.o(.text.main) refers to leds.o(.text.LED_Init) for LED_Init
-    main.o(.text.main) refers to seg7_display.o(.text.Timer_Reset) for Timer_Reset
-    main.o(.text.main) refers to seg7_display.o(.text.Display_Update) for Display_Update
-    main.o(.text.main) refers to seg7_display.o(.text.SEG7_DisplayTest) for SEG7_DisplayTest
+    main.o(.text.main) refers to button.o(.text.Buttons_Init) for Buttons_Init
+    main.o(.text.main) refers to keyboard_driver.o(.text.Keyboard_Init) for Keyboard_Init
+    main.o(.text.main) refers to seg7_display.o(.text.SEG7_Init) for SEG7_Init
+    main.o(.text.main) refers to main.o(.bss.input_index) for input_index
+    main.o(.text.main) refers to main.o(.bss.input_buffer) for input_buffer
+    main.o(.text.main) refers to main.o(.bss.current_state) for current_state
+    main.o(.text.main) refers to main.o(.bss.wrong_attempts) for wrong_attempts
+    main.o(.text.main) refers to main.o(.bss.is_keypad_locked) for is_keypad_locked
+    main.o(.text.main) refers to seg7_display.o(.text.SEG7_ClearBuffer) for SEG7_ClearBuffer
+    main.o(.text.main) refers to main.o(.text.update_leds) for update_leds
+    main.o(.text.main) refers to main.o(.bss.main.last_key) for main.last_key
+    main.o(.text.main) refers to main.o(.bss.lock_timer) for lock_timer
+    main.o(.text.main) refers to main.o(.bss.main.last_key_time) for main.last_key_time
     main.o(.text.main) refers to hardware_drivers.o(.text.HD_Delay_ms_blocking) for HD_Delay_ms_blocking
+    main.o(.text.main) refers to keyboard_driver.o(.text.keypadRead) for keypadRead
+    main.o(.text.main) refers to hardware_drivers.o(.text.HD_GetTick) for HD_GetTick
+    main.o(.text.main) refers to main.o(.text.process_keypad) for process_keypad
     main.o(.text.main) refers to button.o(.text.Buttons_Process) for Buttons_Process
-    main.o(.text.main) refers to seg7_display.o(.text.Timer_Process) for Timer_Process
     main.o(.text.main) refers to button.o(.text.Buttons_GetStartStopEvent) for Buttons_GetStartStopEvent
-    main.o(.text.main) refers to seg7_display.o(.text.Timer_StartStop) for Timer_StartStop
+    main.o(.text.main) refers to main.o(.text.process_button) for process_button
+    main.o(.text.main) refers to main.o(.bss.keypad_lock_start) for keypad_lock_start
+    main.o(.text.main) refers to main.o(.bss.full_buffer_index) for full_buffer_index
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     startup_mdr32f9q2i.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mdr32f9q2i.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -494,9 +617,7 @@ Removing Unused input sections from the image.
 
     Removing leds.o(.text), (0 bytes).
     Removing leds.o(.ARM.exidx.text.LED_Init), (8 bytes).
-    Removing leds.o(.text.LED_AllOff), (46 bytes).
     Removing leds.o(.ARM.exidx.text.LED_AllOff), (8 bytes).
-    Removing leds.o(.text.LED_On), (42 bytes).
     Removing leds.o(.ARM.exidx.text.LED_On), (8 bytes).
     Removing leds.o(.text.LED_On_ms), (42 bytes).
     Removing leds.o(.ARM.exidx.text.LED_On_ms), (8 bytes).
@@ -514,7 +635,6 @@ Removing Unused input sections from the image.
     Removing leds.o(.ARM.exidx.text.LED_SequenceStop), (8 bytes).
     Removing leds.o(.text.LED_SequenceIsActive), (12 bytes).
     Removing leds.o(.ARM.exidx.text.LED_SequenceIsActive), (8 bytes).
-    Removing leds.o(.text.LED_AllOn), (44 bytes).
     Removing leds.o(.ARM.exidx.text.LED_AllOn), (8 bytes).
     Removing leds.o(.text.LED_StartPWMWave), (28 bytes).
     Removing leds.o(.ARM.exidx.text.LED_StartPWMWave), (8 bytes).
@@ -543,9 +663,7 @@ Removing Unused input sections from the image.
     Removing hardware_drivers.o(.ARM.exidx.text.HD_IncrementTick), (8 bytes).
     Removing hardware_drivers.o(.text.TIMER1_IRQHandler), (48 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.TIMER1_IRQHandler), (8 bytes).
-    Removing hardware_drivers.o(.text.HD_Timer1_Init), (136 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Timer1_Init), (8 bytes).
-    Removing hardware_drivers.o(.text.HD_Delay_Init), (38 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_Init), (8 bytes).
     Removing hardware_drivers.o(.text.HD_Delay_ms), (70 bytes).
     Removing hardware_drivers.o(.ARM.exidx.text.HD_Delay_ms), (8 bytes).
@@ -569,24 +687,66 @@ Removing Unused input sections from the image.
     Removing button.o(.ARM.exidx.text.Buttons_Process), (8 bytes).
     Removing button.o(.ARM.exidx.text.Buttons_GetStartStopEvent), (8 bytes).
     Removing seg7_display.o(.text), (0 bytes).
+    Removing seg7_display.o(.text.SEG7_ShowSymbol), (142 bytes).
+    Removing seg7_display.o(.ARM.exidx.text.SEG7_ShowSymbol), (8 bytes).
+    Removing seg7_display.o(.text.set_segments_from_table), (134 bytes).
+    Removing seg7_display.o(.ARM.exidx.text.set_segments_from_table), (8 bytes).
+    Removing seg7_display.o(.text.set_segments), (22 bytes).
     Removing seg7_display.o(.ARM.exidx.text.set_segments), (8 bytes).
     Removing seg7_display.o(.text.select_digit), (92 bytes).
     Removing seg7_display.o(.ARM.exidx.text.select_digit), (8 bytes).
     Removing seg7_display.o(.ARM.exidx.text.SEG7_Init), (8 bytes).
-    Removing seg7_display.o(.text.SEG7_Process), (58 bytes).
+    Removing seg7_display.o(.text.SEG7_Process), (70 bytes).
     Removing seg7_display.o(.ARM.exidx.text.SEG7_Process), (8 bytes).
+    Removing seg7_display.o(.text.app_Init), (46 bytes).
     Removing seg7_display.o(.ARM.exidx.text.app_Init), (8 bytes).
+    Removing seg7_display.o(.text.Timer_Process), (234 bytes).
     Removing seg7_display.o(.ARM.exidx.text.Timer_Process), (8 bytes).
+    Removing seg7_display.o(.text.Display_Update), (140 bytes).
     Removing seg7_display.o(.ARM.exidx.text.Display_Update), (8 bytes).
+    Removing seg7_display.o(.text.Timer_StartStop), (30 bytes).
     Removing seg7_display.o(.ARM.exidx.text.Timer_StartStop), (8 bytes).
+    Removing seg7_display.o(.text.Timer_Reset), (46 bytes).
     Removing seg7_display.o(.ARM.exidx.text.Timer_Reset), (8 bytes).
+    Removing seg7_display.o(.text.SEG7_DisplayTest), (264 bytes).
     Removing seg7_display.o(.ARM.exidx.text.SEG7_DisplayTest), (8 bytes).
-    Removing seg7_display.o(.text.SEG7_DisplayNumber), (140 bytes).
+    Removing seg7_display.o(.text.SEG7_DisplayNumber), (158 bytes).
     Removing seg7_display.o(.ARM.exidx.text.SEG7_DisplayNumber), (8 bytes).
+    Removing seg7_display.o(.ARM.exidx.text.SEG7_PushSymbol), (8 bytes).
+    Removing seg7_display.o(.ARM.exidx.text.SEG7_SetBuffer), (8 bytes).
+    Removing seg7_display.o(.ARM.exidx.text.SEG7_ClearBuffer), (8 bytes).
+    Removing seg7_display.o(.rodata.digitTable), (80 bytes).
+    Removing seg7_display.o(.rodata.alphaTable), (208 bytes).
+    Removing seg7_display.o(.rodata.specialTable), (16 bytes).
+    Removing seg7_display.o(.bss.SEG7_Process.last_update), (4 bytes).
+    Removing seg7_display.o(.bss.timer_counter), (4 bytes).
+    Removing seg7_display.o(.bss.timer_seconds), (4 bytes).
+    Removing seg7_display.o(.data.timer_running), (1 bytes).
+    Removing seg7_display.o(.data.timer_updated), (1 bytes).
+    Removing seg7_display.o(.bss.Timer_Process.last_tick), (4 bytes).
     Removing seg7_display.o(.bss.SEG7_DisplayNumber.current_digit), (1 bytes).
     Removing seg7_display.o(.data.SEG7_DisplayNumber.digits), (4 bytes).
+    Removing keyboard_driver.o(.text), (0 bytes).
+    Removing keyboard_driver.o(.ARM.exidx.text.Keyboard_Init), (8 bytes).
+    Removing keyboard_driver.o(.ARM.exidx.text.keypadRead), (8 bytes).
     Removing app.o(.text), (0 bytes).
     Removing main.o(.text), (0 bytes).
+    Removing main.o(.text.convert_key_to_display), (40 bytes).
+    Removing main.o(.ARM.exidx.text.convert_key_to_display), (8 bytes).
+    Removing main.o(.text.init_locker_system), (98 bytes).
+    Removing main.o(.ARM.exidx.text.init_locker_system), (8 bytes).
+    Removing main.o(.text.clear_input_buffer), (28 bytes).
+    Removing main.o(.ARM.exidx.text.clear_input_buffer), (8 bytes).
+    Removing main.o(.text.reset_wrong_attempts), (14 bytes).
+    Removing main.o(.ARM.exidx.text.reset_wrong_attempts), (8 bytes).
+    Removing main.o(.ARM.exidx.text.update_leds), (8 bytes).
+    Removing main.o(.ARM.exidx.text.process_keypad), (8 bytes).
+    Removing main.o(.text.unlock_keypad), (26 bytes).
+    Removing main.o(.ARM.exidx.text.unlock_keypad), (8 bytes).
+    Removing main.o(.text.lock_keypad_temporary), (56 bytes).
+    Removing main.o(.ARM.exidx.text.lock_keypad_temporary), (8 bytes).
+    Removing main.o(.ARM.exidx.text.check_code), (8 bytes).
+    Removing main.o(.ARM.exidx.text.process_button), (8 bytes).
     Removing main.o(.ARM.exidx.text.main), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
     Removing system_mdr32f9q2i.o(.text), (0 bytes).
@@ -680,11 +840,8 @@ Removing Unused input sections from the image.
     Removing mdr32fxqi_timer.o(.text), (0 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_DeInit), (68 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_DeInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_CntInit), (60 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_CntInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_CntStructInit), (16 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_CntStructInit), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_Cmd), (16 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_Cmd), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_SetCounter), (4 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_SetCounter), (8 bytes).
@@ -788,18 +945,15 @@ Removing Unused input sections from the image.
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetStatus), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_GetFlagStatus), (10 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetFlagStatus), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_ClearFlag), (6 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_ClearFlag), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_DMACmd), (20 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_DMACmd), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_ITConfig), (20 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_ITConfig), (8 bytes).
     Removing mdr32fxqi_timer.o(.text.TIMER_GetITStatus), (14 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_GetITStatus), (8 bytes).
-    Removing mdr32fxqi_timer.o(.text.TIMER_BRGInit), (106 bytes).
     Removing mdr32fxqi_timer.o(.ARM.exidx.text.TIMER_BRGInit), (8 bytes).
 
-306 unused section(s) (total 5690 bytes) removed from the image.
+337 unused section(s) (total 6968 bytes) removed from the image.
 
 ==============================================================================
 
@@ -862,6 +1016,7 @@ Image Symbol Table
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../clib/string.c                         0x00000000   Number         0  strncmp.o ABSOLUTE
     ../fplib/faddsub.s                       0x00000000   Number         0  faddsub_clz.o ABSOLUTE
     ../fplib/fcheck1.s                       0x00000000   Number         0  fcheck1.o ABSOLUTE
     ../fplib/fdiv.s                          0x00000000   Number         0  fdiv.o ABSOLUTE
@@ -890,6 +1045,7 @@ Image Symbol Table
     button.c                                 0x00000000   Number         0  button.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     hardware_drivers.c                       0x00000000   Number         0  hardware_drivers.o ABSOLUTE
+    keyboard_driver.c                        0x00000000   Number         0  keyboard_driver.o ABSOLUTE
     leds.c                                   0x00000000   Number         0  leds.o ABSOLUTE
     main.c                                   0x00000000   Number         0  main.o ABSOLUTE
     seg7_display.c                           0x00000000   Number         0  seg7_display.o ABSOLUTE
@@ -942,63 +1098,96 @@ Image Symbol Table
     .ARM.Collect$$rtexit$$00000003           0x08000150   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
     .ARM.Collect$$rtexit$$00000004           0x08000154   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
     .text                                    0x0800015c   Section      104  startup_mdr32f9q2i.o(.text)
-    .text                                    0x080001c4   Section        0  heapauxi.o(.text)
-    .text                                    0x080001cc   Section        8  libspace.o(.text)
-    .text                                    0x080001d4   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x0800021e   Section        0  exit.o(.text)
-    .text                                    0x08000230   Section        0  sys_exit.o(.text)
-    .text                                    0x0800023c   Section        2  use_no_semi.o(.text)
-    .text                                    0x0800023e   Section        0  indicate_semi.o(.text)
-    [Anonymous Symbol]                       0x08000240   Section        0  button.o(.text.Buttons_GetStartStopEvent)
-    [Anonymous Symbol]                       0x08000250   Section        0  button.o(.text.Buttons_Init)
-    [Anonymous Symbol]                       0x080002a8   Section        0  button.o(.text.Buttons_Process)
-    [Anonymous Symbol]                       0x08000324   Section        0  seg7_display.o(.text.Display_Update)
-    [Anonymous Symbol]                       0x080003b0   Section        0  hardware_drivers.o(.text.HD_Delay_ms_blocking)
-    [Anonymous Symbol]                       0x080003d0   Section        0  hardware_drivers.o(.text.HD_GetTick)
-    [Anonymous Symbol]                       0x080003dc   Section        0  hardware_drivers.o(.text.HD_System_Init)
-    [Anonymous Symbol]                       0x08000478   Section        0  leds.o(.text.LED_Init)
-    [Anonymous Symbol]                       0x080004f8   Section        0  mdr32fxqi_port.o(.text.PORT_Init)
-    [Anonymous Symbol]                       0x0800064c   Section        0  mdr32fxqi_port.o(.text.PORT_ReadInputDataBit)
-    [Anonymous Symbol]                       0x08000658   Section        0  mdr32fxqi_port.o(.text.PORT_ResetBits)
-    [Anonymous Symbol]                       0x08000670   Section        0  mdr32fxqi_port.o(.text.PORT_SetBits)
-    [Anonymous Symbol]                       0x08000688   Section        0  mdr32fxqi_port.o(.text.PORT_StructInit)
-    [Anonymous Symbol]                       0x0800069c   Section        0  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
-    [Anonymous Symbol]                       0x080006b4   Section        0  seg7_display.o(.text.SEG7_DisplayTest)
-    [Anonymous Symbol]                       0x08000788   Section        0  seg7_display.o(.text.SEG7_Init)
-    [Anonymous Symbol]                       0x080008a8   Section        0  hardware_drivers.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x080008b8   Section        0  system_mdr32f9q2i.o(.text.SystemInit)
-    [Anonymous Symbol]                       0x08000958   Section        0  seg7_display.o(.text.Timer_Process)
-    [Anonymous Symbol]                       0x08000a44   Section        0  seg7_display.o(.text.Timer_Reset)
-    [Anonymous Symbol]                       0x08000a74   Section        0  seg7_display.o(.text.Timer_StartStop)
-    [Anonymous Symbol]                       0x08000a94   Section        0  seg7_display.o(.text.app_Init)
-    [Anonymous Symbol]                       0x08000ac4   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x08000b08   Section        0  seg7_display.o(.text.set_segments)
+    .text                                    0x080001c4   Section        0  strncmp.o(.text)
+    .text                                    0x0800025a   Section        0  heapauxi.o(.text)
+    .text                                    0x08000260   Section        8  libspace.o(.text)
+    .text                                    0x08000268   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x080002b2   Section        0  exit.o(.text)
+    .text                                    0x080002c4   Section        0  sys_exit.o(.text)
+    .text                                    0x080002d0   Section        2  use_no_semi.o(.text)
+    .text                                    0x080002d2   Section        0  indicate_semi.o(.text)
+    [Anonymous Symbol]                       0x080002d4   Section        0  button.o(.text.Buttons_GetStartStopEvent)
+    [Anonymous Symbol]                       0x080002e4   Section        0  button.o(.text.Buttons_Init)
+    [Anonymous Symbol]                       0x0800033c   Section        0  button.o(.text.Buttons_Process)
+    [Anonymous Symbol]                       0x080003b8   Section        0  hardware_drivers.o(.text.HD_Delay_Init)
+    [Anonymous Symbol]                       0x080003e0   Section        0  hardware_drivers.o(.text.HD_Delay_ms_blocking)
+    [Anonymous Symbol]                       0x08000400   Section        0  hardware_drivers.o(.text.HD_GetTick)
+    [Anonymous Symbol]                       0x0800040c   Section        0  hardware_drivers.o(.text.HD_System_Init)
+    [Anonymous Symbol]                       0x080004a8   Section        0  hardware_drivers.o(.text.HD_Timer1_Init)
+    [Anonymous Symbol]                       0x08000530   Section        0  keyboard_driver.o(.text.Keyboard_Init)
+    [Anonymous Symbol]                       0x080005c8   Section        0  leds.o(.text.LED_AllOff)
+    [Anonymous Symbol]                       0x080005f8   Section        0  leds.o(.text.LED_AllOn)
+    [Anonymous Symbol]                       0x08000624   Section        0  leds.o(.text.LED_Init)
+    [Anonymous Symbol]                       0x080006a4   Section        0  leds.o(.text.LED_On)
+    [Anonymous Symbol]                       0x080006d0   Section        0  mdr32fxqi_port.o(.text.PORT_Init)
+    [Anonymous Symbol]                       0x08000824   Section        0  mdr32fxqi_port.o(.text.PORT_ReadInputDataBit)
+    [Anonymous Symbol]                       0x08000830   Section        0  mdr32fxqi_port.o(.text.PORT_ResetBits)
+    [Anonymous Symbol]                       0x08000848   Section        0  mdr32fxqi_port.o(.text.PORT_SetBits)
+    [Anonymous Symbol]                       0x08000860   Section        0  mdr32fxqi_port.o(.text.PORT_StructInit)
+    [Anonymous Symbol]                       0x08000874   Section        0  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
+    [Anonymous Symbol]                       0x0800088c   Section        0  seg7_display.o(.text.SEG7_ClearBuffer)
+    [Anonymous Symbol]                       0x0800089c   Section        0  seg7_display.o(.text.SEG7_Init)
+    [Anonymous Symbol]                       0x080009bc   Section        0  seg7_display.o(.text.SEG7_PushSymbol)
+    [Anonymous Symbol]                       0x080009d4   Section        0  seg7_display.o(.text.SEG7_SetBuffer)
+    [Anonymous Symbol]                       0x080009fc   Section        0  hardware_drivers.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x08000a0c   Section        0  system_mdr32f9q2i.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x08000aac   Section        0  mdr32fxqi_timer.o(.text.TIMER_BRGInit)
+    [Anonymous Symbol]                       0x08000b18   Section        0  mdr32fxqi_timer.o(.text.TIMER_ClearFlag)
+    [Anonymous Symbol]                       0x08000b20   Section        0  mdr32fxqi_timer.o(.text.TIMER_Cmd)
+    [Anonymous Symbol]                       0x08000b30   Section        0  mdr32fxqi_timer.o(.text.TIMER_CntInit)
+    [Anonymous Symbol]                       0x08000b6c   Section        0  mdr32fxqi_timer.o(.text.TIMER_CntStructInit)
+    [Anonymous Symbol]                       0x08000b7c   Section        0  mdr32fxqi_timer.o(.text.TIMER_ITConfig)
+    [Anonymous Symbol]                       0x08000b90   Section        0  main.o(.text.check_code)
+    [Anonymous Symbol]                       0x08000c54   Section        0  keyboard_driver.o(.text.keypadRead)
+    keypadRead.keymap                        0x08000d14   Number         0  keyboard_driver.o(.text.keypadRead)
+    [Anonymous Symbol]                       0x08000d24   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08000e44   Section        0  main.o(.text.process_button)
+    [Anonymous Symbol]                       0x08000f00   Section        0  main.o(.text.process_keypad)
+    [Anonymous Symbol]                       0x08001100   Section        0  main.o(.text.update_leds)
+    row                                      0x0800115c   Data          32  keyboard_driver.o(.rodata.cst32)
+    [Anonymous Symbol]                       0x0800115c   Section        0  keyboard_driver.o(.rodata.cst32)
+    col                                      0x0800117c   Data          32  keyboard_driver.o(.rodata.cst32)
+    .L.str.3                                 0x0800119c   Data           5  main.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x0800119c   Section        0  main.o(.rodata.str1.1)
+    .L.str.2                                 0x080011a1   Data           5  main.o(.rodata.str1.1)
     LED_Config                               0x20000000   Data          64  leds.o(.data.LED_Config)
     [Anonymous Symbol]                       0x20000000   Section        0  leds.o(.data.LED_Config)
-    timer_running                            0x20000044   Data           1  seg7_display.o(.data.timer_running)
-    [Anonymous Symbol]                       0x20000044   Section        0  seg7_display.o(.data.timer_running)
-    timer_updated                            0x20000045   Data           1  seg7_display.o(.data.timer_updated)
-    [Anonymous Symbol]                       0x20000045   Section        0  seg7_display.o(.data.timer_updated)
-    .bss                                     0x20000048   Section       96  libspace.o(.bss)
-    Timer_Process.last_tick                  0x200000a8   Data           4  seg7_display.o(.bss.Timer_Process.last_tick)
-    [Anonymous Symbol]                       0x200000a8   Section        0  seg7_display.o(.bss.Timer_Process.last_tick)
-    button_start_stop                        0x200000ac   Data          16  button.o(.bss.button_start_stop)
-    [Anonymous Symbol]                       0x200000ac   Section        0  button.o(.bss.button_start_stop)
-    current_digit                            0x200000bc   Data           1  seg7_display.o(.bss.current_digit)
-    [Anonymous Symbol]                       0x200000bc   Section        0  seg7_display.o(.bss.current_digit)
-    display_digits                           0x200000c0   Data           4  seg7_display.o(.bss.display_digits)
-    [Anonymous Symbol]                       0x200000c0   Section        0  seg7_display.o(.bss.display_digits)
-    tick_counter                             0x200000c4   Data           4  hardware_drivers.o(.bss.tick_counter)
-    [Anonymous Symbol]                       0x200000c4   Section        0  hardware_drivers.o(.bss.tick_counter)
-    timer_counter                            0x200000c8   Data           4  seg7_display.o(.bss.timer_counter)
-    [Anonymous Symbol]                       0x200000c8   Section        0  seg7_display.o(.bss.timer_counter)
-    timer_seconds                            0x200000cc   Data           4  seg7_display.o(.bss.timer_seconds)
-    [Anonymous Symbol]                       0x200000cc   Section        0  seg7_display.o(.bss.timer_seconds)
-    Heap_Mem                                 0x200000d0   Data         512  startup_mdr32f9q2i.o(HEAP)
-    HEAP                                     0x200000d0   Section      512  startup_mdr32f9q2i.o(HEAP)
-    Stack_Mem                                0x200002d0   Data        1024  startup_mdr32f9q2i.o(STACK)
-    STACK                                    0x200002d0   Section     1024  startup_mdr32f9q2i.o(STACK)
-    __initial_sp                             0x200006d0   Data           0  startup_mdr32f9q2i.o(STACK)
+    master_code                              0x20000048   Data           7  main.o(.data.master_code)
+    [Anonymous Symbol]                       0x20000048   Section        0  main.o(.data.master_code)
+    .bss                                     0x20000050   Section       96  libspace.o(.bss)
+    button_start_stop                        0x200000b0   Data          16  button.o(.bss.button_start_stop)
+    [Anonymous Symbol]                       0x200000b0   Section        0  button.o(.bss.button_start_stop)
+    current_digit                            0x200000c0   Data           1  seg7_display.o(.bss.current_digit)
+    [Anonymous Symbol]                       0x200000c0   Section        0  seg7_display.o(.bss.current_digit)
+    current_state                            0x200000c1   Data           1  main.o(.bss.current_state)
+    [Anonymous Symbol]                       0x200000c1   Section        0  main.o(.bss.current_state)
+    display_digits                           0x200000c4   Data           4  seg7_display.o(.bss.display_digits)
+    [Anonymous Symbol]                       0x200000c4   Section        0  seg7_display.o(.bss.display_digits)
+    full_buffer_index                        0x200000c8   Data           1  main.o(.bss.full_buffer_index)
+    [Anonymous Symbol]                       0x200000c8   Section        0  main.o(.bss.full_buffer_index)
+    input_buffer                             0x200000c9   Data           7  main.o(.bss.input_buffer)
+    [Anonymous Symbol]                       0x200000c9   Section        0  main.o(.bss.input_buffer)
+    input_index                              0x200000d0   Data           1  main.o(.bss.input_index)
+    [Anonymous Symbol]                       0x200000d0   Section        0  main.o(.bss.input_index)
+    is_keypad_locked                         0x200000d1   Data           1  main.o(.bss.is_keypad_locked)
+    [Anonymous Symbol]                       0x200000d1   Section        0  main.o(.bss.is_keypad_locked)
+    keypad_lock_start                        0x200000d4   Data           4  main.o(.bss.keypad_lock_start)
+    [Anonymous Symbol]                       0x200000d4   Section        0  main.o(.bss.keypad_lock_start)
+    lock_timer                               0x200000d8   Data           4  main.o(.bss.lock_timer)
+    [Anonymous Symbol]                       0x200000d8   Section        0  main.o(.bss.lock_timer)
+    main.last_key                            0x200000dc   Data           1  main.o(.bss.main.last_key)
+    [Anonymous Symbol]                       0x200000dc   Section        0  main.o(.bss.main.last_key)
+    main.last_key_time                       0x200000e0   Data           4  main.o(.bss.main.last_key_time)
+    [Anonymous Symbol]                       0x200000e0   Section        0  main.o(.bss.main.last_key_time)
+    tick_counter                             0x200000e4   Data           4  hardware_drivers.o(.bss.tick_counter)
+    [Anonymous Symbol]                       0x200000e4   Section        0  hardware_drivers.o(.bss.tick_counter)
+    wrong_attempts                           0x200000e8   Data           4  main.o(.bss.wrong_attempts)
+    [Anonymous Symbol]                       0x200000e8   Section        0  main.o(.bss.wrong_attempts)
+    Heap_Mem                                 0x200000f0   Data         512  startup_mdr32f9q2i.o(HEAP)
+    HEAP                                     0x200000f0   Section      512  startup_mdr32f9q2i.o(HEAP)
+    Stack_Mem                                0x200002f0   Data        1024  startup_mdr32f9q2i.o(STACK)
+    STACK                                    0x200002f0   Section     1024  startup_mdr32f9q2i.o(STACK)
+    __initial_sp                             0x200006f0   Data           0  startup_mdr32f9q2i.o(STACK)
 
     Global Symbols
 
@@ -1118,47 +1307,62 @@ Image Symbol Table
     EXT_INT3_IRQHandler                      0x0800019d   Thumb Code     2  startup_mdr32f9q2i.o(.text)
     EXT_INT4_IRQHandler                      0x0800019f   Thumb Code     2  startup_mdr32f9q2i.o(.text)
     __user_initial_stackheap                 0x080001a1   Thumb Code     0  startup_mdr32f9q2i.o(.text)
-    __use_two_region_memory                  0x080001c5   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x080001c7   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x080001c9   Thumb Code     2  heapauxi.o(.text)
-    __user_libspace                          0x080001cd   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x080001cd   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x080001cd   Thumb Code     0  libspace.o(.text)
-    __user_setup_stackheap                   0x080001d5   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x0800021f   Thumb Code    18  exit.o(.text)
-    _sys_exit                                0x08000231   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x0800023d   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x0800023d   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x0800023f   Thumb Code     0  indicate_semi.o(.text)
-    Buttons_GetStartStopEvent                0x08000241   Thumb Code    16  button.o(.text.Buttons_GetStartStopEvent)
-    Buttons_Init                             0x08000251   Thumb Code    86  button.o(.text.Buttons_Init)
-    Buttons_Process                          0x080002a9   Thumb Code   124  button.o(.text.Buttons_Process)
-    Display_Update                           0x08000325   Thumb Code   140  seg7_display.o(.text.Display_Update)
-    HD_Delay_ms_blocking                     0x080003b1   Thumb Code    32  hardware_drivers.o(.text.HD_Delay_ms_blocking)
-    HD_GetTick                               0x080003d1   Thumb Code    12  hardware_drivers.o(.text.HD_GetTick)
-    HD_System_Init                           0x080003dd   Thumb Code   156  hardware_drivers.o(.text.HD_System_Init)
-    LED_Init                                 0x08000479   Thumb Code   126  leds.o(.text.LED_Init)
-    PORT_Init                                0x080004f9   Thumb Code   340  mdr32fxqi_port.o(.text.PORT_Init)
-    PORT_ReadInputDataBit                    0x0800064d   Thumb Code    10  mdr32fxqi_port.o(.text.PORT_ReadInputDataBit)
-    PORT_ResetBits                           0x08000659   Thumb Code    24  mdr32fxqi_port.o(.text.PORT_ResetBits)
-    PORT_SetBits                             0x08000671   Thumb Code    22  mdr32fxqi_port.o(.text.PORT_SetBits)
-    PORT_StructInit                          0x08000689   Thumb Code    20  mdr32fxqi_port.o(.text.PORT_StructInit)
-    RST_CLK_PCLKcmd                          0x0800069d   Thumb Code    24  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
-    SEG7_DisplayTest                         0x080006b5   Thumb Code   210  seg7_display.o(.text.SEG7_DisplayTest)
-    SEG7_Init                                0x08000789   Thumb Code   286  seg7_display.o(.text.SEG7_Init)
-    SysTick_Handler                          0x080008a9   Thumb Code    16  hardware_drivers.o(.text.SysTick_Handler)
-    SystemInit                               0x080008b9   Thumb Code   158  system_mdr32f9q2i.o(.text.SystemInit)
-    Timer_Process                            0x08000959   Thumb Code   234  seg7_display.o(.text.Timer_Process)
-    Timer_Reset                              0x08000a45   Thumb Code    46  seg7_display.o(.text.Timer_Reset)
-    Timer_StartStop                          0x08000a75   Thumb Code    30  seg7_display.o(.text.Timer_StartStop)
-    app_Init                                 0x08000a95   Thumb Code    46  seg7_display.o(.text.app_Init)
-    main                                     0x08000ac5   Thumb Code    68  main.o(.text.main)
-    set_segments                             0x08000b09   Thumb Code   214  seg7_display.o(.text.set_segments)
-    Region$$Table$$Base                      0x08000be0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000c00   Number         0  anon$$obj.o(Region$$Table)
+    strncmp                                  0x080001c5   Thumb Code   150  strncmp.o(.text)
+    __use_two_region_memory                  0x0800025b   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0800025d   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x0800025f   Thumb Code     2  heapauxi.o(.text)
+    __user_libspace                          0x08000261   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x08000261   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x08000261   Thumb Code     0  libspace.o(.text)
+    __user_setup_stackheap                   0x08000269   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x080002b3   Thumb Code    18  exit.o(.text)
+    _sys_exit                                0x080002c5   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x080002d1   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x080002d1   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x080002d3   Thumb Code     0  indicate_semi.o(.text)
+    Buttons_GetStartStopEvent                0x080002d5   Thumb Code    16  button.o(.text.Buttons_GetStartStopEvent)
+    Buttons_Init                             0x080002e5   Thumb Code    86  button.o(.text.Buttons_Init)
+    Buttons_Process                          0x0800033d   Thumb Code   124  button.o(.text.Buttons_Process)
+    HD_Delay_Init                            0x080003b9   Thumb Code    38  hardware_drivers.o(.text.HD_Delay_Init)
+    HD_Delay_ms_blocking                     0x080003e1   Thumb Code    32  hardware_drivers.o(.text.HD_Delay_ms_blocking)
+    HD_GetTick                               0x08000401   Thumb Code    12  hardware_drivers.o(.text.HD_GetTick)
+    HD_System_Init                           0x0800040d   Thumb Code   156  hardware_drivers.o(.text.HD_System_Init)
+    HD_Timer1_Init                           0x080004a9   Thumb Code   136  hardware_drivers.o(.text.HD_Timer1_Init)
+    Keyboard_Init                            0x08000531   Thumb Code   152  keyboard_driver.o(.text.Keyboard_Init)
+    LED_AllOff                               0x080005c9   Thumb Code    46  leds.o(.text.LED_AllOff)
+    LED_AllOn                                0x080005f9   Thumb Code    44  leds.o(.text.LED_AllOn)
+    LED_Init                                 0x08000625   Thumb Code   126  leds.o(.text.LED_Init)
+    LED_On                                   0x080006a5   Thumb Code    42  leds.o(.text.LED_On)
+    PORT_Init                                0x080006d1   Thumb Code   340  mdr32fxqi_port.o(.text.PORT_Init)
+    PORT_ReadInputDataBit                    0x08000825   Thumb Code    10  mdr32fxqi_port.o(.text.PORT_ReadInputDataBit)
+    PORT_ResetBits                           0x08000831   Thumb Code    24  mdr32fxqi_port.o(.text.PORT_ResetBits)
+    PORT_SetBits                             0x08000849   Thumb Code    22  mdr32fxqi_port.o(.text.PORT_SetBits)
+    PORT_StructInit                          0x08000861   Thumb Code    20  mdr32fxqi_port.o(.text.PORT_StructInit)
+    RST_CLK_PCLKcmd                          0x08000875   Thumb Code    24  mdr32fxqi_rst_clk.o(.text.RST_CLK_PCLKcmd)
+    SEG7_ClearBuffer                         0x0800088d   Thumb Code    16  seg7_display.o(.text.SEG7_ClearBuffer)
+    SEG7_Init                                0x0800089d   Thumb Code   286  seg7_display.o(.text.SEG7_Init)
+    SEG7_PushSymbol                          0x080009bd   Thumb Code    22  seg7_display.o(.text.SEG7_PushSymbol)
+    SEG7_SetBuffer                           0x080009d5   Thumb Code    38  seg7_display.o(.text.SEG7_SetBuffer)
+    SysTick_Handler                          0x080009fd   Thumb Code    16  hardware_drivers.o(.text.SysTick_Handler)
+    SystemInit                               0x08000a0d   Thumb Code   158  system_mdr32f9q2i.o(.text.SystemInit)
+    TIMER_BRGInit                            0x08000aad   Thumb Code   106  mdr32fxqi_timer.o(.text.TIMER_BRGInit)
+    TIMER_ClearFlag                          0x08000b19   Thumb Code     6  mdr32fxqi_timer.o(.text.TIMER_ClearFlag)
+    TIMER_Cmd                                0x08000b21   Thumb Code    16  mdr32fxqi_timer.o(.text.TIMER_Cmd)
+    TIMER_CntInit                            0x08000b31   Thumb Code    60  mdr32fxqi_timer.o(.text.TIMER_CntInit)
+    TIMER_CntStructInit                      0x08000b6d   Thumb Code    16  mdr32fxqi_timer.o(.text.TIMER_CntStructInit)
+    TIMER_ITConfig                           0x08000b7d   Thumb Code    20  mdr32fxqi_timer.o(.text.TIMER_ITConfig)
+    check_code                               0x08000b91   Thumb Code   188  main.o(.text.check_code)
+    keypadRead                               0x08000c55   Thumb Code   192  keyboard_driver.o(.text.keypadRead)
+    main                                     0x08000d25   Thumb Code   286  main.o(.text.main)
+    process_button                           0x08000e45   Thumb Code   180  main.o(.text.process_button)
+    process_keypad                           0x08000f01   Thumb Code   512  main.o(.text.process_keypad)
+    update_leds                              0x08001101   Thumb Code    90  main.o(.text.update_leds)
+    Region$$Table$$Base                      0x080011a8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080011c8   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000040   Data           4  system_mdr32f9q2i.o(.data.SystemCoreClock)
-    __libspace_start                         0x20000048   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x200000a8   Data           0  libspace.o(.bss)
+    displayBuf                               0x20000044   Data           4  seg7_display.o(.data.displayBuf)
+    __libspace_start                         0x20000050   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x200000b0   Data           0  libspace.o(.bss)
 
 
 
@@ -1168,130 +1372,159 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000c48, Max: 0x00020000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001218, Max: 0x00020000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000c00, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000011c8, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000c0   Data   RO          161    RESET               startup_mdr32f9q2i.o
-    0x080000c0   0x080000c0   0x00000008   Code   RO          417  * !!!main             c_w.l(__main.o)
-    0x080000c8   0x080000c8   0x00000034   Code   RO          653    !!!scatter          c_w.l(__scatter.o)
-    0x080000fc   0x080000fc   0x0000001a   Code   RO          655    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x08000000   0x08000000   0x000000c0   Data   RO          222    RESET               startup_mdr32f9q2i.o
+    0x080000c0   0x080000c0   0x00000008   Code   RO          480  * !!!main             c_w.l(__main.o)
+    0x080000c8   0x080000c8   0x00000034   Code   RO          716    !!!scatter          c_w.l(__scatter.o)
+    0x080000fc   0x080000fc   0x0000001a   Code   RO          718    !!handler_copy      c_w.l(__scatter_copy.o)
     0x08000116   0x08000116   0x00000002   PAD
-    0x08000118   0x08000118   0x0000001c   Code   RO          657    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x08000134   0x08000134   0x00000002   Code   RO          512    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          518    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          520    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          522    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          525    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          527    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          529    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          532    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          534    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          536    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          538    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          540    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          542    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          544    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          546    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          548    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          550    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          552    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          556    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          558    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          560    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000000   Code   RO          562    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
-    0x08000136   0x08000136   0x00000002   Code   RO          563    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
-    0x08000138   0x08000138   0x00000002   Code   RO          589    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          604    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          606    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          609    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          612    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          614    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000000   Code   RO          617    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0800013a   0x0800013a   0x00000002   Code   RO          618    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x0800013c   0x0800013c   0x00000000   Code   RO          445    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x0800013c   0x0800013c   0x00000000   Code   RO          479    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x0800013c   0x0800013c   0x00000006   Code   RO          491    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x08000142   0x08000142   0x00000000   Code   RO          481    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x08000142   0x08000142   0x00000004   Code   RO          482    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x08000146   0x08000146   0x00000000   Code   RO          484    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x08000146   0x08000146   0x00000008   Code   RO          485    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x0800014e   0x0800014e   0x00000002   Code   RO          515    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x08000150   0x08000150   0x00000000   Code   RO          567    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x08000150   0x08000150   0x00000004   Code   RO          568    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x08000154   0x08000154   0x00000006   Code   RO          569    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x08000118   0x08000118   0x0000001c   Code   RO          720    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x08000134   0x08000134   0x00000002   Code   RO          575    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          581    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          583    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          585    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          588    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          590    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          592    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          595    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          597    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          599    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          601    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          603    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          605    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          607    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          609    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          611    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          613    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          615    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          619    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          621    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          623    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000000   Code   RO          625    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x08000136   0x08000136   0x00000002   Code   RO          626    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x08000138   0x08000138   0x00000002   Code   RO          652    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          667    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          669    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          672    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          675    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          677    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000000   Code   RO          680    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0800013a   0x0800013a   0x00000002   Code   RO          681    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x0800013c   0x0800013c   0x00000000   Code   RO          508    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x0800013c   0x0800013c   0x00000000   Code   RO          542    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x0800013c   0x0800013c   0x00000006   Code   RO          554    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          544    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x08000142   0x08000142   0x00000004   Code   RO          545    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x08000146   0x08000146   0x00000000   Code   RO          547    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x08000146   0x08000146   0x00000008   Code   RO          548    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0800014e   0x0800014e   0x00000002   Code   RO          578    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x08000150   0x08000150   0x00000000   Code   RO          630    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x08000150   0x08000150   0x00000004   Code   RO          631    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x08000154   0x08000154   0x00000006   Code   RO          632    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0800015a   0x0800015a   0x00000002   PAD
-    0x0800015c   0x0800015c   0x00000068   Code   RO          162    .text               startup_mdr32f9q2i.o
-    0x080001c4   0x080001c4   0x00000006   Code   RO          415    .text               c_w.l(heapauxi.o)
-    0x080001ca   0x080001ca   0x00000002   PAD
-    0x080001cc   0x080001cc   0x00000008   Code   RO          500    .text               c_w.l(libspace.o)
-    0x080001d4   0x080001d4   0x0000004a   Code   RO          503    .text               c_w.l(sys_stackheap_outer.o)
-    0x0800021e   0x0800021e   0x00000012   Code   RO          505    .text               c_w.l(exit.o)
-    0x08000230   0x08000230   0x0000000c   Code   RO          579    .text               c_w.l(sys_exit.o)
-    0x0800023c   0x0800023c   0x00000002   Code   RO          594    .text               c_w.l(use_no_semi.o)
-    0x0800023e   0x0800023e   0x00000000   Code   RO          596    .text               c_w.l(indicate_semi.o)
-    0x0800023e   0x0800023e   0x00000002   PAD
-    0x08000240   0x08000240   0x00000010   Code   RO           99    .text.Buttons_GetStartStopEvent  button.o
-    0x08000250   0x08000250   0x00000056   Code   RO           95    .text.Buttons_Init  button.o
-    0x080002a6   0x080002a6   0x00000002   PAD
-    0x080002a8   0x080002a8   0x0000007c   Code   RO           97    .text.Buttons_Process  button.o
-    0x08000324   0x08000324   0x0000008c   Code   RO          122    .text.Display_Update  seg7_display.o
-    0x080003b0   0x080003b0   0x00000020   Code   RO           72    .text.HD_Delay_ms_blocking  hardware_drivers.o
-    0x080003d0   0x080003d0   0x0000000c   Code   RO           68    .text.HD_GetTick    hardware_drivers.o
-    0x080003dc   0x080003dc   0x0000009c   Code   RO           76    .text.HD_System_Init  hardware_drivers.o
-    0x08000478   0x08000478   0x0000007e   Code   RO            2    .text.LED_Init      leds.o
-    0x080004f6   0x080004f6   0x00000002   PAD
-    0x080004f8   0x080004f8   0x00000154   Code   RO          184    .text.PORT_Init     mdr32fxqi_port.o
-    0x0800064c   0x0800064c   0x0000000a   Code   RO          188    .text.PORT_ReadInputDataBit  mdr32fxqi_port.o
-    0x08000656   0x08000656   0x00000002   PAD
-    0x08000658   0x08000658   0x00000018   Code   RO          194    .text.PORT_ResetBits  mdr32fxqi_port.o
-    0x08000670   0x08000670   0x00000016   Code   RO          192    .text.PORT_SetBits  mdr32fxqi_port.o
-    0x08000686   0x08000686   0x00000002   PAD
-    0x08000688   0x08000688   0x00000014   Code   RO          186    .text.PORT_StructInit  mdr32fxqi_port.o
-    0x0800069c   0x0800069c   0x00000018   Code   RO          274    .text.RST_CLK_PCLKcmd  mdr32fxqi_rst_clk.o
-    0x080006b4   0x080006b4   0x000000d2   Code   RO          128    .text.SEG7_DisplayTest  seg7_display.o
-    0x08000786   0x08000786   0x00000002   PAD
-    0x08000788   0x08000788   0x0000011e   Code   RO          114    .text.SEG7_Init     seg7_display.o
-    0x080008a6   0x080008a6   0x00000002   PAD
-    0x080008a8   0x080008a8   0x00000010   Code   RO           56    .text.SysTick_Handler  hardware_drivers.o
-    0x080008b8   0x080008b8   0x0000009e   Code   RO          171    .text.SystemInit    system_mdr32f9q2i.o
-    0x08000956   0x08000956   0x00000002   PAD
-    0x08000958   0x08000958   0x000000ea   Code   RO          120    .text.Timer_Process  seg7_display.o
-    0x08000a42   0x08000a42   0x00000002   PAD
-    0x08000a44   0x08000a44   0x0000002e   Code   RO          126    .text.Timer_Reset   seg7_display.o
-    0x08000a72   0x08000a72   0x00000002   PAD
-    0x08000a74   0x08000a74   0x0000001e   Code   RO          124    .text.Timer_StartStop  seg7_display.o
-    0x08000a92   0x08000a92   0x00000002   PAD
-    0x08000a94   0x08000a94   0x0000002e   Code   RO          118    .text.app_Init      seg7_display.o
-    0x08000ac2   0x08000ac2   0x00000002   PAD
-    0x08000ac4   0x08000ac4   0x00000044   Code   RO          150    .text.main          main.o
-    0x08000b08   0x08000b08   0x000000d6   Code   RO          110    .text.set_segments  seg7_display.o
-    0x08000bde   0x08000bde   0x00000002   PAD
-    0x08000be0   0x08000be0   0x00000020   Data   RO          652    Region$$Table       anon$$obj.o
+    0x0800015c   0x0800015c   0x00000068   Code   RO          223    .text               startup_mdr32f9q2i.o
+    0x080001c4   0x080001c4   0x00000096   Code   RO          476    .text               c_w.l(strncmp.o)
+    0x0800025a   0x0800025a   0x00000006   Code   RO          478    .text               c_w.l(heapauxi.o)
+    0x08000260   0x08000260   0x00000008   Code   RO          563    .text               c_w.l(libspace.o)
+    0x08000268   0x08000268   0x0000004a   Code   RO          566    .text               c_w.l(sys_stackheap_outer.o)
+    0x080002b2   0x080002b2   0x00000012   Code   RO          568    .text               c_w.l(exit.o)
+    0x080002c4   0x080002c4   0x0000000c   Code   RO          642    .text               c_w.l(sys_exit.o)
+    0x080002d0   0x080002d0   0x00000002   Code   RO          657    .text               c_w.l(use_no_semi.o)
+    0x080002d2   0x080002d2   0x00000000   Code   RO          659    .text               c_w.l(indicate_semi.o)
+    0x080002d2   0x080002d2   0x00000002   PAD
+    0x080002d4   0x080002d4   0x00000010   Code   RO           99    .text.Buttons_GetStartStopEvent  button.o
+    0x080002e4   0x080002e4   0x00000056   Code   RO           95    .text.Buttons_Init  button.o
+    0x0800033a   0x0800033a   0x00000002   PAD
+    0x0800033c   0x0800033c   0x0000007c   Code   RO           97    .text.Buttons_Process  button.o
+    0x080003b8   0x080003b8   0x00000026   Code   RO           64    .text.HD_Delay_Init  hardware_drivers.o
+    0x080003de   0x080003de   0x00000002   PAD
+    0x080003e0   0x080003e0   0x00000020   Code   RO           72    .text.HD_Delay_ms_blocking  hardware_drivers.o
+    0x08000400   0x08000400   0x0000000c   Code   RO           68    .text.HD_GetTick    hardware_drivers.o
+    0x0800040c   0x0800040c   0x0000009c   Code   RO           76    .text.HD_System_Init  hardware_drivers.o
+    0x080004a8   0x080004a8   0x00000088   Code   RO           62    .text.HD_Timer1_Init  hardware_drivers.o
+    0x08000530   0x08000530   0x00000098   Code   RO          164    .text.Keyboard_Init  keyboard_driver.o
+    0x080005c8   0x080005c8   0x0000002e   Code   RO            4    .text.LED_AllOff    leds.o
+    0x080005f6   0x080005f6   0x00000002   PAD
+    0x080005f8   0x080005f8   0x0000002c   Code   RO           24    .text.LED_AllOn     leds.o
+    0x08000624   0x08000624   0x0000007e   Code   RO            2    .text.LED_Init      leds.o
+    0x080006a2   0x080006a2   0x00000002   PAD
+    0x080006a4   0x080006a4   0x0000002a   Code   RO            6    .text.LED_On        leds.o
+    0x080006ce   0x080006ce   0x00000002   PAD
+    0x080006d0   0x080006d0   0x00000154   Code   RO          245    .text.PORT_Init     mdr32fxqi_port.o
+    0x08000824   0x08000824   0x0000000a   Code   RO          249    .text.PORT_ReadInputDataBit  mdr32fxqi_port.o
+    0x0800082e   0x0800082e   0x00000002   PAD
+    0x08000830   0x08000830   0x00000018   Code   RO          255    .text.PORT_ResetBits  mdr32fxqi_port.o
+    0x08000848   0x08000848   0x00000016   Code   RO          253    .text.PORT_SetBits  mdr32fxqi_port.o
+    0x0800085e   0x0800085e   0x00000002   PAD
+    0x08000860   0x08000860   0x00000014   Code   RO          247    .text.PORT_StructInit  mdr32fxqi_port.o
+    0x08000874   0x08000874   0x00000018   Code   RO          335    .text.RST_CLK_PCLKcmd  mdr32fxqi_rst_clk.o
+    0x0800088c   0x0800088c   0x00000010   Code   RO          140    .text.SEG7_ClearBuffer  seg7_display.o
+    0x0800089c   0x0800089c   0x0000011e   Code   RO          118    .text.SEG7_Init     seg7_display.o
+    0x080009ba   0x080009ba   0x00000002   PAD
+    0x080009bc   0x080009bc   0x00000016   Code   RO          136    .text.SEG7_PushSymbol  seg7_display.o
+    0x080009d2   0x080009d2   0x00000002   PAD
+    0x080009d4   0x080009d4   0x00000026   Code   RO          138    .text.SEG7_SetBuffer  seg7_display.o
+    0x080009fa   0x080009fa   0x00000002   PAD
+    0x080009fc   0x080009fc   0x00000010   Code   RO           56    .text.SysTick_Handler  hardware_drivers.o
+    0x08000a0c   0x08000a0c   0x0000009e   Code   RO          232    .text.SystemInit    system_mdr32f9q2i.o
+    0x08000aaa   0x08000aaa   0x00000002   PAD
+    0x08000aac   0x08000aac   0x0000006a   Code   RO          465    .text.TIMER_BRGInit  mdr32fxqi_timer.o
+    0x08000b16   0x08000b16   0x00000002   PAD
+    0x08000b18   0x08000b18   0x00000006   Code   RO          457    .text.TIMER_ClearFlag  mdr32fxqi_timer.o
+    0x08000b1e   0x08000b1e   0x00000002   PAD
+    0x08000b20   0x08000b20   0x00000010   Code   RO          353    .text.TIMER_Cmd     mdr32fxqi_timer.o
+    0x08000b30   0x08000b30   0x0000003c   Code   RO          349    .text.TIMER_CntInit  mdr32fxqi_timer.o
+    0x08000b6c   0x08000b6c   0x00000010   Code   RO          351    .text.TIMER_CntStructInit  mdr32fxqi_timer.o
+    0x08000b7c   0x08000b7c   0x00000014   Code   RO          461    .text.TIMER_ITConfig  mdr32fxqi_timer.o
+    0x08000b90   0x08000b90   0x000000c4   Code   RO          194    .text.check_code    main.o
+    0x08000c54   0x08000c54   0x000000d0   Code   RO          166    .text.keypadRead    keyboard_driver.o
+    0x08000d24   0x08000d24   0x0000011e   Code   RO          198    .text.main          main.o
+    0x08000e42   0x08000e42   0x00000002   PAD
+    0x08000e44   0x08000e44   0x000000bc   Code   RO          196    .text.process_button  main.o
+    0x08000f00   0x08000f00   0x00000200   Code   RO          188    .text.process_keypad  main.o
+    0x08001100   0x08001100   0x0000005a   Code   RO          186    .text.update_leds   main.o
+    0x0800115a   0x0800115a   0x00000002   PAD
+    0x0800115c   0x0800115c   0x00000040   Data   RO          168    .rodata.cst32       keyboard_driver.o
+    0x0800119c   0x0800119c   0x0000000a   Data   RO          209    .rodata.str1.1      main.o
+    0x080011a6   0x080011a6   0x00000002   PAD
+    0x080011a8   0x080011a8   0x00000020   Data   RO          715    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000c00, Size: 0x000006d0, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080011c8, Size: 0x000006f0, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000c00   0x00000040   Data   RW           38    .data.LED_Config    leds.o
-    0x20000040   0x08000c40   0x00000004   Data   RW          173    .data.SystemCoreClock  system_mdr32f9q2i.o
-    0x20000044   0x08000c44   0x00000001   Data   RW          136    .data.timer_running  seg7_display.o
-    0x20000045   0x08000c45   0x00000001   Data   RW          137    .data.timer_updated  seg7_display.o
-    0x20000046   0x08000c46   0x00000002   PAD
-    0x20000048        -       0x00000060   Zero   RW          501    .bss                c_w.l(libspace.o)
-    0x200000a8        -       0x00000004   Zero   RW          138    .bss.Timer_Process.last_tick  seg7_display.o
-    0x200000ac        -       0x00000010   Zero   RW          101    .bss.button_start_stop  button.o
-    0x200000bc        -       0x00000001   Zero   RW          133    .bss.current_digit  seg7_display.o
-    0x200000bd   0x08000c46   0x00000003   PAD
-    0x200000c0        -       0x00000004   Zero   RW          132    .bss.display_digits  seg7_display.o
-    0x200000c4        -       0x00000004   Zero   RW           86    .bss.tick_counter   hardware_drivers.o
-    0x200000c8        -       0x00000004   Zero   RW          135    .bss.timer_counter  seg7_display.o
-    0x200000cc        -       0x00000004   Zero   RW          134    .bss.timer_seconds  seg7_display.o
-    0x200000d0        -       0x00000200   Zero   RW          160    HEAP                startup_mdr32f9q2i.o
-    0x200002d0        -       0x00000400   Zero   RW          159    STACK               startup_mdr32f9q2i.o
+    0x20000000   0x080011c8   0x00000040   Data   RW           38    .data.LED_Config    leds.o
+    0x20000040   0x08001208   0x00000004   Data   RW          234    .data.SystemCoreClock  system_mdr32f9q2i.o
+    0x20000044   0x0800120c   0x00000004   Data   RW          142    .data.displayBuf    seg7_display.o
+    0x20000048   0x08001210   0x00000007   Data   RW          207    .data.master_code   main.o
+    0x2000004f   0x08001217   0x00000001   PAD
+    0x20000050        -       0x00000060   Zero   RW          564    .bss                c_w.l(libspace.o)
+    0x200000b0        -       0x00000010   Zero   RW          101    .bss.button_start_stop  button.o
+    0x200000c0        -       0x00000001   Zero   RW          147    .bss.current_digit  seg7_display.o
+    0x200000c1        -       0x00000001   Zero   RW          200    .bss.current_state  main.o
+    0x200000c2   0x08001217   0x00000002   PAD
+    0x200000c4        -       0x00000004   Zero   RW          146    .bss.display_digits  seg7_display.o
+    0x200000c8        -       0x00000001   Zero   RW          206    .bss.full_buffer_index  main.o
+    0x200000c9        -       0x00000007   Zero   RW          205    .bss.input_buffer   main.o
+    0x200000d0        -       0x00000001   Zero   RW          204    .bss.input_index    main.o
+    0x200000d1        -       0x00000001   Zero   RW          201    .bss.is_keypad_locked  main.o
+    0x200000d2   0x08001217   0x00000002   PAD
+    0x200000d4        -       0x00000004   Zero   RW          202    .bss.keypad_lock_start  main.o
+    0x200000d8        -       0x00000004   Zero   RW          203    .bss.lock_timer     main.o
+    0x200000dc        -       0x00000001   Zero   RW          210    .bss.main.last_key  main.o
+    0x200000dd   0x08001217   0x00000003   PAD
+    0x200000e0        -       0x00000004   Zero   RW          211    .bss.main.last_key_time  main.o
+    0x200000e4        -       0x00000004   Zero   RW           86    .bss.tick_counter   hardware_drivers.o
+    0x200000e8        -       0x00000004   Zero   RW          208    .bss.wrong_attempts  main.o
+    0x200000ec   0x08001217   0x00000004   PAD
+    0x200000f0        -       0x00000200   Zero   RW          221    HEAP                startup_mdr32f9q2i.o
+    0x200002f0        -       0x00000400   Zero   RW          220    STACK               startup_mdr32f9q2i.o
 
 
 ==============================================================================
@@ -1302,19 +1535,21 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        226          0          0          0         16       3710   button.o
-       216          0          0          0          4       9992   hardware_drivers.o
-       126          0          0         64          0       8158   leds.o
-        68          0          0          0          0        898   main.o
+       390          0          0          0          4       9992   hardware_drivers.o
+       360         16         64          0          0       3379   keyboard_driver.o
+       258          0          0         64          0       8158   leds.o
+      1272         22         10          7         28       4862   main.o
        416          0          0          0          0       5547   mdr32fxqi_port.o
         24          0          0          0          0      14077   mdr32fxqi_rst_clk.o
-      1206         10          0          2         17       5624   seg7_display.o
+       224          0          0          0          0      23900   mdr32fxqi_timer.o
+       362          0          0          4          5       7814   seg7_display.o
        104         26        192          0       1536       1712   startup_mdr32f9q2i.o
        158          0          0          4          0       2645   system_mdr32f9q2i.o
 
     ----------------------------------------------------------------------
-      2568         36        224         72       1576      52363   Object Totals
+      3824         64        300         80       1600      85796   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        24          0          0          2          3          0   (incl. Padding)
+        30          0          2          1         11          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1337,22 +1572,23 @@ Image component sizes
          8          4          0          0         96         68   libspace.o
          2          0          0          0          0          0   rtexit.o
         10          0          0          0          0          0   rtexit2.o
+       150          0          0          0          0         80   strncmp.o
         12          4          0          0          0         68   sys_exit.o
         74          0          0          0          0         80   sys_stackheap_outer.o
          2          0          0          0          0         68   use_no_semi.o
 
     ----------------------------------------------------------------------
-       280         16          0          0         96        584   Library Totals
-         8          0          0          0          0          0   (incl. Padding)
+       428         16          0          0         96        664   Library Totals
+         6          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-       272         16          0          0         96        584   c_w.l
+       422         16          0          0         96        664   c_w.l
 
     ----------------------------------------------------------------------
-       280         16          0          0         96        584   Library Totals
+       428         16          0          0         96        664   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1361,15 +1597,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2848         52        224         72       1672      52699   Grand Totals
-      2848         52        224         72       1672      52699   ELF Image Totals
-      2848         52        224         72          0          0   ROM Totals
+      4252         80        300         80       1696      86120   Grand Totals
+      4252         80        300         80       1696      86120   ELF Image Totals
+      4252         80        300         80          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3072 (   3.00kB)
-    Total RW  Size (RW Data + ZI Data)              1744 (   1.70kB)
-    Total ROM Size (Code + RO Data + RW Data)       3144 (   3.07kB)
+    Total RO  Size (Code + RO Data)                 4552 (   4.45kB)
+    Total RW  Size (RW Data + ZI Data)              1776 (   1.73kB)
+    Total ROM Size (Code + RO Data + RW Data)       4632 (   4.52kB)
 
 ==============================================================================
 

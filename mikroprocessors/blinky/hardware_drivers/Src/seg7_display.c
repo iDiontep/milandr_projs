@@ -3,61 +3,129 @@
 #include "hardware_drivers.h"
 #include <string.h>
 
-// Глобальные переменные таймера
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 static volatile uint32_t timer_counter = 0;
 static volatile uint32_t timer_seconds = 0;
 static volatile bool timer_running = 1;
 static volatile bool timer_updated = 1;
 
-// Переменные для динамической индикации
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 static uint8_t current_digit = 0;
 static uint8_t display_digits[4] = {0, 0, 0, 0};
 
-void set_segments(uint8_t digit) {
-    PORT_ResetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a, b, c
-    PORT_ResetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5); // d, e, f, g
-    if (digit > 9) digit = 0;
+// Р‘СѓС„РµСЂ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРёРјРІРѕР»РѕРІ (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ СЂРµР¶РёРјРµ Р·Р°РјРєР°)
+char displayBuf[4] = {' ', ' ', ' ', ' '};
 
-    switch (digit) {
-        case 0:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a,b,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2); // d,e,f
-            break;
-        case 1:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_4 | PORT_Pin_5); // b,c
-            break;
-        case 2:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4); // a,b
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_2 | PORT_Pin_5); // d,e,g
-            break;
-        case 3:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a,b,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_5); // d,g
-            break;
-        case 4:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_4 | PORT_Pin_5); // b,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_1 | PORT_Pin_5); // f,g
-            break;
-        case 5:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_5); // a,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_5); // d,f,g
-            break;
-        case 6:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_5); // a,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5); // d,e,f,g
-            break;
-        case 7:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a,b,c
-            break;
-        case 8:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a,b,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5); // d,e,f,g
-            break;
-        case 9:
-            PORT_SetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a,b,c
-            PORT_SetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_5); // d,f,g
-            break;
+// РўР°Р±Р»РёС†С‹ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРёРјРІРѕР»РѕРІ РЅР° 7-СЃРµРіРјРµРЅС‚РЅРѕРј РёРЅРґРёРєР°С‚РѕСЂРµ
+// Р¤РѕСЂРјР°С‚: {a, b, c, d, e, f, g, dp}
+static const uint8_t digitTable[10][8] = {
+    {1,1,1,1,1,1,0,0}, // 0
+    {0,1,1,0,0,0,0,0}, // 1
+    {1,1,0,1,1,0,1,0}, // 2
+    {1,1,1,1,0,0,1,0}, // 3
+    {0,1,1,0,0,1,1,0}, // 4
+    {1,0,1,1,0,1,1,0}, // 5
+    {1,0,1,1,1,1,1,0}, // 6
+    {1,1,1,0,0,0,0,0}, // 7
+    {1,1,1,1,1,1,1,0}, // 8
+    {1,1,1,1,0,1,1,0}  // 9
+};
+
+static const uint8_t alphaTable[26][8] = {
+    {1,1,1,0,1,1,1,0}, // A
+    {0,0,1,1,1,1,1,0}, // B
+    {1,0,0,1,1,1,0,0}, // C
+    {0,1,1,1,1,0,1,0}, // D
+    {1,0,0,1,1,1,1,0}, // E
+    {1,0,0,0,1,1,1,0}, // F
+    {1,0,1,1,1,1,1,0}, // G
+    {0,1,1,0,1,1,1,0}, // H
+    {0,0,0,0,1,1,0,0}, // I
+    {0,1,1,1,1,0,0,0}, // J
+    {0,0,0,0,0,0,0,0}, // K (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,1,1,1,0,0}, // L
+    {0,0,0,0,0,0,0,0}, // M (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,1,0,1,0,1,0}, // n
+    {1,1,1,1,1,1,0,0}, // O
+    {1,1,0,0,1,1,1,0}, // P
+    {0,0,0,0,0,0,0,0}, // Q (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,1,0,1,0}, // r
+    {1,0,1,1,0,1,1,0}, // S (РєР°Рє 5)
+    {0,0,0,1,1,1,1,0}, // t (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,0,0,0,0}, // U (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,0,0,0,0}, // V (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,0,0,0,0}, // W (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,0,0,0,0}, // X (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {0,0,0,0,0,0,0,0}, // Y (РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ)
+    {1,1,0,1,1,0,1,0}  // Z (РєР°Рє 2)
+};
+
+static const uint8_t specialTable[2][8] = {
+    {0,0,0,0,0,0,1,0}, // -
+    {0,0,0,1,0,0,0,0}  // _
+};
+
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё СЃРµРіРјРµРЅС‚РѕРІ РїРѕ С‚Р°Р±Р»РёС†Рµ РґР°РЅРЅС‹С…
+static void set_segments_from_table(const uint8_t* data) {
+    // РЎР±СЂРѕСЃ РІСЃРµС… СЃРµРіРјРµРЅС‚РѕРІ
+    PORT_ResetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5); // a, b, c
+    PORT_ResetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5 | PORT_Pin_6); // d, e, f, g, dp
+    
+    // РЈСЃС‚Р°РЅРѕРІРєР° СЃРµРіРјРµРЅС‚РѕРІ СЃРѕРіР»Р°СЃРЅРѕ С‚Р°Р±Р»РёС†Рµ
+    // a = PORT_Pin_7 (PORTA)
+    if (data[0]) PORT_SetBits(MDR_PORTA, PORT_Pin_7);
+    // b = PORT_Pin_4 (PORTA)
+    if (data[1]) PORT_SetBits(MDR_PORTA, PORT_Pin_4);
+    // c = PORT_Pin_5 (PORTA)
+    if (data[2]) PORT_SetBits(MDR_PORTA, PORT_Pin_5);
+    // d = PORT_Pin_0 (PORTB)
+    if (data[3]) PORT_SetBits(MDR_PORTB, PORT_Pin_0);
+    // e = PORT_Pin_2 (PORTB)
+    if (data[4]) PORT_SetBits(MDR_PORTB, PORT_Pin_2);
+    // f = PORT_Pin_1 (PORTB)
+    if (data[5]) PORT_SetBits(MDR_PORTB, PORT_Pin_1);
+    // g = PORT_Pin_5 (PORTB)
+    if (data[6]) PORT_SetBits(MDR_PORTB, PORT_Pin_5);
+    // dp = PORT_Pin_6 (PORTB)
+    if (data[7]) PORT_SetBits(MDR_PORTB, PORT_Pin_6);
+}
+
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРёРјРІРѕР»Р°
+void SEG7_ShowSymbol(char sym) {
+    const uint8_t* data = NULL;
+    
+    if (sym >= '0' && sym <= '9') {
+        data = digitTable[sym - '0'];
+    } else if (sym >= 'A' && sym <= 'Z') {
+        data = alphaTable[sym - 'A'];
+    } else if (sym >= 'a' && sym <= 'z') {
+        data = alphaTable[sym - 'a'];
+    } else if (sym == '*') {
+        data = specialTable[0]; // '-'
+    } else if (sym == '#') {
+        data = specialTable[1]; // '_'
+    } else if (sym == ' ') {
+        // РџСЂРѕР±РµР» - РІСЃРµ СЃРµРіРјРµРЅС‚С‹ РІС‹РєР»СЋС‡РµРЅС‹
+        PORT_ResetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5);
+        PORT_ResetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5 | PORT_Pin_6);
+        return;
+    } else {
+        // РќРµРёР·РІРµСЃС‚РЅС‹Р№ СЃРёРјРІРѕР» - РїСЂРѕР±РµР»
+        PORT_ResetBits(MDR_PORTA, PORT_Pin_7 | PORT_Pin_4 | PORT_Pin_5);
+        PORT_ResetBits(MDR_PORTB, PORT_Pin_0 | PORT_Pin_1 | PORT_Pin_2 | PORT_Pin_5 | PORT_Pin_6);
+        return;
     }
+    
+    if (data) {
+        set_segments_from_table(data);
+    }
+}
+
+// РЎС‚Р°СЂР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё (С‚РѕР»СЊРєРѕ С†РёС„СЂС‹)
+void set_segments(uint8_t digit) {
+    if (digit > 9) digit = 0;
+    const uint8_t* data = digitTable[digit];
+    set_segments_from_table(data);
 }
 
 void select_digit(uint8_t n) {
@@ -130,23 +198,28 @@ void SEG7_Init(void) {
     port_init.PORT_PD = PORT_PD_DRIVER;
     PORT_Init(SEG7_DIGIT_4_PORT, &port_init);
     
-    // Инициализация переменных дисплея
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     memset(display_digits, 0, sizeof(display_digits));
     current_digit = 0;
 }
 
 void SEG7_Process(void) {
-	
-		timer_seconds++;
+    static uint32_t last_update = 0;
+    uint32_t current_time = HD_GetTick();
     
-    // Устанавливаем сегменты для текущего разряда
-    set_segments(display_digits[current_digit]);
-    
-    // Включаем текущий разряд
-    select_digit(current_digit);
-    
-    // Переходим к следующему разряду
-    current_digit = (current_digit + 1) % 4;
+    // РћР±РЅРѕРІР»РµРЅРёРµ РєР°Р¶РґС‹Рµ 5РјСЃ РґР»СЏ РјСѓР»СЊС‚РёРїР»РµРєСЃРёСЂРѕРІР°РЅРёСЏ
+    if ((current_time - last_update) >= 5) {
+        last_update = current_time;
+        
+        // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃРёРјРІРѕР»Р° РёР· Р±СѓС„РµСЂР°
+        SEG7_ShowSymbol(displayBuf[current_digit]);
+        
+        // Р’С‹Р±РѕСЂ С‚РµРєСѓС‰РµР№ С†РёС„СЂС‹
+        select_digit(current_digit);
+        
+        // РџРµСЂРµС…РѕРґ Рє СЃР»РµРґСѓСЋС‰РµР№ С†РёС„СЂРµ
+        current_digit = (current_digit + 1) % 4;
+    }
 }
 
 void app_Init(void) {
@@ -163,31 +236,31 @@ void Timer_Process(void) {
     uint32_t current_tick = HD_GetTick();
     
     if (timer_running) {
-        if ((current_tick - last_tick) >= 100) { // 100 мс
+        if ((current_tick - last_tick) >= 100) { // 100 пїЅпїЅ
             timer_counter++;
             last_tick = current_tick;
             
-            if (timer_counter >= 10) { // 1 секунда (10 * 100мс = 1000мс)
+            if (timer_counter >= 10) { // 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (10 * 100пїЅпїЅ = 1000пїЅпїЅ)
                 timer_counter = 0;
                 timer_seconds++;
                 timer_updated = true;
 								Display_Update();
                 
-                // Ограничение 99:59
-                if (timer_seconds >= 6000) { // 100 минут * 60 секунд
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 99:59
+                if (timer_seconds >= 6000) { // 100 пїЅпїЅпїЅпїЅпїЅ * 60 пїЅпїЅпїЅпїЅпїЅпїЅ
                     timer_seconds = 0;
                 }
             }
         }
     } else {
-        // Если таймер не работает, обновляем last_tick для корректного запуска
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ last_tick пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         last_tick = current_tick;
     }
 }
 
 void Timer_StartStop(void) {
     timer_running = !timer_running;
-    timer_updated = true; // Принудительное обновление дисплея при изменении состояния
+    timer_updated = true; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 }
 
 void Timer_Reset(void) {
@@ -202,33 +275,33 @@ void Display_Update(void) {
         uint32_t minutes = timer_seconds / 60;
         uint32_t seconds = timer_seconds % 60;
         
-        // Преобразуем время в цифры для отображения
-        display_digits[0] = minutes / 10;        // Десятки минут
-        display_digits[1] = minutes % 10;        // Единицы минут
-        display_digits[2] = seconds / 10;        // Десятки секунд
-        display_digits[3] = seconds % 10;        // Единицы секунд
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        display_digits[0] = minutes / 10;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        display_digits[1] = minutes % 10;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        display_digits[2] = seconds / 10;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        display_digits[3] = seconds % 10;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         
         timer_updated = false;
     }
 }
 
 void SEG7_DisplayTest(void) {
-    // Отображаем 1 на первом разряде
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     select_digit(0);
     set_segments(display_digits[0]);
     HD_Delay_ms_blocking(1);
     
-    // Отображаем 2 на втором разряде
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     select_digit(1);
     set_segments(display_digits[1]);
     HD_Delay_ms_blocking(1);
     
-    // Отображаем 3 на третьем разряде
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     select_digit(2);
     set_segments(display_digits[2]);
     HD_Delay_ms_blocking(1);
     
-    // Отображаем 4 на четвертом разряде
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     select_digit(3);
     set_segments(display_digits[3]);
     HD_Delay_ms_blocking(1);
@@ -236,9 +309,9 @@ void SEG7_DisplayTest(void) {
 
 void SEG7_DisplayNumber(uint16_t number) {
     static uint8_t current_digit = 0;
-    static uint8_t digits[4] = {1, 2, 3, 4}; // По умолчанию 1234
+    static uint8_t digits[4] = {1, 2, 3, 4}; // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1234
     
-    // Разбираем число на цифры, если нужно
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     if (number <= 9999) {
         digits[0] = number / 1000;
         digits[1] = (number % 1000) / 100;
@@ -247,14 +320,40 @@ void SEG7_DisplayNumber(uint16_t number) {
     }
    
     
-    // Устанавливаем сегменты для текущей цифры
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     set_segments(digits[current_digit]);
     
-    // Включаем текущий разряд
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     select_digit(current_digit);
     
-    // Переходим к следующему разряду
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     current_digit = (current_digit + 1) % 4;
 		
 		HD_Delay_ms_blocking(1);
+}
+
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СЃРёРјРІРѕР»Р° РІ Р±СѓС„РµСЂ РґРёСЃРїР»РµСЏ (СЃРґРІРёРі)
+void SEG7_PushSymbol(char sym) {
+    for (int i = 3; i > 0; i--) {
+        displayBuf[i] = displayBuf[i - 1];
+    }
+    displayBuf[0] = sym;
+}
+
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РІСЃРµРіРѕ Р±СѓС„РµСЂР°
+void SEG7_SetBuffer(const char* str) {
+    for (int i = 0; i < 4; i++) {
+        if (str[i] != '\0') {
+            displayBuf[i] = str[i];
+        } else {
+            displayBuf[i] = ' ';
+        }
+    }
+}
+
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‡РёСЃС‚РєРё Р±СѓС„РµСЂР°
+void SEG7_ClearBuffer(void) {
+    for (int i = 0; i < 4; i++) {
+        displayBuf[i] = ' ';
+    }
 }
