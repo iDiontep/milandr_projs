@@ -1,0 +1,55 @@
+Dependencies for Project 'sev7', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
+F (.\main.c)(0x692DBBBA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc-D__UVISION_VERSION="538" -D_RTE_ -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h)(0x64A7E1D6)
+I (.\RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h)(0x64A7E1D6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602569CE)
+I (.\RTE\_Target_1\RTE_Components.h)(0x692DB691)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
+F (.\sevseg.c)(0x692DBB9D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc-D__UVISION_VERSION="538" -D_RTE_ -D_RTE_-o .\objects\sevseg.o --omf_browse .\objects\sevseg.crf --depend .\objects\sevseg.d)
+I (sevseg.h)(0x692DBB8C)
+I (GPIO_Union.h)(0x692DB2F4)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h)(0x64A7E1D6)
+I (.\RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h)(0x64A7E1D6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602569CE)
+I (.\RTE\_Target_1\RTE_Components.h)(0x692DB691)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
+F (.\sevseg.h)(0x692DBB8C)()
+F (.\keyboard.c)(0x692DBC23)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc-D__UVISION_VERSION="538" -D_RTE_ -D_RTE_-o .\objects\keyboard.o --omf_browse .\objects\keyboard.crf --depend .\objects\keyboard.d)
+I (keyboard.h)(0x692DBB30)
+I (GPIO_Union.h)(0x692DB2F4)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h)(0x64A7E1D6)
+I (.\RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h)(0x64A7E1D6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602569CE)
+I (.\RTE\_Target_1\RTE_Components.h)(0x692DB691)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
+F (.\keyboard.h)(0x692DBB30)()
+F (.\main.h)(0x692DBA5E)()
+F (.\GPIO_Union.c)(0x6916F9FA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc-D__UVISION_VERSION="538" -D_RTE_ -D_RTE_-o .\objects\gpio_union.o --omf_browse .\objects\gpio_union.crf --depend .\objects\gpio_union.d)
+I (GPIO_Union.h)(0x692DB2F4)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h)(0x64A7E1D6)
+I (.\RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h)(0x64A7E1D6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602569CE)
+I (.\RTE\_Target_1\RTE_Components.h)(0x692DB691)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
+F (.\GPIO_Union.h)(0x692DB2F4)()
+F (RTE/Device/MDR32F9Q2I/MDR32F9Q2I.sct)(0x64A7E1D6)()
+F (RTE/Device/MDR32F9Q2I/MDR32FxQI_config.h)(0x64A7E1D6)()
+F (RTE/Device/MDR32F9Q2I/startup_MDR32F9Q2I.S)(0x64A7E170)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc--cpreproc --pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_mdr32f9q2i.lst --xref -o .\objects\startup_mdr32f9q2i.o --depend .\objects\startup_mdr32f9q2i.d)
+F (RTE/Device/MDR32F9Q2I/system_MDR32F9Q2I.c)(0x64A7E1D6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\MDR32F9Q2I-I.\RTE\_Target_1-IC:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\CoreSupport\CM3-IC:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc-D__UVISION_VERSION="538" -D_RTE_ -D_RTE_-o .\objects\system_mdr32f9q2i.o --omf_browse .\objects\system_mdr32f9q2i.crf --depend .\objects\system_mdr32f9q2i.d)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\Milandr\MDR32FxQI\1.1\Libraries\CMSIS\MDR32FxQI\DeviceSupport\MDR32F9Q2I\inc\MDR32F9Q2I.h)(0x64A7E1D6)
+I (.\RTE\Device\MDR32F9Q2I\MDR32FxQI_config.h)(0x64A7E1D6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x602569CE)
+I (.\RTE\_Target_1\RTE_Components.h)(0x692DB691)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm3.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
+I (C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
+F (RTE/Device/MDR32F9Q2I/system_MDR32F9Q2I.h)(0x64A7E1D6)()

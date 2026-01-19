@@ -1,0 +1,91 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Daniil Ionin, BMSTU, LIC=R4HV2-9QR29-HRWXN-YAICK-NL02S-MWCYD
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+C:\workspace\mifi1\milandr_projs\sev7\sev7.uvprojx
+Project File Date:  12/01/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling system_MDR32F9Q2I.c...
+C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h(287): error:  #35: #error directive: Unknown compiler.
+    #error Unknown compiler.
+RTE/Device/MDR32F9Q2I/system_MDR32F9Q2I.c: 0 warnings, 1 error
+compiling sevseg.c...
+C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h(287): error:  #35: #error directive: Unknown compiler.
+    #error Unknown compiler.
+sevseg.c: 0 warnings, 1 error
+compiling GPIO_Union.c...
+C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h(287): error:  #35: #error directive: Unknown compiler.
+    #error Unknown compiler.
+GPIO_Union.c: 0 warnings, 1 error
+compiling main.c...
+C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h(287): error:  #35: #error directive: Unknown compiler.
+    #error Unknown compiler.
+main.c: 0 warnings, 1 error
+compiling keyboard.c...
+C:\Users\s20di\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h(287): error:  #35: #error directive: Unknown compiler.
+    #error Unknown compiler.
+keyboard.c: 0 warnings, 1 error
+assembling startup_MDR32F9Q2I.S...
+".\Objects\sev7.axf" - 5 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM.CMSIS.6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Milandr
+                https://ic.milandr.ru/soft/Milandr.MDR32FxQI.1.1.pack
+                Milandr.MDR32FxQI.1.1
+                Milandr MDR32FxQI Series Device Support, Drivers and Examples
+   * Component: Startup Version: 2.1.0i
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/MDR32F9Q2I
+  ./RTE/_Target_1
+  C:/Users/s20di/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  C:/Users/s20di/AppData/Local/Arm/Packs/Milandr/MDR32FxQI/1.1/Libraries/CMSIS/MDR32FxQI/CoreSupport/CM3
+  C:/Users/s20di/AppData/Local/Arm/Packs/Milandr/MDR32FxQI/1.1/Libraries/CMSIS/MDR32FxQI/DeviceSupport/MDR32F9Q2I/inc
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:6.1.0
+
+   * Component: Milandr::Device:Startup:2.1.0i
+      Source file:   Libraries/CMSIS/MDR32FxQI/DeviceSupport/MDR32F9Q2I/startup/arm/startup_MDR32F9Q2I.S
+      Include file:  Libraries/CMSIS/MDR32FxQI/DeviceSupport/MDR32F9Q2I/inc/MDR32F9Q2I.h
+      Include file:  Libraries/SPL/MDR32FxQI/inc/IRQ_Handler_Template/MDR32F9Q2I_IT.h
+      Include file:  Libraries/SPL/MDR32FxQI/MDR32FxQI_config.h
+      Source file:   Libraries/CMSIS/MDR32FxQI/DeviceSupport/MDR32F9Q2I/startup/system_MDR32F9Q2I.c
+      Include file:  Libraries/CMSIS/MDR32FxQI/DeviceSupport/MDR32F9Q2I/startup/system_MDR32F9Q2I.h
+      Include file:  Libraries/CMSIS/MDR32FxQI/CoreSupport/CM3/core_cm3.h
+      Source file:   Libraries/SPL/MDR32FxQI/src/IRQ_Handler_Template/MDR32F9Q2I_IT.c
+Target not created.
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>
